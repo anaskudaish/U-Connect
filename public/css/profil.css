@@ -1,0 +1,90 @@
+body {
+    font-family: "Roboto", Helvetica, Arial, sans-serif;
+    background: #f3f3f3;
+    background-size: cover;
+    padding: 50px;
+    margin: 0;
+}
+.cl p {
+    position: relative;
+}
+.cl label {
+    position: absolute;
+    top: -10px;
+    left: 5px;
+    background-color: white;
+
+}
+.cl input {
+    border: 1px solid lightgray;
+}
+
+
+.form__input-group {
+    margin-bottom: 1rem;
+}
+
+form input {
+    display: block;
+    width: 35%;
+    padding: 0.75rem;
+    box-sizing: border-box;
+    border-radius: 9px;
+    border: 1px solid #dddddd;
+    outline: none;
+    background: #ffffff;
+    transition: background 0.2s, border-color 0.2s;
+}
+
+form input:focus {
+    border-color: #00b5ad;
+    background: #ffffff;
+}
+
+
+form button {
+    width: 35%;
+    padding: 1rem 2rem;
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: #ffffff;
+    border: none;
+    border-radius: 9px;
+    outline: none;
+    cursor: pointer;
+    background: black;
+}
+
+form button:hover {
+    background:#00b5ad;
+}
+
+form button:active {
+    transform: scale(0.98);
+}
+
+span{
+
+    color: #00b5ad;
+}
+
+.error {
+    color: red;
+}
+.success {
+    color: #00b5ad;
+}
+.previous {
+    background-color: #f1f1f1;
+    color: black;
+}
+a {
+    text-decoration: none;
+    display: inline-block;
+    padding: 8px 16px;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+a:hover { background: #00b5ad; }
+a:active { background: #008B8BFF; }
