@@ -68,20 +68,3 @@ function kontakt_hinzufuegen($email_nutzer,$vorname,$nachname,$bildname,$erinner
     mysqli_close($link);
     return $resultat;
 }
-
-function Name_von_Kontakt($email_nutzer){
-
-    $ShowNAme=[] ;
-    $link = connectdb();
-    $resultat=  mysqli_query($link,"select id from nutzer where email='{$email_nutzer}'");
-    $date = mysqli_fetch_assoc($resultat);
-    $nutzer_id= (int) $date['id'];
-
-
-    $resultat1=  mysqli_query($link,"select name,telefonnummer from kontakte where nutzer_id='{$nutzer_id}'");
-    while ($daten = mysqli_fetch_assoc($resultat1)){
-        $ShowNAme[]=$daten['name'];
-    }
-
-    return $ShowNAme;
-}
