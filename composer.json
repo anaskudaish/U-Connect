@@ -1,8 +1,0 @@
-{
-    "name": "emensa/mvc",
-    "require": {
-        "eftec/bladeone": "^3.47",
-        "ext-mysqli": "*",
-        "phpmailer/phpmailer": "^6.5"
-    }
-}
