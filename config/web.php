@@ -25,8 +25,9 @@ return array(
     '/neuer_code'                        =>      'RegistrierungController@neuer_code',
 
     '/passwort_vergessen'                =>    'Passwort_VergessenController@passwort_vergessen',
-    '/passwort_vergessen_verifizierung'  =>  'Passwort_VergessenController@passwort_vergessen_verifizierung'
+    '/passwort_vergessen_verifizierung'  =>  'Passwort_VergessenController@passwort_vergessen_verifizierung',
 
+    '/kontakt'                      =>     'IndexController@kontakt'
 
 
 );

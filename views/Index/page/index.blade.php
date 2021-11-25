@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <title>Hauptseite</title>
     <link rel="stylesheet" href="../css/index.css">
+
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 
 <body>
@@ -13,16 +17,34 @@
     </div>
 
     <a href="/Profil">Profil</a>
-    <a>Beziehungen</a>
+    <a href="">Beziehungen</a>
     <a href="/Neuer_Kontakt">Neuer Kontakt</a>
     <a href="/abmeldung">Abmelden</a>
 
 </nav>
 
-<div>
+<div class="container">
+    <div class="main-body">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 gutters-sm">
 
+            @foreach($kontakte as $value)
+            <div class="col mb-3">
+                <div class="card">
+                    <img src="../img/unknown.jpg" alt="Cover" class="card-img-top">
+                    <div class="card-body text-center">
+                        <form method="post" action="/kontakt">
+                      <button type="submit" class="btn btn-light btn-sm bg-white has-icon btn-block"><h5 class="card-title">{{$value['vorname'] .' ' .$value['nachname']}}</h5></button>
+                        <input type="hidden" name="id_kontakt" value="{{$value['id']}}">
 
+                        <input type="hidden" name="submitted" value="1" >
+                        </form>
+                    </div>
 
+                </div>
+            </div>
+            @endforeach
+        </div>
+    </div>
 </div>
 
 

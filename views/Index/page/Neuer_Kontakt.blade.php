@@ -11,6 +11,8 @@
 
 </head>
 <body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+
 <a href="/" class="previous">&laquo; Hauptseite</a>
 <div class="container">
 
@@ -18,6 +20,7 @@
         <h3>Neuer Kontakt</h3>
         <div class="form__input-error-message">@if(!is_null($resultatfehler)){{$resultatfehler}} @endif</div>
         <div class="form__message form__message--success">@if(!is_null($resultatok)){{$resultatok}} @endif</div>
+
 
         <fieldset>
             <input  type="text" name="vorname" required autofocus placeholder="Vorname">
@@ -31,7 +34,6 @@
             <input type="url" name="instagram"  placeholder="Instagram Link" >
             <input type="url" name="facebook"  placeholder="Facebook Link" >
             <input type="url" name="twitter"  placeholder="Twitter Link" >
-            <input type="url" name="linkedin"  placeholder="Linkedin Link" >
         </fieldset>
         <fieldset>
             <input type="text" name="strasse"  placeholder="Straße" >
@@ -48,7 +50,9 @@
                 <input type="checkbox" name="tags[]" id="{{$value}}" value="{{$value}}"> <label for="{{$value}}">{{$value}}</label>
                 @endforeach
             @endif
+
             <input  type="text" name="neu_tag"  autofocus placeholder="Neue Tags">
+
         </fieldset>
         <fieldset>
             <label for="Geburtsdatum"> Geburtsdatum : </label>
@@ -60,25 +64,26 @@
             <label for="Interval"> Erinnerungsinterval : </label>
             <select id="Interval" name="erinnerungsinterval">
                 <option value="1 Day">  Tag     </option>
-                <option value="3 Day">  3 Tag   </option>
+                <option value="3 Day">  3 Tage   </option>
                 <option value="1 week"> Woche   </option>
-                <option value="2 week"> 2 Woche </option>
+                <option value="2 week"> 2 Wochen </option>
                 <option value="1 month"> Monat  </option>
-                <option value="3 month"> 3 Monat </option>
-                <option value="6 month"> 6 Monat </option>
-                <option value="9 month"> 9 Monat </option>
+                <option value="3 month"> 3 Monate </option>
+                <option value="6 month"> 6 Monate </option>
+                <option value="9 month"> 9 Monate </option>
                 <option value="1 year" selected> Jahr</option>
             </select>
         </fieldset>
         <fieldset>
             <label for="Bild"> Bild : </label>
-            <input id="Bild" type="file" name="bildname">
+            <input id="Bild" type="file" name="bild">
         </fieldset>
         <fieldset>
             <button name="submit" type="submit"  >Speichern</button>
         </fieldset>
         <input type="hidden" name="submitted" value="1" >
     </form>
+
 
 </div>
 

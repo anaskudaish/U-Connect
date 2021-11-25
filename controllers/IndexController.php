@@ -3,18 +3,49 @@
 require_once('../models/erinnerung.php');
 require_once('../models/geburtstage_erinnerung.php');
 require_once('../models/helfer.php');
+require_once('../models/kontaktenzeigen.php');
+
 
 class IndexController
 {
 
-    public function index(RequestData $rd)
+    public function index()
     {
 
         if ($_SESSION['login_ok'] == 1) {
 
+            $email=$_SESSION['email'];
+            $kontakte= kontakte($email);
+            $daten=[ 'kontakte' => $kontakte
 
-            $daten = [];
+            ];
+
             return view('Index.page.index', $daten);
+
+        } else {
+            header("Location: /anmeldung");
+        }
+    }
+
+
+    public function kontakt()// ausgewählte Kontakt anzeigen
+    {
+
+        if ($_SESSION['login_ok'] == 1) {
+
+            if ($_POST['submitted']) {
+
+                $kontakt_id = $_POST['id_kontakt'];
+                $kontakt= kontaktdaten($kontakt_id);
+                $daten=[ 'kontakt' => $kontakt
+
+                ];
+                return view('Index.page.kontakt', $daten);
+            }
+            else{
+                header("Location: /");
+            }
+
 
         } else {
             header("Location: /anmeldung");

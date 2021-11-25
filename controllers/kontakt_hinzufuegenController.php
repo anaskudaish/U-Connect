@@ -17,7 +17,7 @@ class kontakt_hinzufuegenController
 
                 $vorname              = $_POST['vorname'];
                 $nachname             = $_POST['nachname'];
-                $bildname              = $_POST['bildname'];
+
                 $erinnerungsinterval  = $_POST['erinnerungsinterval'];
 
                 $telefonnummer        = $_POST['telefonnummer'];
@@ -25,7 +25,6 @@ class kontakt_hinzufuegenController
                 $instagram           = $_POST['instagram'];
                 $facebook            = $_POST['facebook'] ;
                 $twitter             = $_POST['twitter'] ;
-                $linkedin            = $_POST['linkedin'] ;
 
                 $strasse             = $_POST['strasse'];
                 $plz                 = $_POST['plz'];
@@ -35,6 +34,23 @@ class kontakt_hinzufuegenController
                 $textfeld            = $_POST['textfeld'];
 
                 $geburtsdatum        = $_POST['geburtsdatum'] ;
+
+                   if (!empty($_POST['bild'])){
+
+                       $bildname = $_FILES['bild']['name'];
+                       $bildtmp = $_FILES['bild']['tmp_name'];
+
+                       $bildExt = explode('.', $bildname);
+                       $bildActualExt = strtolower(end($bildExt));
+
+                       $bildnameNew = uniqid('', true) . "." . $bildActualExt;
+                       $bildspeichern =  "C:\Users\anask\OneDrive\Desktop\U-Connect\public\img/". $bildnameNew;
+
+                       move_uploaded_file($bildtmp, $bildspeichern);
+                       $bildname = $bildnameNew;
+
+                   }
+
 
                 $tags=null;
                 if(!empty($_POST['tags'])){
@@ -54,7 +70,7 @@ class kontakt_hinzufuegenController
                 $resultatok =null;
                 $resultatfehelr=null;
                 $resultat= kontakt_hinzufuegen
-                ($email_nutzer,$vorname,$nachname,$bildname,$erinnerungsinterval,$telefonnummer,$instagram,$facebook,$twitter,$linkedin,$strasse,$plz,$stadt,$land,$textfeld,$geburtsdatum,$tags);
+                ($email_nutzer,$vorname,$nachname,$bildname,$erinnerungsinterval,$telefonnummer,$instagram,$facebook,$twitter,$strasse,$plz,$stadt,$land,$textfeld,$geburtsdatum,$tags);
                 if($resultat==true){
                     $resultatok  ='Kontakt hinzugefügt';
                 }
