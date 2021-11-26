@@ -8,7 +8,7 @@ class ProfilController
     public function profil_update()
     {
 
-        if ($_SESSION['login_ok'] == 1) {
+        if (isset($_SESSION['login_ok']) && $_SESSION['login_ok'] == 1) {
 
 
             $email=$_SESSION['email'];

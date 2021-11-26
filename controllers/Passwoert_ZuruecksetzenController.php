@@ -11,7 +11,7 @@ class Passwoert_ZuruecksetzenController
 
 
     public  function passwort_zuruecksetzen(){
-        if ($_SESSION['login_ok'] == 1) {
+        if (isset($_SESSION['login_ok']) && $_SESSION['login_ok'] == 1) {
             header("Location: /");
         }
         elseif($_SESSION['login_ok'] == 2){
@@ -26,7 +26,7 @@ class Passwoert_ZuruecksetzenController
 
 
     public  function passwort_zuruecksetzen_verifizierung(){
-        if ($_SESSION['login_ok'] == 1) {
+        if (isset($_SESSION['login_ok']) && $_SESSION['login_ok'] == 1) {
             header("Location: /");
         }
         elseif($_SESSION['login_ok'] == 2){

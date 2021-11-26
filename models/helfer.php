@@ -4,6 +4,7 @@
 function hashpasswort($passwort):string{
     $salt='SWE';
     return  sha1($passwort.$salt);
+    
 }
 
 

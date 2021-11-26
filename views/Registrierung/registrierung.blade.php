@@ -15,7 +15,7 @@
     <form class="form" id="createAccount" method="POST" action="/registrierung_verifizierung">
         <h1 class="form__title">Neues Konto</h1>
         <div class="form__input-group">
-            <input type="text" class="form__input" name="email" autofocus placeholder="Email" value="{{$valueEmail}}" required>
+            <input type="text" class="form__input" name="email" autofocus placeholder="Email" value="@if(!empty($valueEmail)){{$valueEmail}}@endif" required>
             <!--<div class="form__input-error-message"></div>-->
         </div>
         <div class="form__input-group">
@@ -24,7 +24,7 @@
         </div>
         <div class="form__input-group">
             <input type="password" class="form__input" name="passwort2" autofocus placeholder="Passwort wiederholen" required>
-            <div class="form__input-error-message">@if(!is_null($fehler)){{$fehler}} @endif</div>
+            <div class="form__input-error-message">@if(!empty($fehler)){{$fehler}} @endif</div>
 
         </div>
         <button class="form__button" type="submit">Registrieren</button>

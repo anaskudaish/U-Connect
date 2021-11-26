@@ -14,7 +14,7 @@
 
     <form class="form"  method="POST" action="/passwort_zuruecksetzen_verifizierung">
         <h1 class="form__title">Neues Passwort</h1>
-        <div class="form__message form__message--error">@if(!is_null($fehler)){{$fehler}} @endif</div>
+        <div class="form__message form__message--error">@if(!empty($fehler)){{$fehler}} @endif</div>
         <div class="form__input-group">
             <input type="password" class="form__input" name="passwort1"  autofocus placeholder="Neues Passwort" required>
         </div>

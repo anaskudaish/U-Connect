@@ -8,21 +8,19 @@ class AnmeldungController
 
     public function anmeldung()
     {
-
-
-        if ($_SESSION['login_ok'] == 1) {
-            header("Location: /");
-        } else {
-            $var = [];
-            return view('Anmeldung.anmeldung', $var);
-        }
-
+            if (isset($_SESSION['login_ok']) && $_SESSION['login_ok'] == 1) {
+                header("Location: /");
+            }
+            else {
+                $var = [];
+                return view('Anmeldung.anmeldung', $var);
+            }
 
     }
 
     public function anmeldung_verifizierung()
     {
-        if ($_SESSION['login_ok'] == 1) {
+        if (isset($_SESSION['login_ok']) && $_SESSION['login_ok'] == 1) {
             header("Location: /");
         } elseif ($_POST['submitted']) {
             $email = htmlspecialchars(trim($_POST['email']));
@@ -43,6 +41,7 @@ class AnmeldungController
                 header("Location: /passwort_zuruecksetzen");
             } else {// $resultat== 0
                 $_SESSION['login_ok'] = 0;
+
                 $var = [
                     'valueEmail' => $email,
                     'fehler' => 'E-Mail oder Passwort ist falsch'];

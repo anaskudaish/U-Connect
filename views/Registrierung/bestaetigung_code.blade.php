@@ -19,7 +19,7 @@
 
         <div class="form__input-group">
             <input type="text" class="form__input" name="code"  autofocus placeholder="Code eintragen " required>
-            <div class="form__input-error-message">@if(!is_null($fehler)){{$fehler}} @endif</div>
+            <div class="form__input-error-message">@if(!empty($fehler)){{$fehler}} @endif</div>
         </div>
 
         <button class="form__button" type="submit">Bestätigen</button>

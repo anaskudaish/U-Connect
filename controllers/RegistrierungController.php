@@ -9,7 +9,7 @@ class RegistrierungController
     public function registrierung()
     {
 
-        if ($_SESSION['login_ok'] == 1) {
+        if (isset($_SESSION['login_ok']) && $_SESSION['login_ok'] == 1) {
             header("Location: /");
         } else {
             $var = [];
@@ -21,7 +21,7 @@ class RegistrierungController
 
     public function registrierung_verifizierung()
     {
-        if ($_SESSION['login_ok'] == 1) {
+        if (isset($_SESSION['login_ok']) && $_SESSION['login_ok'] == 1) {
             header("Location: /");
         }
         elseif ($_POST['submitted']){// submitted
@@ -66,7 +66,7 @@ class RegistrierungController
 
     public function bestaetigung_code()
     {
-        if ($_SESSION['login_ok'] == 1) {
+        if (isset($_SESSION['login_ok']) && $_SESSION['login_ok'] == 1) {
             header("Location: /");
         } else {
             $var = [];
@@ -78,7 +78,7 @@ class RegistrierungController
 
     }
     public function neuer_code(){
-        if ($_SESSION['login_ok'] == 1) {
+        if (isset($_SESSION['login_ok']) && $_SESSION['login_ok'] == 1) {
             header("Location: /");
         }
         elseif($_SESSION['code']){
@@ -106,7 +106,7 @@ class RegistrierungController
 
     public function bestaetigung_code_verifizierung()
     {
-        if ($_SESSION['login_ok'] == 1) {
+        if (isset($_SESSION['login_ok']) && $_SESSION['login_ok'] == 1) {
             header("Location: /");
         }
         elseif ($_POST['submitted']) {

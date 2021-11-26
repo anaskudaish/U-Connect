@@ -36,7 +36,7 @@ $heute = date("Y-m-d");
                 $instagram =   $daten1['instagram'];
                 $facebook  =   $daten1['facebook'];
                 $twitter   =   $daten1['twitter'];
-                $linkedin  =   $daten1['linkedin'];
+
 
 
                 $result2   =   mysqli_query($link,"select telefonnummer from telefonnummer_kontakte where id= '{$kontakt_id}' ");
@@ -44,7 +44,7 @@ $heute = date("Y-m-d");
                 mysqli_free_result($result2);
                 $telefonnummer   =   $daten2['telefonnummer'];
 
-                send_erinnerung($email,$vorname,$nachname,$telefonnummer,$instagram,$facebook,$twitter,$linkedin);
+                send_erinnerung($email,$vorname,$nachname,$telefonnummer,$instagram,$facebook,$twitter);
 
                 $time= strtotime($erinnerungsinterval);
                 $naechsteerinnerung_neue= date("Y-m-d",$time);
@@ -63,7 +63,7 @@ $heute = date("Y-m-d");
 
 
 
-function send_erinnerung($email,$vorname,$nachname,$telefonnummer,$instagram,$facebook,$twitter,$linkedin){
+function send_erinnerung($email,$vorname,$nachname,$telefonnummer,$instagram,$facebook,$twitter){
 
 
 
@@ -103,9 +103,7 @@ function send_erinnerung($email,$vorname,$nachname,$telefonnummer,$instagram,$fa
     if(!empty($twitter)) {
         $bodyContent .= '<p><a href="'. $twitter.'">Twitter</a></p>';
     }
-    if(!empty($linkedin)) {
-        $bodyContent .= '<p><a href="'.$linkedin.'">Linkedin</a></p>';
-    }
+
 
     $bodyContent .= '<p >Gesandt von <b><a href="http://localhost:9090">U-Connect</a></b></p>';
     $mail->Body    = $bodyContent;
