@@ -109,14 +109,22 @@
                                 <input type="text" name="stadt" class="form-control" value="{{$kontakt['stadt']}}">
                             </div>
                         </div>
-                        <div class="row mb-3">
-                            <div class="col-sm-3">
-                                <h6 class="mb-0">Land</h6>
+                            <div class="row mb-3">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Land</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <input type="text" name="land" class="form-control" value="{{$kontakt['land']}}">
+                                </div>
                             </div>
-                            <div class="col-sm-9 text-secondary">
-                                <input type="text" name="land" class="form-control" value="{{$kontakt['land']}}">
+                            <div class="row mb-3">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Tags</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <input type="text" name="tags" class="form-control" value="{{$kontakt['tags']}}">
+                                </div>
                             </div>
-                        </div>
                         <div class="row mb-3">
                             <div class="col-sm-3">
                                 <h6 class="mb-0">Textfeld</h6>

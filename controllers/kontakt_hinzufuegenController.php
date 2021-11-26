@@ -54,10 +54,10 @@ class kontakt_hinzufuegenController
 
                 $tags=null;
                 if(!empty($_POST['tags'])){
-                    $tags=implode("-",$_POST['tags']);
+                    $tags=implode(",",$_POST['tags']);
                     if(!empty($_POST['neu_tag'])){
                         $neu_tag=trim($_POST['neu_tag']);
-                        $tags=$tags.'-'.$neu_tag;
+                        $tags=$tags.','.$neu_tag;
                         tags_import($email_nutzer,$neu_tag);// für nutzer
                     }
                 }

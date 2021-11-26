@@ -71,7 +71,7 @@ function kontaktdaten($kontakt_id)
 
 }
 
-    $result6  =   mysqli_query($link,"select * from tags_kontakte where id= '{$kontakt_id}' ");
+    $result6  =   mysqli_query($link,"select GROUP_CONCAT(tags) as tags from tags_kontakte where id= '{$kontakt_id}' ");
     $daten6    =   mysqli_fetch_assoc($result6);
     $kontakt ['tags']= $daten6['tags']?? null;
 
