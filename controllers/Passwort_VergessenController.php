@@ -10,7 +10,7 @@ class Passwort_VergessenController
 
     public function passwort_vergessen(){
 
-        if ($_SESSION['login_ok'] == 1) {
+        if (isset($_SESSION['login_ok']) && $_SESSION['login_ok'] == 1) {
             header("Location: /");
         } else {
             $var = [];
@@ -26,7 +26,7 @@ class Passwort_VergessenController
     public function passwort_vergessen_verifizierung ()
 {
 
-        if ($_SESSION['login_ok'] == 1) {
+    if (isset($_SESSION['login_ok']) && $_SESSION['login_ok'] == 1) {
             header("Location: /");
         }
         elseif ($_POST['submitted']) {// submitted

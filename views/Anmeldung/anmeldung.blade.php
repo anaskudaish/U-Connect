@@ -14,9 +14,9 @@
 
     <form class="form"  method="POST" action="/anmeldung_verifizierung">
         <h1 class="form__title">Anmeldung</h1>
-        <div class="form__message form__message--error">@if(!is_null($fehler)){{$fehler}} @endif</div>
+        <div class="form__message form__message--error">@if(!empty($fehler)){{$fehler}} @endif</div>
         <div class="form__input-group">
-            <input type="email" class="form__input" name="email" value="{{$valueEmail}}" autofocus placeholder="Email" required>
+            <input type="email" class="form__input" name="email" value="@if(!empty($valueEmail)){{$valueEmail}}@endif" autofocus placeholder="Email" required>
         </div>
         <div class="form__input-group">
             <input type="password" class="form__input" name="passwort" autofocus placeholder="Password" required>

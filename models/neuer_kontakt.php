@@ -2,7 +2,7 @@
 
 
 function kontakt_hinzufuegen($email_nutzer,$vorname,$nachname,$bildname,$erinnerungsinterval,
-                             $telefonnummer,$instagram,$facebook,$twitter,$linkedin,$strasse,$plz,$stadt,$land,$textfeld,$geburtsdatum,$tags): bool {
+                             $telefonnummer,$instagram,$facebook,$twitter,$strasse,$plz,$stadt,$land,$textfeld,$geburtsdatum,$tags): bool {
 
     $resultat=true;
 
@@ -30,9 +30,9 @@ function kontakt_hinzufuegen($email_nutzer,$vorname,$nachname,$bildname,$erinner
         }
 
 
-        if($instagram || $facebook || $twitter|| $linkedin){// eine oder mehr nicht null, dann insert
-            mysqli_query($link, "insert into socialmedia_kontakte (id,instagram,facebook,twitter,linkedin)
-         VALUES ('$lastid','$instagram','$facebook','$twitter','$linkedin')");
+        if($instagram || $facebook || $twitter){// eine oder mehr nicht null, dann insert
+            mysqli_query($link, "insert into socialmedia_kontakte (id,instagram,facebook,twitter)
+         VALUES ('$lastid','$instagram','$facebook','$twitter')");
 
         }
 
@@ -52,8 +52,10 @@ function kontakt_hinzufuegen($email_nutzer,$vorname,$nachname,$bildname,$erinner
        }
 
       if($tags){
-          mysqli_query($link, "insert into tags_kontakte (id,tags)
-         VALUES ('$lastid','$tags')");
+          $tmp = explode(",",$tags);
+          foreach ($tmp as $t)
+              mysqli_query($link, "insert into tags_kontakte (id,tags)
+         VALUES ('$lastid','$t')");
 
       }
 

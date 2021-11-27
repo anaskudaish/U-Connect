@@ -68,16 +68,17 @@ create table socialMedia_Kontakte(
                                          ON DELETE CASCADE,
                                      instagram varchar(300) default null,
                                      facebook varchar (300) default null,
-                                     twitter varchar(300) default null,
-                                     linkedin varchar(300) default null
+                                     twitter varchar(300) default null
+
 
 );
 
 
 create table tags_kontakte(
-                              id int(10) primary key not null references kontakte(id)
+                              id int(10) not null references kontakte(id)
                                   ON DELETE CASCADE,
-                              tags varchar(800) not null
+                              tags varchar(800) not null,
+                              primary key (id,tags)
 
 );
 

@@ -4,6 +4,7 @@
 function hashpasswort($passwort):string{
     $salt='SWE';
     return  sha1($passwort.$salt);
+    
 }
 
 
@@ -21,7 +22,7 @@ function tags_import($email_nutzer,$neu_tag){
      {
 
     $nutzer_tags[]=$neu_tag;
-     $tags= implode('-',  $nutzer_tags);
+     $tags= implode(',',  $nutzer_tags);
     mysqli_query($link,"update nutzer_tags set tags='{$tags}' where id='{$nutzer_id}'");
      }
     mysqli_free_result($result);
@@ -36,17 +37,24 @@ function tags_export($email_nutzer){
     $nutzer_id = (int)$date['id'];
     mysqli_free_result($result);
 
-    $resultat=  mysqli_query($link,"select tags from nutzer_tags where id='{$nutzer_id}'");
-    $daten = mysqli_fetch_assoc($resultat);
+    $resultat=  mysqli_query($link,"select GROUP_CONCAT(id) as id from kontakte where nutzer_id='{$nutzer_id}'");
+    $daten = implode(mysqli_fetch_assoc($resultat));
     mysqli_free_result($resultat);
 
+    $resultat=  mysqli_query($link,"SELECT tags FROM tags_kontakte where id in($daten) GROUP BY tags ORDER BY count(tags) DESC");
+    $daten = mysqli_fetch_all($resultat);
+    mysqli_free_result($resultat);
     mysqli_close($link);
 
-    if(empty($daten['tags'])){
+
+    $tmp = [];
+    if(empty($daten)){
         return null;
     }
     else{
-        return explode('-', $daten['tags']);
+        foreach ($daten as $e => $t)
+            array_push($tmp,$t[0]);
+        return $tmp;
     }
 
 }

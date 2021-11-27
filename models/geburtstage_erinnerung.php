@@ -44,14 +44,14 @@ while ($date = mysqli_fetch_assoc($resultat)) {
                 $instagram =   $daten3['instagram'];
                 $facebook  =   $daten3['facebook'];
                 $twitter   =   $daten3['twitter'];
-                $linkedin  =   $daten3['linkedin'];
+
 
 
                 $result4   =   mysqli_query($link,"select telefonnummer from telefonnummer_kontakte where id= '{$kontakt_id}' ");
                 $daten4   =   mysqli_fetch_assoc($result4);
                 $telefonnummer   =   $daten4['telefonnummer'];
 
-                send_geburtstage_erinnerung($email,$vorname,$nachname,$telefonnummer,$alter,$instagram,$facebook,$twitter,$linkedin);
+                send_geburtstage_erinnerung($email,$vorname,$nachname,$telefonnummer,$alter,$instagram,$facebook,$twitter);
 
 
             }
@@ -76,7 +76,7 @@ function alter($tag,$monat,$jahr): int
 
 }
 
-function send_geburtstage_erinnerung($email,$vorname,$nachname,$telefonnummer,$alter,$instagram,$facebook,$twitter,$linkedin){
+function send_geburtstage_erinnerung($email,$vorname,$nachname,$telefonnummer,$alter,$instagram,$facebook,$twitter){
 
 
 
@@ -117,9 +117,7 @@ function send_geburtstage_erinnerung($email,$vorname,$nachname,$telefonnummer,$a
     if(!empty($twitter)) {
         $bodyContent .= '<p><a href="'. $twitter.'">Twitter</a></p>';
     }
-    if(!empty($linkedin)) {
-        $bodyContent .= '<p><a href="'.$linkedin.'">Linkedin</a></p>';
-    }
+
 
     $bodyContent .= '<p >Gesandt von <b><a href="http://localhost:9090">U-Connect</a></b></p>';
     $mail->Body    = $bodyContent;
