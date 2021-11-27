@@ -4,5 +4,7 @@
 # exclude patterns (uncomment them if you want to use them):
 # *.[oa]
 # *~
-./config/*
-./storage/cache/*
+./config/
+./storage/cache/
+./public/img/
+*.bladec

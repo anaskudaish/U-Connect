@@ -23,7 +23,7 @@
 
                         <div class="d-flex flex-column align-items-center text-center">
 
-                            <img src="../img/unknown.jpg" alt="Admin" class="rounded-circle p-1 bg-primary" width="210">
+                            <img src="../img/{{$kontakt['bildname']}}" alt="Admin" class="rounded-circle p-1 bg-primary" width="210">
                         </div>
                         <hr class="my-4">
 

@@ -21,7 +21,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex flex-column align-items-center text-center">
-                                <img src="../img/unknown.jpg" alt="Admin" class="rounded-circle p-1 bg-primary" width="210">
+                                <img src="../img/{{$kontakt['bildname']}}" alt="Admin" class="rounded-circle p-1 bg-primary" width="210">
                             </div>
                            <h3 class="card-title">{{$kontakt['vorname'] . ' ' . $kontakt['nachname']}}</h3>
                             <hr class="my-4">

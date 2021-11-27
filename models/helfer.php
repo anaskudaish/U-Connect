@@ -41,7 +41,7 @@ function tags_export($email_nutzer){
     $daten = implode(mysqli_fetch_assoc($resultat));
     mysqli_free_result($resultat);
 
-    $resultat=  mysqli_query($link,"SELECT tags FROM tags_kontakte where id in($daten) GROUP BY tags ORDER BY count(tags) DESC");
+    $resultat =  mysqli_query($link,"SELECT tags FROM tags_kontakte where id in($daten) GROUP BY tags ORDER BY count(tags) DESC");
     $daten = mysqli_fetch_all($resultat);
     mysqli_free_result($resultat);
     mysqli_close($link);

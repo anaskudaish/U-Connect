@@ -16,7 +16,7 @@
 <a href="/" class="previous">&laquo; Hauptseite</a>
 <div class="container">
 
-    <form id="contact" action="/kontakt_hinzufuegen" method="post">
+    <form id="contact" action="/kontakt_hinzufuegen" method="post" enctype="multipart/form-data">
         <h3>Neuer Kontakt</h3>
         <div class="form__input-error-message">@if(isset($resultatfehler)){{$resultatfehler}} @endif</div>
         <div class="form__message form__message--success">@if(isset($resultatok)){{$resultatok}} @endif</div>
@@ -79,7 +79,7 @@
             <input id="Bild" type="file" name="bild">
         </fieldset>
         <fieldset>
-            <button name="submit" type="submit"  >Speichern</button>
+            <button name="submit" type="submit">Speichern</button>
         </fieldset>
         <input type="hidden" name="submitted" value="1" >
     </form>
