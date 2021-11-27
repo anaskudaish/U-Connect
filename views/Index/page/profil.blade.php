@@ -24,9 +24,9 @@
 
             <p>
                 @if(empty($mitteilung))
-                    <input type="email"  id="input01" name="email" placeholder="Neue E-Mail" value="{{$valueEmail}}" >
+                    <input type="email"  id="input01" name="email" placeholder="Neue E-Mail">
                 @else
-                    <input type="text"  id="input01" name="code" placeholder="Code eingeben"  >
+                    <input type="text"  id="input01" name="code" placeholder="Code eingeben">
 
                 @endif
 

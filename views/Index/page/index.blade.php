@@ -31,7 +31,7 @@
             @foreach($kontakte as $value)
             <div class="col mb-3">
                 <div class="card">
-                    <img src="../img/unknown.jpg" alt="Cover" class="card-img-top">
+                    <img src="../img/{{$value['bildname']}}" alt="Cover" class="card-img-top">
                     <div class="card-body text-center">
                         <form method="post" action="/kontakt">
                       <button type="submit" class="btn btn-light btn-sm bg-white has-icon btn-block"><h5 class="card-title">{{$value['vorname'] .' ' .$value['nachname']}}</h5></button>
