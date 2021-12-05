@@ -7,7 +7,7 @@
 
 
     <link rel="stylesheet"  href="../css/kontakt_hinzufuegen.css">
-    <link rel="stylesheet"  href="../css/kontakt_hinzufuegen.scss">
+
 
 </head>
 <body>

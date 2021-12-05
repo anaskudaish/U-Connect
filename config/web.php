@@ -7,6 +7,9 @@ return array(
     '/'                                      =>       'IndexController@index',
     '/Neuer_Kontakt'             =>       'IndexController@Neuer_Kontakt',
     '/kontakt_hinzufuegen'                   =>       'kontakt_hinzufuegenController@kontakt_hinzufuegen',
+    '/kontakt'                      =>     'IndexController@kontakt',
+    '/kontakt_bearbeiten'                      =>     'IndexController@kontakt_bearbeiten',
+
 
     '/anmeldung'                             =>       'AnmeldungController@anmeldung',
     '/anmeldung_verifizierung'               =>       'AnmeldungController@anmeldung_verifizierung',
@@ -25,9 +28,8 @@ return array(
     '/neuer_code'                        =>      'RegistrierungController@neuer_code',
 
     '/passwort_vergessen'                =>    'Passwort_VergessenController@passwort_vergessen',
-    '/passwort_vergessen_verifizierung'  =>  'Passwort_VergessenController@passwort_vergessen_verifizierung',
+    '/passwort_vergessen_verifizierung'  =>  'Passwort_VergessenController@passwort_vergessen_verifizierung'
 
-    '/kontakt'                      =>     'IndexController@kontakt'
-
+    
 
 );

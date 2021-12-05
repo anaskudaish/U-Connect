@@ -27,6 +27,7 @@
     <div class="main-body">
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 gutters-sm">
 
+            @if(!empty($kontakte))
             @foreach($kontakte as $value)
             <div class="col mb-3">
                 <div class="card">
@@ -43,6 +44,7 @@
                 </div>
             </div>
             @endforeach
+            @endif
         </div>
     </div>
 </div>

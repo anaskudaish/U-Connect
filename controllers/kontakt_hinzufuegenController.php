@@ -9,7 +9,7 @@ class kontakt_hinzufuegenController
 
     public  function kontakt_hinzufuegen(){
 
-        if ($_SESSION['login_ok'] == 1) {
+        if (isset($_SESSION['login_ok']) && $_SESSION['login_ok'] == 1) {
             $email_nutzer=$_SESSION['email'];
 
             if ($_POST['submitted']) {
