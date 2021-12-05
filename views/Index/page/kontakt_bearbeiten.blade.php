@@ -35,7 +35,7 @@
             <div class="col-lg-8">
                 <div class="card">
                     <div class="card-body">
-                        <form method="post" action="">
+                        <form method="post" action="" method="post" enctype="multipart/form-data">
                         <div class="row mb-3">
                             <div class="col-sm-3">
                                 <h6 class="mb-0">Vorname</h6>
