@@ -20,7 +20,7 @@ function tags_import($email_nutzer,$neu_tag){
      }
      else
      {
-
+    $nutzer_tags = array();
     $nutzer_tags[]=$neu_tag;
      $tags= implode(',',  $nutzer_tags);
     mysqli_query($link,"update nutzer_tags set tags='{$tags}' where id='{$nutzer_id}'");
@@ -41,6 +41,8 @@ function tags_export($email_nutzer){
     $daten = implode(mysqli_fetch_assoc($resultat));
     mysqli_free_result($resultat);
 
+    if(empty($daten))
+        return null;
     $resultat =  mysqli_query($link,"SELECT tags FROM tags_kontakte where id in($daten) GROUP BY tags ORDER BY count(tags) DESC");
     $daten = mysqli_fetch_all($resultat);
     mysqli_free_result($resultat);
