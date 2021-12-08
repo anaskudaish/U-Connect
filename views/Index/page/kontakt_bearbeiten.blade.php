@@ -12,7 +12,7 @@
 
 </head>
 <body>
-
+<a href="/" class="previous">&laquo; Hauptseite</a>
 
 <div class="container">
     <div class="main-body">
@@ -199,12 +199,5 @@
         </div>
     </div>
 </div>
-
-
-
-
-
-
-
 </body>
 </html>
