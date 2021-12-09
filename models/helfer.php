@@ -14,6 +14,7 @@ function tags_import($email_nutzer,$neu_tag){
     $date = mysqli_fetch_assoc($result);
     $nutzer_id = (int)$date['id'];
 
+     $nutzer_tags = array();
      $nutzer_tags= tags_export($email_nutzer);
      if(is_null($nutzer_tags)){
          mysqli_query($link,"insert into nutzer_tags (id,tags)  VALUES ('$nutzer_id','$neu_tag')");
@@ -41,7 +42,11 @@ function tags_export($email_nutzer){
     $daten = implode(mysqli_fetch_assoc($resultat));
     mysqli_free_result($resultat);
 
+
+    if(empty($date))
+        return null;
     $resultat =  mysqli_query($link,"SELECT tags FROM tags_kontakte where id in($daten) GROUP BY tags ORDER BY count(tags) DESC");
+    echo print_r($resultat);
     $daten = mysqli_fetch_all($resultat);
     mysqli_free_result($resultat);
     mysqli_close($link);
