@@ -10,8 +10,11 @@
                          position: center;
                      }
 body{
-    background-color: #000000;
     background-image: url("../img/E810h.png");
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-size: cover;
 }
 .background{
     width: 430px;
