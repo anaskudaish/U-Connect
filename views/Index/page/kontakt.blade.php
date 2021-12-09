@@ -12,6 +12,7 @@
 
 </head>
 <body>
+<a href="/" class="previous">&laquo; Hauptseite</a>
 
 
     <div class="container">
