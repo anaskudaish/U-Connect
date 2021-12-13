@@ -16,10 +16,10 @@
 <a href="/" class="previous">&laquo; Hauptseite</a>
 <div class="container">
 
-    <form id="contact" action="/kontakt_hinzufuegen" method="post">
+    <form id="contact" action="/kontakt_hinzufuegen" method="post" enctype="multipart/form-data">
         <h3>Neuer Kontakt</h3>
-        <div class="form__input-error-message">@if(!is_null($resultatfehler)){{$resultatfehler}} @endif</div>
-        <div class="form__message form__message--success">@if(!is_null($resultatok)){{$resultatok}} @endif</div>
+        <div class="form__input-error-message">@if(isset($resultatfehler)){{$resultatfehler}} @endif</div>
+        <div class="form__message form__message--success">@if(isset($resultatok)){{$resultatok}} @endif</div>
 
 
         <fieldset>
@@ -45,7 +45,7 @@
             <textarea  name="textfeld" placeholder="Textfeld"></textarea>
         </fieldset>
         <fieldset  class="tags">
-            @if(!is_null($tags))<p>Vorhandene Tags</p>
+            @if(isset($tags))<p>Vorhandene Tags</p>
                @foreach($tags as $value)
                 <input type="checkbox" name="tags[]" id="{{$value}}" value="{{$value}}"> <label for="{{$value}}">{{$value}}</label>
                 @endforeach
@@ -79,7 +79,7 @@
             <input id="Bild" type="file" name="bild">
         </fieldset>
         <fieldset>
-            <button name="submit" type="submit"  >Speichern</button>
+            <button name="submit" type="submit">Speichern</button>
         </fieldset>
         <input type="hidden" name="submitted" value="1" >
     </form>

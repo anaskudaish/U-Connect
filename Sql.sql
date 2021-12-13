@@ -75,9 +75,10 @@ create table socialMedia_Kontakte(
 
 
 create table tags_kontakte(
-                              id int(10) primary key not null references kontakte(id)
+                              id int(10) not null references kontakte(id)
                                   ON DELETE CASCADE,
-                              tags varchar(800) not null
+                              tags varchar(800) not null,
+                              primary key (id,tags)
 
 );
 

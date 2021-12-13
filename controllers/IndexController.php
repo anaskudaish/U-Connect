@@ -4,6 +4,7 @@ require_once('../models/erinnerung.php');
 require_once('../models/geburtstage_erinnerung.php');
 require_once('../models/helfer.php');
 require_once('../models/kontaktenzeigen.php');
+require_once('../models/kontakt_bearbeiten.php');
 
 
 class IndexController
@@ -68,6 +69,10 @@ class IndexController
                 } else {
                     header("Location: /");
                 }
+            }
+            else if(!empty($_POST)){
+                kontakt_bearbeiten();
+                header("Location: /");
             }
             else {
                 header("Location: /anmeldung");

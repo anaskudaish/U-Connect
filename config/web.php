@@ -9,7 +9,8 @@ return array(
     '/kontakt_hinzufuegen'                   =>       'kontakt_hinzufuegenController@kontakt_hinzufuegen',
     '/kontakt'                      =>     'IndexController@kontakt',
     '/kontakt_bearbeiten'                      =>     'IndexController@kontakt_bearbeiten',
-
+    
+    '/Events_planen'                           =>     'EventController@Events_planen',
 
     '/anmeldung'                             =>       'AnmeldungController@anmeldung',
     '/anmeldung_verifizierung'               =>       'AnmeldungController@anmeldung_verifizierung',

@@ -33,9 +33,9 @@ class kontakt_hinzufuegenController
 
                 $textfeld            = $_POST['textfeld'];
 
-                $geburtsdatum        = $_POST['geburtsdatum'] ;
-
-                   if (!empty($_POST['bild'])){
+                $geburtsdatum        = $_POST['geburtsdatum'];
+                $bildname = null;
+                   if (!$_FILES['bild']['error']){
 
                        $bildname = $_FILES['bild']['name'];
                        $bildtmp = $_FILES['bild']['tmp_name'];
@@ -44,7 +44,7 @@ class kontakt_hinzufuegenController
                        $bildActualExt = strtolower(end($bildExt));
 
                        $bildnameNew = uniqid('', true) . "." . $bildActualExt;
-                       $bildspeichern =  "C:\Users\anask\OneDrive\Desktop\U-Connect\public\img/". $bildnameNew;
+                       $bildspeichern =  "img\\". $bildnameNew;
 
                        move_uploaded_file($bildtmp, $bildspeichern);
                        $bildname = $bildnameNew;
@@ -54,10 +54,10 @@ class kontakt_hinzufuegenController
 
                 $tags=null;
                 if(!empty($_POST['tags'])){
-                    $tags=implode("-",$_POST['tags']);
+                    $tags=implode(",",$_POST['tags']);
                     if(!empty($_POST['neu_tag'])){
                         $neu_tag=trim($_POST['neu_tag']);
-                        $tags=$tags.'-'.$neu_tag;
+                        $tags=$tags.','.$neu_tag;
                         tags_import($email_nutzer,$neu_tag);// für nutzer
                     }
                 }

@@ -52,8 +52,10 @@ function kontakt_hinzufuegen($email_nutzer,$vorname,$nachname,$bildname,$erinner
        }
 
       if($tags){
-          mysqli_query($link, "insert into tags_kontakte (id,tags)
-         VALUES ('$lastid','$tags')");
+          $tmp = explode(",",$tags);
+          foreach ($tmp as $t)
+              mysqli_query($link, "insert into tags_kontakte (id,tags)
+         VALUES ('$lastid','$t')");
 
       }
 

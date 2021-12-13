@@ -17,16 +17,16 @@
 
             <hr>
             <h3> E-Mail ändern </h3>
-            <div class="error">@if(!is_null($fehler_email)){{$fehler_email}} @endif</div>
-            <div class="error">@if(!is_null($fehler_code)){{$fehler_code}} @endif</div>
-            <div class="success">@if(!is_null($mitteilung)){{$mitteilung}} @endif</div>
+            <div class="error">@if(isset($fehler_email)){{$fehler_email}} @endif</div>
+            <div class="error">@if(isset($fehler_code)){{$fehler_code}} @endif</div>
+            <div class="success">@if(isset($mitteilung)){{$mitteilung}} @endif</div>
 
 
             <p>
-                @if(is_null($mitteilung))
-                    <input type="email"  id="input01" name="email" placeholder="Neue E-Mail" value="{{$valueEmail}}" >
+                @if(empty($mitteilung))
+                    <input type="email"  id="input01" name="email" placeholder="Neue E-Mail">
                 @else
-                    <input type="text"  id="input01" name="code" placeholder="Code eingeben"  >
+                    <input type="text"  id="input01" name="code" placeholder="Code eingeben">
 
                 @endif
 
@@ -34,8 +34,8 @@
 
             <hr>
             <h3> Passwort ändern </h3>
-            <div class="error">@if(!is_null($fehler_passwort)){{$fehler_passwort}} @endif</div>
-            <div class="success">@if(!is_null($resultat)){{$resultat}} @endif</div>
+            <div class="error">@if(isset($fehler_passwort)){{$fehler_passwort}} @endif</div>
+            <div class="success">@if(isset($resultat)){{$resultat}} @endif</div>
 
             <p>
                 <input type="password" name="passwort1" placeholder="Neues Passwort">
@@ -46,7 +46,7 @@
             </p>
 
             <hr>
-            <div class="error">@if(!is_null($fehler_akt_passwort)){{$fehler_akt_passwort}} @endif</div>
+            <div class="error">@if(isset($fehler_akt_passwort)){{$fehler_akt_passwort}} @endif</div>
                <p>
             <input type="password" name="passwort" required placeholder="Aktuelles Passwort">
 

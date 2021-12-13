@@ -11,15 +11,19 @@
 </head>
 
 <body>
+
+<img src="../img/logo-swe.png" class="sweLogo" alt="sweLogo">
 <nav>
     <div class="navicon">
         <div></div>
     </div>
-
-    <a href="/Profil">Profil</a>
-    <a href="">Beziehungen</a>
-    <a href="/Neuer_Kontakt">Neuer Kontakt</a>
-    <a href="/abmeldung">Abmelden</a>
+    <div class="dropdown-content">
+        <a href="" class="active"> <img src="../img/home.png" width="25" height="25"> </a>
+        <a href="#">Event erstellen</a>
+        <a href="/Profil" >Profil</a>
+        <a href="/Neuer_Kontakt">Neuer Kontakt</a>
+        <a href="/abmeldung">Abmelden</a>
+    </div>
 
 </nav>
 
@@ -31,7 +35,7 @@
             @foreach($kontakte as $value)
             <div class="col mb-3">
                 <div class="card">
-                    <img src="../img/unknown.jpg" alt="Cover" class="card-img-top">
+                    <img src="../img/{{$value['bildname']}}" alt="Cover" class="card-img-top">
                     <div class="card-body text-center">
                         <form method="post" action="/kontakt">
                       <button type="submit" class="btn btn-light btn-sm bg-white has-icon btn-block"><h5 class="card-title">{{$value['vorname'] .' ' .$value['nachname']}}</h5></button>
