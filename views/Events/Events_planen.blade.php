@@ -12,7 +12,7 @@
 
 </head>
 <body>
-<a href="/" class="previous">&laquo; Hauptseite</a>
+<a href="/" class="previous">&laquo;Hauptseite</a>
 
 
     <div class="container">
@@ -24,23 +24,14 @@
                                 <div class="col-sm-3">
                                     <h6 class="mb-0">Anstehende Events:</h6>
                                 </div>
-                                @if(!empty($events))
+                            @if(!empty($events))
+                                    <select name="test" size="10">
                                     @foreach($events as $value)
-                                        <div class="col mb-3">
-                                            <div class="card">
-                                                <div class="card-body text-center">
-                                                    <form method="post" action="/#">
-                                                        <button type="submit" class="btn btn-light btn-sm bg-white has-icon btn-block"><h5 class="card-title">{{$value['EventName'] }}</h5></button>
-                                                        <input type="hidden" name="id_kontakt" value="{{$value['id']}}">
-
-                                                        <input type="hidden" name="submitted" value="1" >
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                                    @endforeach
-                                                    @endif
-                                                </div>
+                                            <option value="{{$value['EventName'] }}">{{$value['EventName'] }}</option>
+                                    @endforeach
+                                    </select>
+                            @endif
+                        </div>
                             <br>
 
 
