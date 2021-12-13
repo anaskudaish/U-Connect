@@ -11,6 +11,9 @@ return array(
     '/kontakt_bearbeiten'                      =>     'IndexController@kontakt_bearbeiten',
     
     '/Events_planen'                           =>     'EventController@Events_planen',
+    '/Event_bearbeiten'                           =>     'EventController@Event_bearbeiten',
+    '/neues_Event'                           =>     'EventController@neues_Event',
+    '/event_hinzufuegen'                     =>     'EventController@event_hinzufuegen',
 
     '/anmeldung'                             =>       'AnmeldungController@anmeldung',
     '/anmeldung_verifizierung'               =>       'AnmeldungController@anmeldung_verifizierung',

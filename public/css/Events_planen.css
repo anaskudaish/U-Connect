@@ -30,7 +30,15 @@ body{
     margin-left: 19%;
 
 }
-
+#teilnehmer{
+    border: 1px solid black;
+    padding: 25px;
+    margin-bottom: 25px;
+}
+#kontaktInEvent{
+    border: 1px solid black;
+    width: 50px;
+}
 .card-title{
     margin-bottom:.75rem;
     margin-top: 15px;
