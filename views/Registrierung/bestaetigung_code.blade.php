@@ -10,9 +10,11 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/anmeldung.css">
+    <link rel="stylesheet" href="../css/logo-swe.css">
 </head>
 
 <body>
+<img src="../img/logo-swe.png" class="sweLogo" alt="sweLogo">
 <div class="background" >
     <div class="shape"></div>
     <div class="shape"></div>
