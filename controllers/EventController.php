@@ -52,10 +52,7 @@ class EventController
         $email=$_SESSION['email'];
         $contacts = [];
         createEvent($email,$eventname,$date,$time,$contacts);
-        $events= events($email);
-        $selected = null;
-        $daten=[ 'events' => $events,
-            'selected' => $selected];
-        return view('Events.Events_planen',$daten);
+
+        header("Location: /Events_planen");
     }
 }
