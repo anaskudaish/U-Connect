@@ -19,7 +19,7 @@
     </div>
     <div class="dropdown-content">
         <a href="" class="active"> <img src="../img/home.png" width="25" height="25"> </a>
-        <a href="#">Event erstellen</a>
+        <a href="/Events_planen">Event erstellen</a>
         <a href="/Profil" >Profil</a>
         <a href="/Neuer_Kontakt">Neuer Kontakt</a>
         <a href="/abmeldung">Abmelden</a>
