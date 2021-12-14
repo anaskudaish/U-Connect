@@ -235,3 +235,24 @@ a:active { background: #008B8BFF; }
     background-color: #fff;
     border-top: 0 solid rgba(0,0,0,.125);
 }
+
+.search{
+    text-align: left;
+}
+.search  input[type='submit']{
+    width: 8%;
+    height:2%;
+    color: darkcyan;
+}
+.result{
+
+    color: darkcyan;
+}
+
+
+.search span,label{
+    margin-right: 20px;
+    color: white;
+
+
+}

@@ -145,7 +145,7 @@
                                 </div>
                             @endif
 
-                            @if(!empty($kontakt['textfeld']))
+                            @if(!empty($kontakt['erinnerungsinterval']))
 
                             <div class="row mb-3">
                                 <div class="col-sm-3">
