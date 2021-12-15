@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>Hauptseite</title>
     <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/logo-swe.css">
+
 
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -52,20 +54,48 @@
 
             @if(!empty($kontakte))
             @foreach($kontakte as $value)
-            <div class="col mb-3">
-                <div class="card">
-                    <img src="../img/{{$value['bildname']}}" alt="Cover" class="card-img-top">
-                    <div class="card-body text-center">
-                        <form method="post" action="/kontakt">
-                      <button type="submit" class="btn btn-light btn-sm bg-white has-icon btn-block"><h5 class="card-title">{{$value['vorname'] .' ' .$value['nachname']}}</h5></button>
-                        <input type="hidden" name="id_kontakt" value="{{$value['id']}}">
+                    <div class="flip-card-container" style="--hue: 170">
+                        <div class="flip-card">
 
-                        <input type="hidden" name="submitted" value="1" >
-                        </form>
+                            <div class="card-front">
+                                <figure>
+                                    <div class="img-bg"></div>
+                                    <img src="../img/{{$value['bildname']}}" alt="Image 2">
+                                    <figcaption>{{$value['vorname'] .' ' .$value['nachname']}}</figcaption>
+                                </figure>
+
+                                <ul>
+                                    @if(!empty($value['geburtsdatum']))<li>{{$value['geburtsdatum']}}</li>@endif
+                                    @if(!empty($value['stadt']))<li>{{$value['stadt']}}</li>@endif
+                                        @if(!empty($value['land']))<li>{{$value['land']}}</li>@endif
+                                </ul>
+                            </div>
+
+                            <div class="card-back">
+                                <figure>
+                                    <div class="img-bg"></div>
+                                    <img src="../img/{{$value['bildname']}}" alt="image-2">
+                                </figure>
+                                <form method="post" action="/kontakt">
+                                <button type="submit">Anzeigen</button>
+                                    <input type="hidden" name="id_kontakt" value="{{$value['id']}}">
+
+                                    <input type="hidden" name="submitted" value="1" >
+                                </form>
+                                <div class="design-container">
+                                    <span class="design design--1"></span>
+                                    <span class="design design--2"></span>
+                                    <span class="design design--3"></span>
+                                    <span class="design design--4"></span>
+                                    <span class="design design--5"></span>
+                                    <span class="design design--6"></span>
+                                    <span class="design design--7"></span>
+                                    <span class="design design--8"></span>
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
-
-                </div>
-            </div>
             @endforeach
             @endif
         </div>
