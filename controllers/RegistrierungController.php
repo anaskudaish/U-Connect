@@ -33,16 +33,27 @@ class RegistrierungController
             if (nutzer_existiert($email) == false) {
 
                 if ($passwort1 == $passwort2) {
-                    $_SESSION['email'] = $email;
-                    $_SESSION['passwort'] = $passwort1;
-                    $code= code_senden($email);
-                    if (!$code) {
-                        $fehler = 'Leider ist ein fehler aufgetreten';
-                    } else {
-                        $_SESSION['code'] = $code;
-                        header("Location: /bestaetigung_code");
-                    }
 
+                if (!(preg_match("/[a-z]/", $passwort1)
+                    && preg_match("/[A-Z]/", $passwort1)
+                    && preg_match("/[0-9]/", $passwort1))) {
+                    $fehler  = "Das Passwort muss Kleinbuchstaben, Großbuchstaben und Zahlen enthalten.";
+                } else if (strlen($passwort1) < 8) {
+                    $fehler  = "Das Passwort muss mindestens 8 Zeichen lang sein.";
+                }
+                else{
+
+                $_SESSION['email'] = $email;
+                $_SESSION['passwort'] = $passwort1;
+
+                $code = code_senden($email);
+                if (!$code) {
+                    $fehler = 'Leider ist ein fehler aufgetreten';
+                } else {
+                    $_SESSION['code'] = $code;
+                    header("Location: /bestaetigung_code");
+                }
+            }
                 } else {
                     $fehler = 'Passwörter stimmen nicht überein';
                 }
