@@ -12,7 +12,7 @@
 <a href="/Events_planen" class="previous">&laquo;Events planen</a>
 <div class="container">
     <div class="main-body">
-        <form id="contact" action="/event_hinzufuegen" method="post" enctype="multipart/form-data">
+        <form id="contact" action="/Event_bearbeiten" method="post">
             <h3>Event Bearbeiten</h3>
             <div class="form__input-error-message">@if(isset($resultatfehler)){{$resultatfehler}} @endif</div>
             <div class="form__message form__message--success">@if(isset($resultatok)){{$resultatok}} @endif</div>
@@ -31,6 +31,7 @@
                 <button name="submit" type="submit">Event speichern</button>
             </fieldset>
             <input type="hidden" name="submitted" value="1" >
+            <input type="hidden" name="eventId" value={{$eventData['id']}} >
 
             <label>Teilnehmer Liste:</label>
             <div id="teilnehmer">
