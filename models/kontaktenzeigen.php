@@ -12,7 +12,9 @@ function kontakte($email){
     $nutzer_id=$date['id'];
 
 
-    $result=mysqli_query($link,"select id,vorname,nachname,bildname from kontakte where nutzer_id= '{$nutzer_id}' ");
+    $result=mysqli_query($link,"select kontakte.id,vorname,nachname,bildname, geburtsdatum, stadt,land from kontakte
+left join geburtsdatum_kontakte gk on kontakte.id = gk.id
+left join adresse_kontakte ak on kontakte.id = ak.id where nutzer_id= '{$nutzer_id}' ");
     while($daten = mysqli_fetch_assoc($result)) {
 
         $kontakte []= $daten;
