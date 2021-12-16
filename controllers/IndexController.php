@@ -6,6 +6,7 @@ require_once('../models/helfer.php');
 require_once('../models/kontaktenzeigen.php');
 require_once('../models/kontakt_bearbeiten.php');
 require_once('../models/kontakt_suchen.php');
+require_once('../models/loeschen.php');
 
 
 class IndexController
@@ -177,6 +178,26 @@ class IndexController
         }
 
     }
+    public function kontakt_loeschen()
+    {
 
-
+        if (isset($_SESSION['login_ok']) && $_SESSION['login_ok'] == 1) {
+            if (isset($_POST['loeschen'])) {
+                if($_POST['loeschen']){
+                    $kontakt_id = $_POST['id_kontakt'];
+                    $bool = kontakt_loeschen_model($kontakt_id);
+                    $daten = ['loeschen_bool' => $bool
+                    ];
+                    header("Location: /");
+                }
+                else {
+                    header("Location: /kontakt");
+                }
+            } else {
+                header("Location: /");
+            }
+        } else {
+            header("Location: /anmeldung");
+        }
+    }
 }
