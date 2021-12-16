@@ -7,12 +7,14 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="../css/Events_planen.css">
+    <link rel="stylesheet" href="../css/logo-swe.css">
 
 
 
 </head>
 <body>
-<a href="/" class="previous">&laquo; Hauptseite</a>
+<img src="../img/logo-swe.png" class="sweLogo" alt="sweLogo">
+<a href="/" class="previous">&laquo;Hauptseite</a>
 
 
     <div class="container">
@@ -24,23 +26,14 @@
                                 <div class="col-sm-3">
                                     <h6 class="mb-0">Anstehende Events:</h6>
                                 </div>
-                                @if(!empty($events))
+                            @if(!empty($events))
+                                    <select name="eventId" size="10" form="edit_event">
                                     @foreach($events as $value)
-                                        <div class="col mb-3">
-                                            <div class="card">
-                                                <div class="card-body text-center">
-                                                    <form method="post" action="/#">
-                                                        <button type="submit" class="btn btn-light btn-sm bg-white has-icon btn-block"><h5 class="card-title">{{$value['EventName'] }}</h5></button>
-                                                        <input type="hidden" name="id_kontakt" value="{{$value['id']}}">
-
-                                                        <input type="hidden" name="submitted" value="1" >
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                                    @endforeach
-                                                    @endif
-                                                </div>
+                                            <option value="{{$value['id'] }}">{{$value['EventName'] }}</option>
+                                    @endforeach
+                                    </select>
+                            @endif
+                        </div>
                             <br>
 
 
@@ -56,9 +49,8 @@
 
                                 <div class="row mb-3">
                                 <div class="col-sm-9 text-secondary">
-                                        <form  method="post" action="/Event_bearbeiten" >
+                                        <form  id="edit_event" method="post" action="/Event_bearbeiten" >
                                         <input  type="submit" name="submit" class="btn btn-primary px-4" value="Ausgewähltes Event bearbeiten">
-                                        <input type="hidden" name="id_kontakt" value="{{$Events['id']}}">
                                         <input type="hidden" name="beziehungen" value="1" >
                                         </form>
                                 </div>

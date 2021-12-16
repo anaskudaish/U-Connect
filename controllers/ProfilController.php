@@ -75,10 +75,18 @@ class ProfilController
                         $passwort1 = trim($_POST['passwort1']);
                         $passwort2 = trim($_POST['passwort2']);
                         if ($passwort1 == $passwort2) {
-                            $hashpasswort = hashpasswort($passwort1);
-                            neues_passwort($email, $hashpasswort);
-                            $result3='Ihr Passwort wurde erfolgreich zurückgesetzt';
-
+                            if (!(preg_match("/[a-z]/", $passwort1)
+                                && preg_match("/[A-Z]/", $passwort1)
+                                && preg_match("/[0-9]/", $passwort1))) {
+                                $result4  = "Das neues Passwort muss Kleinbuchstaben, Großbuchstaben und Zahlen enthalten.";
+                            } else if (strlen($passwort1) < 8) {
+                                $result4  = "Das neues Passwort muss mindestens 8 Zeichen lang sein.";
+                            }
+                            else {
+                                $hashpasswort = hashpasswort($passwort1);
+                                neues_passwort($email, $hashpasswort);
+                                $result3 = 'Ihr Passwort wurde erfolgreich zurückgesetzt';
+                            }
                         }
                         else {
                             $result4='Passwörter stimmen nicht überein';

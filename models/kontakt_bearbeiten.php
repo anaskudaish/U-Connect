@@ -31,7 +31,7 @@ function kontakt_bearbeiten(): bool {
     $date = mysqli_fetch_assoc($result);
     $curPic = (string)$date['bildname'];
 
-    $bildname = "unknown.jpg";
+    $bildname = $curPic;
     if (!$_FILES['bild']['error']){
 
         if($curPic != "unknown.jpg")
@@ -59,13 +59,17 @@ function kontakt_bearbeiten(): bool {
 
         mysqli_query($link,"update telefonnummer_kontakte set telefonnummer='$telefonnummer' where id=$_POST[id_kontakt]");
 
-        mysqli_query($link,"replace into socialmedia_kontakte VALUES($_POST[id_kontakt],'$instagram','$facebook','$twitter')");
+        if(!empty($instagram . $facebook . $twitter))
+            mysqli_query($link,"replace into socialmedia_kontakte VALUES($_POST[id_kontakt],'$instagram','$facebook','$twitter')");
 
+        if(!empty($strasse . $plz . $stadt .$land))
         mysqli_query($link,"replace into adresse_kontakte VALUES($_POST[id_kontakt],'$strasse','$plz','$stadt','$land')");
 
-        mysqli_query($link,"replace into text_kontakte VALUES($_POST[id_kontakt],'$textfeld')");
+        if(!empty($textfeld))
+            mysqli_query($link,"replace into text_kontakte VALUES($_POST[id_kontakt],'$textfeld')");
 
-        mysqli_query($link,"replace into geburtsdatum_kontakte VALUES($_POST[id_kontakt],'$geburtsdatum')");
+        if(!empty($geburtsdatum))
+            mysqli_query($link,"replace into geburtsdatum_kontakte VALUES($_POST[id_kontakt],'$geburtsdatum')");
 
         if($tags){
             mysqli_query($link,"delete from tags_kontakte where id=$_POST[id_kontakt]");

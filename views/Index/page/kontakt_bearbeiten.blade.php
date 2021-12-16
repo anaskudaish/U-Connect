@@ -7,13 +7,13 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="../css/kontakt_bearbeiten.css">
-
+    <link rel="stylesheet" href="../css/logo-swe.css">
 
 
 </head>
 <body>
 <a href="/" class="previous">&laquo; Hauptseite</a>
-
+<img src="../img/logo-swe.png" class="sweLogo" alt="sweLogo">
 <div class="container">
     <div class="main-body">
         <div class="row">
@@ -174,8 +174,8 @@
                         <div class="row">
 
                             <div class="col-sm-9 text-secondary">
-                                <input   type="submit" name="submit" class="btn btn-primary px-4" value="Speichern">
-                                <input  type="hidden" name="submitted" value="1" >
+                                <input type="submit" name="submit" class="btn btn-primary px-4" value="Speichern">
+                                <input type="hidden" name="submitted" value="1" >
                                 <input type="hidden" name="id_kontakt" value="{{$kontakt['id']}}">
                             </div>
                         </div>
@@ -183,7 +183,7 @@
 <br>
                         <div class="row">
                             <div class="col-sm-9 text-secondary">
-                                <form  method="post" action="" >
+                                <form method="post" action="\beziehungenVerwalten" >
                                     <input  type="submit" name="submit" class="btn btn-primary px-4" value="Beziehungen verwalten">
                                     <input type="hidden" name="id_kontakt" value="{{$kontakt['id']}}">
                                     <input type="hidden" name="beziehungen_verwalten" value="1" >

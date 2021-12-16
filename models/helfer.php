@@ -46,9 +46,9 @@ function tags_export($email_nutzer){
     if(empty($date))
         return null;
     $resultat =  mysqli_query($link,"SELECT tags FROM tags_kontakte where id in($daten) GROUP BY tags ORDER BY count(tags) DESC");
-    echo print_r($resultat);
+    if(!is_bool($resultat)){
     $daten = mysqli_fetch_all($resultat);
-    mysqli_free_result($resultat);
+    mysqli_free_result($resultat);}
     mysqli_close($link);
 
 

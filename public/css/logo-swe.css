@@ -1,0 +1,6 @@
+.sweLogo {
+grid-column: 1 / 2;
+justify-self: right;
+float:right;
+width: 200px;
+}
