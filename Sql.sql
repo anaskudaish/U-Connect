@@ -1,4 +1,5 @@
-
+CREATE SCHEMA adressbuch;
+USE adressbuch;
 
 
 create table nutzer(
@@ -87,4 +88,12 @@ create table geburtsdatum_kontakte(
                                   ON DELETE CASCADE,
                               geburtsdatum varchar(80) not null
 
+);
+
+CREATE TABLE beziehungen_kontakte(
+                                     id int(10) not null REFERENCES kontakte(id)
+                                         ON DELETE CASCADE,
+                                     id_beziehung int(10) not null,
+                                     Beziehungs_wert int(10),
+                                     PRIMARY KEY (id,id_beziehung)
 );
