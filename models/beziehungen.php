@@ -18,7 +18,7 @@ function get_name_zu_beziehung($beziehung){
     $result= mysqli_query($link,"SELECT vorname, nachname From kontake WHERE id = '$beziehung'");
 
     mysqli_close($link);
-    return $result;
+    return $result3;
 }
 function get_zu_bearbeitenden_name($zu_bearebiten){
     $link = connectdb();
@@ -45,6 +45,24 @@ function name_vom_kontakt($id){
     $link = connectdb();
 
     $result=  mysqli_query($link,"SELECT vorname, nachname FROM kontakte WHERE id LIKE '$id';");
+
+    $result2 = mysqli_fetch_assoc($result);
+    mysqli_close($link);
+    return $result2;
+}
+function beziehung_entfernen($id,$beziehung_zu){
+    $link = connectdb();
+
+    $result = mysqli_query($link,"DELETE FROM beziehungen_kontakte WHERE id = '$id' AND id_beziehung = '$beziehung_zu'");
+
+    $result2 = mysqli_fetch_assoc($result);
+    mysqli_close($link);
+    return $result2;
+}
+function beziehung_update($id){
+    $link = connectdb();
+
+    $result=  mysqli_query($link,"SELECT vorname, nachname FROM kontakte WHERE id ='$id';");
 
     $result2 = mysqli_fetch_assoc($result);
     mysqli_close($link);

@@ -13,7 +13,13 @@
 <?php
     $kontakt['id'] = $_POST['id_kontakt'];
     echo $kontakt['id'];
-    var_dump($names2);
+
+    echo '<pre>';
+        //var_dump($test_result2);
+    echo '</pre>';
+    echo '<pre>';
+        //var_dump($names2);
+    echo '</pre>';
 ?>
 <a href="/" class="previous">&laquo; Hauptseite</a>
 <div class="container">
@@ -28,11 +34,11 @@
                             @foreach ($names2 as $key)
                                 {{$key['id_beziehung']}}
                             @endforeach
-                            <form method="Post" action="">
+                            <form method="post" action="/beziehungenVerwalten">
                                 <label for="Beziehungen"><h5>Vorhandene Beziehungen</h5></label>
                                 <select id="Beziehungen" name="beziehungen_zu_id" multiple="multiple">
-                                    @foreach($names as $key)
-                                        <option value="{{$key['id']}}" > {{$names2}}  {{$key['id_beziehung']}}  {{$key['Beziehungs_wert']}} </option>
+                                    @foreach($test_result2 as $key)
+                                        <option value="{{$key['id_beziehung']}}" >{{$key['vorname']}} {{$key['nachname']}} {{$key['Beziehungs_wert']}} </option>
                                     @endforeach
                                 </select>
                                 <div class="row">
@@ -45,18 +51,17 @@
                             </form>
                         </div>
 
-
-
                         {{--var_dump($kontakt_bearebiten)--}}
                         <div class="second">
                             <h5>Beziehung zu @if(isset($_POST['beziehungen_zu_id'])) {{$kontakt_bearebiten[0]['vorname'] . ' ' . $kontakt_bearebiten[0]['nachname']}} @else {{'...'}} @endif bearbeiten</h5>
-                            <form oninput="numerisch.value=auswertung.value">
+                            <form method="post" action="/beziehungenVerwalten" oninput="numerisch.value=update_entfernen.value">
 
-                                <input type="range" name="auswertung" min="-5" max="5" value="0" >
+                                <input type="range" name="update_entfernen" min="-5" max="5" value="0" >
                                 Punkte: <output name="numerisch">0</output>
 
-                                <input type="submit" name="submit" class="btn btn-primary px-4" value="Update">
-                                <input type="submit" name="submit" class="btn btn-primary px-4" value="Entfernen">
+                                <input type="submit" name="submit_update" class="btn btn-primary px-4" value="Update">
+                                <input type="submit" name="submit_entfernen" class="btn btn-primary px-4" value="Entfernen">
+                                <input type="hidden" name="beziehung_zu" value="{{$beziehung_zu[0]}}">
                                 <input type="hidden" name="id_kontakt" value="{{$kontakt['id']}}">
                             </form>
                         </div>

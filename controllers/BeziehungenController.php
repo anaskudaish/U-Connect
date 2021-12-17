@@ -10,6 +10,7 @@ class BeziehungenController
             foreach ($names as $key){
                 $names2[] = get_name_zu_beziehung($key['id_beziehung']);
             }
+            //$test_result = $names.array_merge($names2);
             //$names2 = get_name_zu_beziehung($names['Beziehungs_wert']);
 
             if(isset($_POST['beziehungen_zu_id'])){
@@ -22,6 +23,11 @@ class BeziehungenController
             }
             if(isset($_POST['bewertung'])){
                 $ergebnis = beziehung_hinzufügen($_POST['id_kontakt'],$_POST['beziehungen_hinzufügen'],$_POST['bewertung']);
+            }
+            if(isset($_POST['submit_entfernen'])){
+                $id = $_POST['id_kontakt'];
+                $beziehung_zu2 = $_POST['beziehung_zu'];
+                beziehung_entfernen($id,$beziehung_zu2);
             }
             $kontakt_wo_beziehungen_bearebitet_werden = name_vom_kontakt($_POST['id_kontakt']);
             //$daten = [ 'names' => $names];
@@ -57,7 +63,9 @@ class BeziehungenController
                 'kontakt_hinzufügen' => $kontakt_hinzufügen,
                 'ergebnis' => $ergebnis,
                 'kontakt_wo_beziehungen_bearebitet_werden' => $kontakt_wo_beziehungen_bearebitet_werden,
-                'names2' => $names2
+                'names2' => $names2,
+                'test_result2' => $test_result2,
+                'beziehung_zu' => $beziehung_zu
             ];
 
             return view('Beziehungen.beziehungen', $daten);
