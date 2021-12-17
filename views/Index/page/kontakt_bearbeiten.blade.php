@@ -12,8 +12,8 @@
 
 </head>
 <body>
-<a href="/" class="previous">&laquo; Hauptseite</a>
 <img src="../img/logo-swe.png" class="sweLogo" alt="sweLogo">
+<a href="/" class="previous">&laquo; Hauptseite</a>
 <div class="container">
     <div class="main-body">
         <div class="row">

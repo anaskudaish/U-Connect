@@ -19,8 +19,12 @@ class EventController
     public function Event_bearbeiten()// ausgewähltes Event bearbeiten
     {
         if (isset($_SESSION['login_ok']) && $_SESSION['login_ok'] == 1) {
-            $eventData = ausgewaehtlesevent(1);
-            $userList = teilnehmerDesEvents(1);
+            if(!empty($_POST['submitted'])){
+                updateEvent($_SESSION['email'],$_POST['eventId'],$_POST['Eventname'],$_POST['date'],$_POST['time']);
+                header("Location: /Events_planen");
+            }
+            $eventData = ausgewaehtlesevent($_POST['eventId']);
+            $userList = teilnehmerDesEvents($_POST['eventId']);
             $daten = ['eventData' => $eventData,
                       'userList' => $userList
                 ];
@@ -33,11 +37,7 @@ class EventController
     public function neues_Event()// ausgewähltes Event bearbeiten
     {
         if (isset($_SESSION['login_ok']) && $_SESSION['login_ok'] == 1) {
-            $eventData = ausgewaehtlesevent(1);
-            $userList = teilnehmerDesEvents(1);
-            $daten = ['eventData' => $eventData,
-                'userList' => $userList
-            ];
+            $daten = [];
             return view('Events.neues_Event',$daten);
         }
         else {

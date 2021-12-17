@@ -31,7 +31,7 @@ function kontakt_bearbeiten(): bool {
     $date = mysqli_fetch_assoc($result);
     $curPic = (string)$date['bildname'];
 
-    $bildname = "unknown.jpg";
+    $bildname = $curPic;
     if (!$_FILES['bild']['error']){
 
         if($curPic != "unknown.jpg")

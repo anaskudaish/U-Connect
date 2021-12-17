@@ -11,8 +11,8 @@
 
 </head>
 <body>
-<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
 <img src="../img/logo-swe.png" class="sweLogo" alt="sweLogo">
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
 <a href="/" class="previous">&laquo; Hauptseite</a>
 <div class="container">
 

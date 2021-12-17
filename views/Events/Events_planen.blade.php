@@ -27,9 +27,9 @@
                                     <h6 class="mb-0">Anstehende Events:</h6>
                                 </div>
                             @if(!empty($events))
-                                    <select name="test" size="10">
+                                    <select name="eventId" size="10" form="edit_event">
                                     @foreach($events as $value)
-                                            <option value="{{$value['EventName'] }}">{{$value['EventName'] }}</option>
+                                            <option value="{{$value['id'] }}">{{$value['EventName'] }}</option>
                                     @endforeach
                                     </select>
                             @endif
@@ -49,9 +49,8 @@
 
                                 <div class="row mb-3">
                                 <div class="col-sm-9 text-secondary">
-                                        <form  method="post" action="/Event_bearbeiten" >
+                                        <form  id="edit_event" method="post" action="/Event_bearbeiten" >
                                         <input  type="submit" name="submit" class="btn btn-primary px-4" value="Ausgewähltes Event bearbeiten">
-                                        <input type="hidden" name="id_kontakt" value="{{$Events['id']}}">
                                         <input type="hidden" name="beziehungen" value="1" >
                                         </form>
                                 </div>

@@ -12,8 +12,9 @@
 
 </head>
 <body>
-<a href="/" class="previous">&laquo; Hauptseite</a>
 <img src="../img/logo-swe.png" class="sweLogo" alt="sweLogo">
+<a href="/" class="previous">&laquo; Hauptseite</a>
+
 
     <div class="container">
         <div class="main-body">
@@ -30,18 +31,18 @@
                             <ul class="list-group list-group-flush">
                                 @if(!empty($kontakt['instagram']))
                                     <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                        <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-instagram me-2 icon-inline text-danger"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg><a href="{{$kontakt['instagram']}}">Instagram</a></h6>
+                                        <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-instagram me-2 icon-inline text-danger"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg><a href="{{$kontakt['instagram']}}" target="_blank">Instagram</a></h6>
                                     </li>
                                 @endif
                                 @if(!empty($kontakt['facebook']))
                                     <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                        <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-facebook me-2 icon-inline text-primary"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg><a href="{{$kontakt['facebook']}}">Facebook</a></h6>
+                                        <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-facebook me-2 icon-inline text-primary"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg><a href="{{$kontakt['facebook']}}" target="_blank">Facebook</a></h6>
 
                                     </li>
                                 @endif
                                 @if(!empty($kontakt['twitter']))
                                     <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                        <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-twitter me-2 icon-inline text-info"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg><a href="{{$kontakt['twitter']}}">Twitter</a></h6>
+                                        <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-twitter me-2 icon-inline text-info"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg><a href="{{$kontakt['twitter']}}" target="_blank">Twitter</a></h6>
                                     </li>
                                 @endif
                             </ul>
@@ -189,6 +190,16 @@
                                         </form>
                                 </div>
                                 </div>
+
+                            <div class="row mb-3">
+                                <div class="col-sm-9 text-secondary">
+                                    <form  method="post" action="\kontakt_loeschen" >
+                                        <input type="submit" name="submit" class="btn btn-primary px-4" value="Löschen">
+                                        <input type="hidden" name="id_kontakt" value="{{$kontakt['id']}}">
+                                        <input type="hidden" name="loeschen" value="1" >
+                                    </form>
+                                </div>
+                            </div>
 
 
                         </div>

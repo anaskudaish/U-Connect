@@ -12,7 +12,7 @@ function events($email){
     $date = mysqli_fetch_assoc($resultat);
     $nutzer_id=$date['id'];
 
-    $result=mysqli_query($link,"select EventName from events where nutzer_id= '{$nutzer_id}' ");
+    $result=mysqli_query($link,"select id,EventName from events where nutzer_id= '{$nutzer_id}' ");
     while($daten = mysqli_fetch_assoc($result)) {
 
         $events []= $daten;
@@ -51,6 +51,21 @@ function createEvent($email,$eventname,$date,$time,$contacts)
     return $result;
 }
 
+
+
+function updateEvent($email,$eventId,$eventName,$date,$time){
+    $link = connectdb();
+    $email = mysqli_real_escape_string($link,$email);
+    $eventId = mysqli_real_escape_string($link,$eventId);
+    $eventName = mysqli_real_escape_string($link,$eventName);
+    $date = mysqli_real_escape_string($link,$date);
+
+    mysqli_query($link,"UPDATE events SET eventname='$eventName',Datum='$date',Uhrzeit='$time' WHERE id='$eventId'");
+
+    //TODO Contacts
+}
+
+
 function teilnehmerDesEvents($eventID){
 
     $link  = connectdb();
@@ -59,6 +74,7 @@ function teilnehmerDesEvents($eventID){
 
     $resultat=  mysqli_query($link,"select * from event_kontakte where event_id='{$eventID}'");
     $date = mysqli_fetch_assoc($resultat);
+    if(!empty($date)){
     $kontakt_id=$date['kontakte_id'];
 
 
@@ -66,5 +82,6 @@ function teilnehmerDesEvents($eventID){
     while($daten = mysqli_fetch_assoc($result)) {
         $kontakte [] = $daten;
     }
-    return $result;
+    return $result;}
+    return [];
 }

@@ -544,8 +544,8 @@ button:focus+.design-container {
     text-align: left;
 }
 .search  input[type='submit']{
-    width: 8%;
-    height:2%;
+    width: auto;
+    height:auto;
     color: darkcyan;
 }
 .result{

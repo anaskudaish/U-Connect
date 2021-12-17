@@ -2,6 +2,6 @@
 return [
     'host' => 'localhost',
     'user' => 'root',
-    'password' => '', // '<yourpassword>',
+    'password' => 'mariadb1', // '<yourpassword>',
     'database' => 'adressbuch'
 ];
