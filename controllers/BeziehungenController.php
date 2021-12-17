@@ -23,10 +23,10 @@ class BeziehungenController
                     $counter++;
                 }
             }
-            $beziehung_zu = $_POST['beziehungen_zu_id'];
             if(isset($_POST['beziehungen_zu_id'])){
+                $beziehung_zu = $_POST['beziehungen_zu_id'];
                 $zu_bearebiten = $_POST['beziehungen_zu_id'];
-                $kontakt_bearebiten = get_zu_bearbeitenden_name($zu_bearebiten);
+                $kontakt_bearbeiten = get_zu_bearbeitenden_name($zu_bearebiten);
             }
             if(isset($_POST['beziehungen_hinzufügen'])){
                 $zu_bearebiten = $_POST['beziehungen_hinzufügen'];
@@ -40,12 +40,17 @@ class BeziehungenController
                 $beziehung_zu2 = $_POST['beziehung_zu'];
                 beziehung_entfernen($id,$beziehung_zu2);
             }
+            if(isset($_POST['submit_update'])){
+                $id = $_POST['id_kontakt'];
+                $beziehung_zu2 = $_POST['beziehung_zu'];
+                $ergebnis = beziehung_hinzufügen($id,$beziehung_zu2,$_POST['update_entfernen']);
+            }
             $kontakt_wo_beziehungen_bearebitet_werden = name_vom_kontakt($_POST['id_kontakt']);
             //$daten = [ 'names' => $names];
 
             //if ($_POST['submitted'] == 1) {
                 $email = $_SESSION['email'];
-                $search_text = trim($_POST['search_text']);
+                $search_text = isset($_POST['search_text']) ? trim($_POST['search_text']) : "";
                 $show = null;
 
                     $vornamen = vorname_suchen($email, $search_text);
@@ -70,13 +75,13 @@ class BeziehungenController
                 'kontakte' => $kontakte,
                 'resultat' => $resultat,
                 'search_text' => $search_text,
-                'kontakt_bearebiten' => $kontakt_bearebiten,
-                'kontakt_hinzufügen' => $kontakt_hinzufügen,
-                'ergebnis' => $ergebnis,
+                'kontakt_bearebiten' => $kontakt_bearbeiten ?? [],
+                'kontakt_hinzufügen' => $kontakt_hinzufügen ?? [],
+                'ergebnis' => $ergebnis ?? false,
                 'kontakt_wo_beziehungen_bearebitet_werden' => $kontakt_wo_beziehungen_bearebitet_werden,
-                'names2' => $names2,
+                'names2' => $names2 ?? [],
                 'test_result2' => $test_result2,
-                'beziehung_zu' => $beziehung_zu
+                'beziehung_zu' => $beziehung_zu ?? 0
             ];
 
             return view('Beziehungen.beziehungen', $daten);
