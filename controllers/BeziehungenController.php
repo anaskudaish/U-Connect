@@ -12,7 +12,18 @@ class BeziehungenController
             }
             //$test_result = $names.array_merge($names2);
             //$names2 = get_name_zu_beziehung($names['Beziehungs_wert']);
+            $counter = 0;
+            $test_result2 = [];
+            foreach ($names as $key2){
+                if($counter < count($names)){
+                    $key2["vorname"] = $names2[$counter][0]['vorname'];
+                    $key2["nachname"] = $names2[$counter][0]['nachname'];
 
+                    $test_result2[] = $key2;
+                    $counter++;
+                }
+            }
+            $beziehung_zu = $_POST['beziehungen_zu_id'];
             if(isset($_POST['beziehungen_zu_id'])){
                 $zu_bearebiten = $_POST['beziehungen_zu_id'];
                 $kontakt_bearebiten = get_zu_bearbeitenden_name($zu_bearebiten);

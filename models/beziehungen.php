@@ -15,8 +15,13 @@ function kontakt_name($kontakt_id){
 }
 function get_name_zu_beziehung($beziehung){
     $link = connectdb();
-    $result= mysqli_query($link,"SELECT vorname, nachname From kontake WHERE id = '$beziehung'");
+    $result= mysqli_query($link,"SELECT vorname, nachname From kontakte WHERE id = '$beziehung'");
 
+    while($result2 = mysqli_fetch_assoc($result)) {
+
+        $result3[] = $result2;
+
+    }
     mysqli_close($link);
     return $result3;
 }
