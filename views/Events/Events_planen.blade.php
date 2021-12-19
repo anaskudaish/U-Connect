@@ -13,8 +13,9 @@
 
 </head>
 <body>
-<img src="../img/logo-swe.png" class="sweLogo" alt="sweLogo">
-<a href="/" class="previous">&laquo;Hauptseite</a>
+<a href="/"><img src="../img/logo-swe.png" class="sweLogo" alt="sweLogo"></a>
+
+
 
 
     <div class="container">
@@ -64,7 +65,13 @@
                                     </form>
                                 </div>
                             </div>
-
+                            <div class="row">
+                                <div class="col-sm-9 text-secondary">
+                                    <form method="post" action="\" >
+                                        <input  type="submit" name="submit" class="btn btn-primary px-4" value="Abbrechen">
+                                    </form>
+                                </div>
+                            </div>
 
                         </div>
                     </div>

@@ -14,11 +14,15 @@ body {
     background-size: cover;
 }
 .sweLogo {
+    margin-right: 70px;
+    margin-top:-50px;
     grid-column: 1 / 2;
     justify-self: right;
     float: right;
     width: 200px;
 }
+
+
 
 .cl p {
     position: relative;
@@ -94,13 +98,4 @@ span{
     background-color: #00b5ad;
     color: black;
 }
-a {
-    text-decoration: none;
-    display: inline-block;
-    padding: 8px 16px;
-    position: absolute;
-    left: 0;
-    top: 0;
-}
-a:hover { background: #00b5ad; }
-a:active { background: #008B8BFF; }
+

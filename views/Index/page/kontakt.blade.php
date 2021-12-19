@@ -12,8 +12,8 @@
 
 </head>
 <body>
-<img src="../img/logo-swe.png" class="sweLogo" alt="sweLogo">
-<a href="/" class="previous">&laquo; Hauptseite</a>
+<a href="/"><img src="../img/logo-swe.png" class="sweLogo" alt="sweLogo"></a>
+
 
 
     <div class="container">
@@ -194,7 +194,33 @@
                             <div class="row mb-3">
                                 <div class="col-sm-9 text-secondary">
                                     <form  method="post" action="\kontakt_loeschen" >
-                                        <input type="submit" name="submit" class="btn btn-primary px-4" value="Löschen">
+
+                                        <!-- Button trigger modal -->
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                            Löschen
+                                        </button>
+
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">ACHTUNG!</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        Sind Sie sich sicher, den Kontakt endgültig zu löschen?
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Abbruch</button>
+                                                        <button type="submit" class="btn btn-primary">Endgültig löschen</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
                                         <input type="hidden" name="id_kontakt" value="{{$kontakt['id']}}">
                                         <input type="hidden" name="loeschen" value="1" >
                                     </form>

@@ -10,6 +10,8 @@ body{
     background-size: cover;
 }
 .sweLogo {
+
+    margin-top:-18px;
     grid-column: 1 / 2;
     justify-self: right;
     float: right;

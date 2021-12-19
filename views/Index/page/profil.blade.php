@@ -7,8 +7,9 @@
         <link rel="stylesheet" href="../css/logo-swe.css">
 </head>
 <body>
-<img src="../img/logo-swe.png" class="sweLogo" alt="sweLogo">
-<a href="/" class="previous">&laquo; Hauptseite</a>
+<a href="/"><img src="../img/logo-swe.png" class="sweLogo" alt="sweLogo"></a>
+
+
 <h2 class=""> Account </h2>
 
 <p>Angemeldet als <span >{{$Email}}</span></p><br>

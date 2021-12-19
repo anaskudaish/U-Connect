@@ -47,13 +47,4 @@ body{
     background-color: #00b5ad;
     color: black;
 }
-a {
-    text-decoration: none;
-    display: inline-block;
-    padding: 8px 16px;
-    position: absolute;
-    left: 0;
-    top: 0;
-}
-a:hover { background: #00b5ad; }
-a:active { background: #008B8BFF; }
+

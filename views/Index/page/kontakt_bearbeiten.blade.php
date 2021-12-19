@@ -12,8 +12,9 @@
 
 </head>
 <body>
-<img src="../img/logo-swe.png" class="sweLogo" alt="sweLogo">
-<a href="/" class="previous">&laquo; Hauptseite</a>
+<a href="/"><img src="../img/logo-swe.png" class="sweLogo" alt="sweLogo"></a>
+
+
 <div class="container">
     <div class="main-body">
         <div class="row">
@@ -190,7 +191,16 @@
                                 </form>
                             </div>
                         </div>
-
+<br>
+                        <div class="row">
+                            <div class="col-sm-9 text-secondary">
+                                <form method="post" action="\kontakt" >
+                                    <input  type="submit" name="submit" class="btn btn-primary px-4" value="Abbrechen">
+                                    <input type="hidden" name="id_kontakt" value="{{$kontakt['id']}}">
+                                    <input type="hidden" name="submitted" value="1" >
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
 

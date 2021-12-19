@@ -25,7 +25,14 @@ body {
     background-size: cover;
 }
 
+.sweLogo {
 
+    margin-top:-18px;
+    grid-column: 1 / 2;
+    justify-self: right;
+    float: right;
+    width: 200px;
+}
 
 .container {
     max-width: 650px;
@@ -46,7 +53,7 @@ body {
 #contact {
     background: #F9F9F9;
     padding: 25px;
-    margin: 150px 0;
+    margin: 1px 0;
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
 #contact h3 {
@@ -152,20 +159,8 @@ label {
 .form__input-error-message {
     color: red;
 }
-a {
-    text-decoration: none;
-    display: inline-block;
-    padding: 8px 16px;
-}
-:any-link {text-decoration: none;}
-a:hover { background: #00b5ad; }
-a:active { background: #008B8BFF; }
 
-.previous {
-    background-color: #00b5ad;
-    color: black;
 
-}
 
 .tags{
     margin-top: -20px;

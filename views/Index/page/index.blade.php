@@ -97,6 +97,10 @@
                         </div>
                     </div>
             @endforeach
+            @else <div style="width: 60px; background-color: #00b5ad; color: green; border: 2px solid #999;" class="container">
+
+                <a href="/Neuer_Kontakt" class="text-light"> <p>Sie haben noch keine Kontakte!</p> Zum hinzufügen einfach klicken...</a>
+          </div>
             @endif
         </div>
     </div>

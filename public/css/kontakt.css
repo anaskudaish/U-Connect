@@ -11,6 +11,7 @@ body{
 }
 .sweLogo {
     grid-column: 1 / 2;
+    margin-top: -10px;
     justify-self: right;
     float: right;
     width: 200px;

@@ -7,9 +7,8 @@
     <link rel="stylesheet"  href="../css/Events_planen.css">
     <link rel="stylesheet"  href="../css/neues_event.css">
 </head>
-<img src="../img/logo-swe.png" class="sweLogo" alt="sweLogo">
+<a href="/"><img src="../img/logo-swe.png" class="sweLogo" alt="sweLogo"></a>
 <body>
-<a href="/Events_planen" class="previous">&laquo;Events planen</a>
 <div class="container">
     <div class="main-body">
         <form id="contact" action="/Event_bearbeiten" method="post">
@@ -45,6 +44,10 @@
             </div>
             <button name="submit" type="submit">Neuen Teilnehmer hinzufügen</button>
             <button name="submit" type="submit">Ausgewählten Teilnehmer entfernen</button>
+        </form>
+        <form id="contact" action="/Events_planen" method="post">
+            <button name="submit" type="submit">Abbrechen</button>
+
         </form>
     </div>
 </div>

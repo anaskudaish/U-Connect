@@ -13,10 +13,10 @@
 
 </head>
 <body>
-<img src="../img/logo-swe.png" class="sweLogo" alt="sweLogo">
+<a href="/"><img src="../img/logo-swe.png" class="sweLogo" alt="sweLogo"></a>
+
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
 
-<a href="/Events_planen" class="previous">&laquo;Events planen</a>
 <div class="container">
     <div class="main-body">
     <form id="contact" action="/event_hinzufuegen" method="post" enctype="multipart/form-data">
@@ -45,7 +45,17 @@
         <button name="submit" type="submit">Neuen Teilnehmer hinzufügen</button>
         <button name="submit" type="submit">Ausgewählten Teilnehmer entfernen</button>
     </form>
+        <form id="contact" action="/Events_planen" method="post">
+            <button name="submit" type="submit">Abbrechen</button>
+
+        </form>
+    </div>
+
 </div>
-</div>
+
+
+
+
+
 </body>
 </html>

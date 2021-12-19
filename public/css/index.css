@@ -560,3 +560,15 @@ button:focus+.design-container {
 
 
 }
+
+a.text-light{
+    text-align: center;
+
+}
+
+.sweLogo {
+    grid-column: 1 / 2;
+    justify-self: right;
+    float: right;
+    width: 200px;
+}

@@ -11,9 +11,10 @@
 
 </head>
 <body>
-<img src="../img/logo-swe.png" class="sweLogo" alt="sweLogo">
+<a href="/"><img src="../img/logo-swe.png" class="sweLogo" alt="sweLogo"></a>
+
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
-<a href="/" class="previous">&laquo; Hauptseite</a>
+
 <div class="container">
 
     <form id="contact" action="/kontakt_hinzufuegen" method="post" enctype="multipart/form-data">
@@ -83,7 +84,10 @@
         </fieldset>
         <input type="hidden" name="submitted" value="1" >
     </form>
+    <form id="contact" action="/" method="post">
+        <button name="submit" type="submit">Abbrechen</button>
 
+    </form>
 
 </div>
 

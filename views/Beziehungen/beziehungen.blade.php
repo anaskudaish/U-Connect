@@ -20,7 +20,8 @@
         //var_dump($names2);
     echo '</pre>';
 ?>
-<a href="/" class="previous">&laquo; Hauptseite</a>
+<a href="/"><img src="../img/logo-swe.png" class="sweLogo" alt="sweLogo"></a>
+
 <div class="container">
     <div class="main-body">
         <div class="row">
@@ -113,6 +114,15 @@
                                     <input type="hidden" name="id_kontakt" value="{{$kontakt['id']}}">
                                     <input type="submit" name="submit" class="btn btn-primary px-4" value="Speichern">
                                 </form>
+
+                                <form method="Post" action="/kontakt">
+
+                                    <input type="submit" value="Abbrechen" class="btn btn-primary px-4">
+                                    <input type="hidden" name="id_kontakt" value="{{$kontakt['id']}}">
+                                    <input type="hidden" name="submitted" value="1" >
+
+                                </form>
+
                         </div>
                     </div>
                 </div>

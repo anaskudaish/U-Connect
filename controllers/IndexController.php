@@ -1,7 +1,5 @@
 <?php
 
-require_once('../models/erinnerung.php');
-require_once('../models/geburtstage_erinnerung.php');
 require_once('../models/helfer.php');
 require_once('../models/kontaktenzeigen.php');
 require_once('../models/kontakt_bearbeiten.php');

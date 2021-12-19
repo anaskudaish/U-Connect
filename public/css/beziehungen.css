@@ -8,6 +8,14 @@ body{
     /**background-repeat: no-repeat;*/
     background-size: cover;
 }
+.sweLogo {
+   
+    margin-top:-100px;
+    grid-column: 1 / 2;
+    justify-self: right;
+    float: right;
+    width: 200px;
+}
 .card {
     position: relative;
     display: flex;
