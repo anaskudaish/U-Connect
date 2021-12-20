@@ -10,10 +10,14 @@ return array(
     '/kontakt'                      =>     'IndexController@kontakt',
     '/kontakt_bearbeiten'                      =>     'IndexController@kontakt_bearbeiten',
     '/kontakt_suchen'                                      =>       'IndexController@kontakt_suchen',
+
     '/Events_planen'                           =>     'EventController@Events_planen',
     '/Event_bearbeiten'                           =>     'EventController@Event_bearbeiten',
     '/neues_Event'                           =>     'EventController@neues_Event',
     '/event_hinzufuegen'                     =>     'EventController@event_hinzufuegen',
+    '/Teilnehmer_Hinzufuegen'                 => 'EventController@Teilnehmer_Hinzufuegen',
+    '/Teilnehmer_Entfernen'                 => 'EventController@Teilnehmer_Entfernen',
+
     '/beziehungenVerwalten'                =>      'BeziehungenController@beziehungenVerwalten',
     '/kontakt_loeschen'                     =>     'IndexController@kontakt_loeschen',
 
@@ -35,7 +39,4 @@ return array(
 
     '/passwort_vergessen'                =>    'Passwort_VergessenController@passwort_vergessen',
     '/passwort_vergessen_verifizierung'  =>  'Passwort_VergessenController@passwort_vergessen_verifizierung'
-
-    
-
 );
