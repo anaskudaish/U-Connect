@@ -97,3 +97,17 @@ CREATE TABLE beziehungen_kontakte(
                                      Beziehungs_wert int(10),
                                      PRIMARY KEY (id,id_beziehung)
 );
+
+create table events(
+                         id int(10) auto_increment primary key not null,
+                         nutzer_id int(10) not null references nutzer(id)
+                             ON DELETE CASCADE,
+                         eventname varchar(80)  not null ,
+                         Datum varchar(80) not null ,
+                         Uhrzeit varchar(200) not null
+);
+
+create table event_kontakte(
+    event_id int not null references events(id) ON DELETE CASCADE,
+    kontakte_id int not null references kontakte(id) ON DELETE CASCADE
+); 
