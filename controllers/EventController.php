@@ -75,4 +75,12 @@ class EventController
             header("Location: /");
         }
     }
+    public function Teilnehmer_Entfernen(){
+        if (isset($_SESSION['login_ok']) && $_SESSION['login_ok'] == 1) {
+            // TO DO REMOVE SELECTED CONTACT
+            header("Location: /Event_bearbeiten");
+        }else{
+            header("Location: /");
+        }
+    }
 }
