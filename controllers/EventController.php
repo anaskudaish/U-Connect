@@ -1,5 +1,7 @@
 <?php
 require_once('../models/eventsListe.php');
+require_once('../models/kontaktenzeigen.php');
+
 class EventController
 {
     public function Events_planen()// Anzeige Events
@@ -54,5 +56,31 @@ class EventController
         createEvent($email,$eventname,$date,$time,$contacts);
 
         header("Location: /Events_planen");
+    }
+
+    public function Teilnehmer_Hinzufuegen(){
+        if (isset($_SESSION['login_ok']) && $_SESSION['login_ok'] == 1) {
+
+            $eventData = ausgewaehtlesevent($_POST['eventId']);
+            $userList = teilnehmerDesEvents($_POST['eventId']);
+            $andereKontakte = kontakte($_SESSION['email']);
+
+            $daten = ['eventData' => $eventData,
+                'userList' => $userList,
+                'andereKontakte' => $andereKontakte,
+                'kontakt_bearbeiten' => $kontakt_bearbeiten ?? []
+            ];
+            return view('Events.Teilnehmer_Hinzufuegen',$daten);
+        }else{
+            header("Location: /");
+        }
+    }
+    public function Teilnehmer_Entfernen(){
+        if (isset($_SESSION['login_ok']) && $_SESSION['login_ok'] == 1) {
+            // TO DO REMOVE SELECTED CONTACT
+            header("Location: /Event_bearbeiten");
+        }else{
+            header("Location: /");
+        }
     }
 }
