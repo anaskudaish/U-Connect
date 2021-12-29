@@ -10,16 +10,7 @@
 
 </head>
 <body>
-<?php
-$kontakt['id'] = $_POST['id_kontakt'];
 
-echo '<pre>';
-//var_dump($test_result2);
-echo '</pre>';
-echo '<pre>';
-//var_dump($names2);
-echo '</pre>';
-?>
 <a href="/"><img src="../img/logo-swe.png" class="sweLogo" alt="sweLogo"></a>
 
 <div class="container">
