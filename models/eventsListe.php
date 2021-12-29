@@ -1,6 +1,5 @@
 <?php
-
-
+require_once('../models/kontaktenzeigen.php');
 
 function events($email){
 
@@ -75,13 +74,31 @@ function teilnehmerDesEvents($eventID){
     $resultat=  mysqli_query($link,"select * from event_kontakte where event_id='{$eventID}'");
     $date = mysqli_fetch_assoc($resultat);
     if(!empty($date)){
-    $kontakt_id=$date['kontakte_id'];
-
-
-    $result=mysqli_query($link,"select * from kontakte where id= '{$kontakt_id}' ");
-    while($daten = mysqli_fetch_assoc($result)) {
-        $kontakte [] = $daten;
+        $ArrayKontaktDaten = [];
+        $counter = 0;
+        foreach($date as $KontaktID){
+            $result =  mysqli_query($link,"select id,vorname,nachname from kontakte where id='{$KontaktID}'");
+            $kontaktDaten = mysqli_fetch_array($result);
+            $ArrayKontaktDaten[$counter]= $kontaktDaten;
+            mysqli_free_result($result);
+            $counter++;
+        }
+        return $ArrayKontaktDaten;
     }
-    return $result;}
     return [];
+}
+
+function nichtteilnehmerDesEvents($eventID,$email){
+    $Kontakte = teilnehmerDesEvents($eventID);
+    $alleKontakte = kontakte($email);
+    $resultat = [];
+    $i = 0;
+    foreach($alleKontakte as $Kontakt){
+        if(!in_array($Kontakt,$Kontakte))
+        {
+            $resultat[$i]=$Kontakt;
+            next($Kontakte);
+        }
+    }
+    return $resultat;
 }
