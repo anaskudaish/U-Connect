@@ -35,21 +35,27 @@
             <label>Teilnehmer Liste:</label>
             <div id="teilnehmer">
                 @if(!empty($userList))
-                    <select name="test" size="10">
+                    <select name="test" size="10" width="100" style="width: 100px">
                     @foreach($userList as $value)
-                        <option id="kontaktInEvent">{{$value['vorname'] }}</option>
+                        <option style="border: 100px" id="kontaktInEvent">{{$value['id'] }} {{$value['vorname'] }} {{$value['nachname'] }}</option>
                     @endforeach
                     </select>
                 @endif
             </div>
-            <button name="submit" type="submit">Neuen Teilnehmer hinzufügen</button>
-            <button name="submit" type="submit">Ausgewählten Teilnehmer entfernen</button>
         </form>
-        <form id="contact" action="/Events_planen" method="post">
-            <button name="submit" type="submit">Abbrechen</button>
+            <form id="contact" action="/Teilnehmer_Hinzufuegen" method="post">
+                <button name="submit" type="submit">Neuen Teilnehmer hinzufügen</button>
+                <input type="hidden" name="eventId" value={{$eventData['id']}} >
+            </form>
+            <form id="contact" action="/Teilnehmer_Entfernen" method="post">
+                <button name="submit" type="submit">Ausgewählten Teilnehmer entfernen</button>
+                <input type="hidden" name="eventId" value={{$eventData['id']}} >
+                <input name="teilnehmer" value="1"name="kontaktInEventID">
+            </form>
+            <form id="contact" action="/Events_planen" method="post">
+                <button name="submit" type="submit">Abbrechen</button>
 
-        </form>
-    </div>
+            </form>
 </div>
 </body>
 </html>
