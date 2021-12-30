@@ -64,7 +64,7 @@ class EventController
             $userList = teilnehmerDesEvents($_POST['eventId']);
             $andereKontakte= nichtteilnehmerDesEvents($_POST['eventId'],$_SESSION['email']);
 
-            $daten = ['eventData' => 1,
+            $daten = ['eventData' => $eventData,
                 'userList' => $userList,
                 'andereKontakte' => $andereKontakte
             ];
@@ -81,5 +81,11 @@ class EventController
         }else{
             header("Location: /");
         }
+    }
+
+    public function Ausgewaehlten_Kontakt_Hinzufuegen(){
+        echo "Eventid: ".$_POST['eventID']."<br>";
+        echo "Kontaktid: ".$_POST['kontaktID'];
+        echo teilnehmerHinzufuegen($_POST['eventID'],$_POST['kontaktID']);
     }
 }

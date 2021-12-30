@@ -40,8 +40,12 @@
 
                             </form>
                             <h5>Ausgewählter Kontakt:@if(isset($_POST['nichtTeilnehmerListeKontakt']) && isset($kontakt_hinzufügen[0])){{$kontakt_hinzufügen[0]['vorname'] . '  ' . $kontakt_hinzufügen[0]['nachname']}} @else {!! '<a id=\'outputName\'>...</a>' !!} @endif</h5>
-
-
+                        @if( isset($KontaktBeziehung['besteName'])) <div>  Durchschnittliche Beziehung zu Teilnehmern: {{$KontaktBeziehung['Durchschnitt']}}/5<br>
+                                    Beste Beziehung zu: {{$KontaktBeziehung['besteName']}} <br>
+                                    mit:                {{$KontaktBeziehung['besteWertung']}} <br>
+                                    schlechteste Beziehung zu: {{$KontaktBeziehung['schlechtesteName']}} <br>
+                                    mit: {{$KontaktBeziehung['schlechtesteWertung']}}
+                            </div> @else Wählen Sie einen Kontakt aus @endif
                     </div>
 
             </div>

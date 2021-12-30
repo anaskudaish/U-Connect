@@ -69,36 +69,38 @@ function teilnehmerDesEvents($eventID){
 
     $link  = connectdb();
 
-    $events =null;
-
     $resultat=  mysqli_query($link,"select * from event_kontakte where event_id='{$eventID}'");
-    $date = mysqli_fetch_assoc($resultat);
-    if(!empty($date)){
         $ArrayKontaktDaten = [];
-        $counter = 0;
-        foreach($date as $KontaktID){
+        while($date = mysqli_fetch_assoc($resultat)) {
+            $KontaktID = $date['kontakte_id'];
             $result =  mysqli_query($link,"select id,vorname,nachname from kontakte where id='{$KontaktID}'");
             $kontaktDaten = mysqli_fetch_array($result);
-            $ArrayKontaktDaten[$counter]= $kontaktDaten;
+            $ArrayKontaktDaten[]= $kontaktDaten;
             mysqli_free_result($result);
-            $counter++;
         }
         return $ArrayKontaktDaten;
-    }
-    return [];
 }
 
 function nichtteilnehmerDesEvents($eventID,$email){
     $Kontakte = teilnehmerDesEvents($eventID);
+    $ArrayKontaktID = [];
+    foreach($Kontakte as $test){
+        $ArrayKontaktID[] = $test[0];
+    }
     $alleKontakte = kontakte($email);
     $resultat = [];
-    $i = 0;
     foreach($alleKontakte as $Kontakt){
-        if(!in_array($Kontakt,$Kontakte))
-        {
-            $resultat[$i]=$Kontakt;
-            next($Kontakte);
+        if(in_array($Kontakt['id'],$ArrayKontaktID)){
+            echo $Kontakt['id']."ist im Array";
+        }else{
+            $resultat[]=$Kontakt;
         }
     }
     return $resultat;
+}
+
+function teilnehmerHinzufuegen($eventID,$KontaktID){
+    $link = connectdb();
+    $resultat = mysqli_query($link,"INSERT into event_kontakte (event_id, kontakte_id) VALUES ('{$eventID}','{$KontaktID}')");
+    echo $resultat;
 }

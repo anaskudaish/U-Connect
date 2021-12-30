@@ -16,6 +16,7 @@ return array(
     '/neues_Event'                           =>     'EventController@neues_Event',
     '/event_hinzufuegen'                     =>     'EventController@event_hinzufuegen',
     '/Teilnehmer_Hinzufuegen'                 => 'EventController@Teilnehmer_Hinzufuegen',
+    '/Ausgewaehlten_Kontakt_Hinzufuegen' => 'EventController@Ausgewaehlten_Kontakt_Hinzufuegen',
     '/Teilnehmer_Entfernen'                 => 'EventController@Teilnehmer_Entfernen',
 
     '/beziehungenVerwalten'                =>      'BeziehungenController@beziehungenVerwalten',
