@@ -64,7 +64,7 @@ class EventController
             $userList = teilnehmerDesEvents($_POST['eventId']);
             $andereKontakte= nichtteilnehmerDesEvents($_POST['eventId'],$_SESSION['email']);
 
-            $daten = ['eventData' => 1,
+            $daten = ['eventData' => $eventData,
                 'userList' => $userList,
                 'andereKontakte' => $andereKontakte
             ];
