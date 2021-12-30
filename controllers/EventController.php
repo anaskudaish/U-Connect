@@ -75,17 +75,19 @@ class EventController
     }
 
     public function Teilnehmer_Entfernen(){
-        if (isset($_SESSION['login_ok']) && $_SESSION['login_ok'] == 1) {
+      /**  if (isset($_SESSION['login_ok']) && $_SESSION['login_ok'] == 1) {
             // TO DO REMOVE SELECTED CONTACT
             header("Location: /Event_bearbeiten");
         }else{
             header("Location: /");
-        }
+        }**/
+        echo "Eventid: ".$_POST['eventID']."<br>";
+        echo "Kontaktid: ".$_POST['TeilnehmerID'];
     }
 
     public function Ausgewaehlten_Kontakt_Hinzufuegen(){
         echo "Eventid: ".$_POST['eventID']."<br>";
         echo "Kontaktid: ".$_POST['kontaktID'];
-        echo teilnehmerHinzufuegen($_POST['eventID'],$_POST['kontaktID']);
+        teilnehmerHinzufuegen($_POST['eventID'],$_POST['kontaktID']);
     }
 }
