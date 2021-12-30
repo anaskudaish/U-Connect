@@ -75,19 +75,36 @@ class EventController
     }
 
     public function Teilnehmer_Entfernen(){
-      /**  if (isset($_SESSION['login_ok']) && $_SESSION['login_ok'] == 1) {
+      if (isset($_SESSION['login_ok']) && $_SESSION['login_ok'] == 1) {
             // TO DO REMOVE SELECTED CONTACT
-            header("Location: /Event_bearbeiten");
+            $eventID = $_POST['eventID'];
+            teilnehmerEntfernen($_POST['eventID'],$_POST['TeilnehmerID']);
+          $eventData = ausgewaehtlesevent($eventID);
+          $userList = teilnehmerDesEvents($eventID);
+          $daten = ['eventData' => $eventData,
+              'userList' => $userList
+            ];
+            return view('Events.Event_bearbeiten',$daten);
         }else{
             header("Location: /");
-        }**/
-        echo "Eventid: ".$_POST['eventID']."<br>";
-        echo "Kontaktid: ".$_POST['TeilnehmerID'];
+        }
     }
 
     public function Ausgewaehlten_Kontakt_Hinzufuegen(){
-        echo "Eventid: ".$_POST['eventID']."<br>";
-        echo "Kontaktid: ".$_POST['kontaktID'];
-        teilnehmerHinzufuegen($_POST['eventID'],$_POST['kontaktID']);
+        if (isset($_SESSION['login_ok']) && $_SESSION['login_ok'] == 1) {
+            $eventID = $_POST['eventID'];
+            teilnehmerHinzufuegen($eventID,$_POST['kontaktID']);
+            $eventData = ausgewaehtlesevent($eventID);
+            $userList = teilnehmerDesEvents($eventID);
+            $andereKontakte= nichtteilnehmerDesEvents($eventID,$_SESSION['email']);
+
+            $daten = ['eventData' => $eventData,
+                'userList' => $userList,
+                'andereKontakte' => $andereKontakte
+            ];
+            return view('Events.Teilnehmer_Hinzufuegen',$daten);
+        }else{
+            header("Location: /");
+        }
     }
 }
