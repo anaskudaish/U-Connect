@@ -90,14 +90,17 @@ function teilnehmerDesEvents($eventID){
 
 function nichtteilnehmerDesEvents($eventID,$email){
     $Kontakte = teilnehmerDesEvents($eventID);
+    $ArrayKontaktID = [];
+    foreach($Kontakte as $test){
+        $ArrayKontaktID[] = $test[0];
+    }
     $alleKontakte = kontakte($email);
     $resultat = [];
-    $i = 0;
     foreach($alleKontakte as $Kontakt){
-        if(!in_array($Kontakt,$Kontakte))
-        {
-            $resultat[$i]=$Kontakt;
-            next($Kontakte);
+        if(in_array($Kontakt['id'],$ArrayKontaktID)){
+            echo $Kontakt['id']."ist im Array";
+        }else{
+            $resultat[]=$Kontakt;
         }
     }
     return $resultat;
