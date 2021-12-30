@@ -21,8 +21,8 @@
                     <h3>neuen Teilnehmer zu <b>{{$eventData['eventname']}}</b> hinzufuegen</h3>
                     <label>Kontaktliste:</label>
                     <div id="teilnehmer">
-                            <form method="post" action="/">
-                                <select id="nichtTeilnehmerListeKontakt" name="nichtTeilnehmerListeKontakt" size="4" onchange="document.getElementById('outputName').text = document.getElementById('nichtTeilnehmerListeKontakt').options[document.getElementById('nichtTeilnehmerListeKontakt').selectedIndex].text;">
+                            <form method="post" action="/Kontakt_auswaehlen">
+                                <select id="nichtTeilnehmerListeKontakt" name="kontaktID" size="4" onchange="document.getElementById('outputName').text = document.getElementById('nichtTeilnehmerListeKontakt').options[document.getElementById('nichtTeilnehmerListeKontakt').selectedIndex].text;">
                                     @foreach($andereKontakte as $value)
                                         @if($value['id'] !== $kontakt['id'])
                                             <option value="{{$value['id']}}"> {{$value['vorname']}} {{$value['nachname']}} </option>
@@ -31,27 +31,35 @@
                                 </select>
                                 <div class="row">
                                     <div class="col-sm-9 text-secondary">
-                                        <input type="submit" name="submit" class="btn btn-primary px-4" value="Auswählen">
-                                        <input type="hidden" name="submitted" value="1" >
+                                        <button type="submit" name="submit" class="btn btn-primary px-4">Auswählen</button>
                                         <input type="hidden" name="eventId" value="{{$eventData['id']}}">
-                                        <input type="hidden" name="id_kontakt" value="{{$kontakt['id']}}">
+                                        <input type="hidden" name="sus_kontakt" value="{{$kontakt['id']}}">
                                     </div>
                                 </div>
 
                             </form>
-                            <h5>Ausgewählter Kontakt:@if(isset($_POST['nichtTeilnehmerListeKontakt']) && isset($kontakt_hinzufügen[0])){{$kontakt_hinzufügen[0]['vorname'] . '  ' . $kontakt_hinzufügen[0]['nachname']}} @else {!! '<a id=\'outputName\'>...</a>' !!} @endif</h5>
-                        @if( isset($KontaktBeziehung['besteName'])) <div>  Durchschnittliche Beziehung zu Teilnehmern: {{$KontaktBeziehung['Durchschnitt']}}/5<br>
+                            @if( isset($ausgewaehtlerKontakt['vorname']) & isset($KontaktBeziehung['Durchschnitt']))
+                            <h5>Ausgewählter Kontakt:{{$ausgewaehtlerKontakt['vorname']}} {{$ausgewaehtlerKontakt['nachname']}}</h5>
+                            <div>   Durchschnittliche Beziehung zu Teilnehmern: {{$KontaktBeziehung['Durchschnitt']}}/5<br>
                                     Beste Beziehung zu: {{$KontaktBeziehung['besteName']}} <br>
-                                    mit:                {{$KontaktBeziehung['besteWertung']}} <br>
+                                    mit:                {{$KontaktBeziehung['besteWertung']}} /5<br>
                                     schlechteste Beziehung zu: {{$KontaktBeziehung['schlechtesteName']}} <br>
-                                    mit: {{$KontaktBeziehung['schlechtesteWertung']}}
+                                    mit: {{$KontaktBeziehung['schlechtesteWertung']}} /5<br>
+                                <form method="post" action="/Ausgewaehlten_Kontakt_Hinzufuegen">
+                                <input type="hidden" name="kontaktID" value="{{$ausgewaehtlerKontakt['id']}}">
+                                    <input type="hidden" name="eventId" value="{{$eventData['id']}}">
+                                    <button type="submit">Kontakt Hinzufügen</button>
+                                </form>
                             </div> @else Wählen Sie einen Kontakt aus @endif
                     </div>
-
+                    <form id="contact" action="/Event_bearbeiten" method="post">
+                        <input type="hidden" name="eventId" value="{{$eventData['id']}}">
+                        <button class="btn btn-primary px-4" name="submit" type="submit">zurück zum Event</button>
+                    </form>
             </div>
         </div>
     </div>
 </div>
-
+</div>
 </body>
 </html>
