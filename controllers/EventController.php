@@ -82,4 +82,10 @@ class EventController
             header("Location: /");
         }
     }
+
+    public function Ausgewaehlten_Kontakt_Hinzufuegen(){
+        echo "Eventid: ".$_POST['eventID']."<br>";
+        echo "Kontaktid: ".$_POST['kontaktID'];
+        echo teilnehmerHinzufuegen($_POST['eventID'],$_POST['kontaktID']);
+    }
 }
