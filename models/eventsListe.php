@@ -170,3 +170,8 @@ function getBeziehungenImEvent($eventID,$KontaktID,$isEmpty){
     }
     return $KontaktBeziehung;
 }
+
+    function deleteEvent($EventID){
+        $link = connectdb();
+        $resultat = mysqli_query($link,"DELETE FROM events WHERE id = '$EventID'");
+    }
