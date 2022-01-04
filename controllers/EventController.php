@@ -21,6 +21,11 @@ class EventController
     public function Event_bearbeiten()// ausgewähltes Event bearbeiten
     {
         if (isset($_SESSION['login_ok']) && $_SESSION['login_ok'] == 1) {
+            if(isset($_POST['deleteEvent'])){
+                deleteEvent($_POST['eventId']);
+                header("Location: /Events_planen");
+                return ;
+            }
             if(!empty($_POST['submitted'])){
                 updateEvent($_SESSION['email'],$_POST['eventId'],$_POST['Eventname'],$_POST['date'],$_POST['time']);
                 header("Location: /Events_planen");
