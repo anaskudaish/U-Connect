@@ -36,8 +36,6 @@
                             @endif
                         </div>
                             <br>
-
-
                             <div class="row mb-3">
                                 <div class="col-sm-9 text-secondary">
                                     <form  method="post" action="/neues_Event" >
@@ -45,31 +43,16 @@
                                     </form>
                                 </div>
                             </div>
-
-
-
                                 <div class="row mb-3">
                                 <div class="col-sm-9 text-secondary">
                                         <form  id="edit_event" method="post" action="/Event_bearbeiten" >
                                         <input  type="submit" name="submit" class="btn btn-primary px-4" value="Ausgewähltes Event bearbeiten">
-                                        <input type="hidden" name="beziehungen" value="1" >
+                                        <input  type="submit" name="deleteEvent" class="btn btn-primary px-4" value="Ausgewähltes Event loeschen">
                                         </form>
                                 </div>
                                 </div>
-                            <div class="row mb-3">
-                                <div class="col-sm-9 text-secondary">
-                                    <form  method="post" action="/Events_planen" >
-                                        <input  type="submit" name="submit" class="btn btn-primary px-4" value="Ausgewähltes Event löschen">
-                                        <input type="hidden" name="id_kontakt" value="{{$Events['id']}}">
-                                        <input type="hidden" name="beziehungen" value="1" >
-                                    </form>
-                                </div>
-                            </div>
                             <div class="row">
                                 <div class="col-sm-9 text-secondary">
-                                    <form method="post" action="\" >
-                                        <input  type="submit" name="submit" class="btn btn-primary px-4" value="Abbrechen">
-                                    </form>
                                 </div>
                             </div>
 
