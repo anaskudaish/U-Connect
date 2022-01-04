@@ -96,11 +96,13 @@ class EventController
             $KontaktID = $_POST['kontaktID'];
             $eventData = ausgewaehtlesevent($eventID);
             $userList = teilnehmerDesEvents($eventID);
+            $isEmpty=false;
+            if($userList==[]){
+                $isEmpty=true;
+            }
             $andereKontakte = nichtteilnehmerDesEvents($eventID,$_SESSION['email']);
-
             $ausgewaehtlerKontakt = getKontakt($KontaktID);
-            $KontaktBeziehung = getBeziehungenImEvent($eventID,$KontaktID);
-               // $KontaktBeziehung['Durchschnitt'] = 0;
+            $KontaktBeziehung = getBeziehungenImEvent($eventID,$KontaktID,$isEmpty);
             $daten = ['eventData' => $eventData,
                 'userList' => $userList,
                 'andereKontakte' => $andereKontakte,

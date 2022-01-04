@@ -115,7 +115,15 @@ function getKontakt($kontaktID){
     return $result;
 }
 
-function getBeziehungenImEvent($eventID,$KontaktID){
+function getBeziehungenImEvent($eventID,$KontaktID,$isEmpty){
+    if($isEmpty){
+        $KontaktBeziehung['Durchschnitt'] = '-';
+        $KontaktBeziehung['besteWertung'] = "-";
+        $KontaktBeziehung['besteName'] = 'Keine Teilnehmer im Event';
+        $KontaktBeziehung['schlechtesteWertung'] = "-";
+        $KontaktBeziehung['schlechtesteName'] = 'Keine Teilnehmer im Event';
+        return $KontaktBeziehung;
+    }
     $link = connectdb();
     $resultat = mysqli_query($link,"SELECT * FROM beziehungen_kontakte WHERE id_beziehung='$KontaktID'");
     $alleBeziehungen = [];
