@@ -19,6 +19,19 @@
             <div class="col-lg-8">
                 <div class="card">
                     <h3>neuen Teilnehmer zu <b>{{$eventData['eventname']}}</b> hinzufuegen</h3>
+                    <form method="Post" action="/Kontakt_suchen_fuer_auswahl">
+                        <span><b>Suche nach</b></span>
+                        <input type="hidden" name="eventId" value="{{$eventData['id']}}">
+                        <input id="vorname" name="wahl" type="radio" value="1" checked>
+                        <label for="vorname">Vorname</label>
+                        <input id="nachname" name="wahl" type="radio" value="2">
+                        <label for="nachname">Nachname</label>
+                        <input id="tag" name="wahl" type="radio" value="3">
+                        <label for="tag">Tag</label>
+                        <input id="search_text" type="text" name="search_text" value="{{$search_text}}">
+                        <input type="submit" value="Suchen">
+                        <input type="hidden" name="submitted" value="1" >
+                    </form>
                     <label>Kontaktliste:</label>
                     <div id="teilnehmer">
                             <form method="post" action="/Kontakt_auswaehlen">
@@ -36,7 +49,6 @@
                                         <input type="hidden" name="sus_kontakt" value="{{$kontakt['id']}}">
                                     </div>
                                 </div>
-
                             </form>
                             @if( isset($ausgewaehtlerKontakt['vorname']) & isset($KontaktBeziehung['Durchschnitt']))
                             <h5>Ausgewählter Kontakt:{{$ausgewaehtlerKontakt['vorname']}} {{$ausgewaehtlerKontakt['nachname']}}</h5>

@@ -30,7 +30,7 @@
                             @if(!empty($events))
                                     <select name="eventId" size="10" form="edit_event">
                                     @foreach($events as $value)
-                                            <option value="{{$value['id'] }}">{{$value['EventName'] }}</option>
+                                            <option selected="selected" value="{{$value['id'] }}">{{$value['EventName'] }}</option>
                                     @endforeach
                                     </select>
                             @endif

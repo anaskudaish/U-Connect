@@ -35,10 +35,10 @@
             <form id="contact" action="/Teilnehmer_Entfernen" method="post">
                 <label>Teilnehmer Liste:</label>
                 <div id="teilnehmer">
-                    @if(!empty($userList))
+                    @if(!empty($userList)) <? $i = 0; ?>
                         <select name="TeilnehmerID" size="10" width="100" style="width: 100px">
                             @foreach($userList as $value)
-                                <option style="border: 100px" id="kontaktInEvent">{{$value['id'] }} {{$value['vorname'] }} {{$value['nachname'] }}</option>
+                                <option style="border: 100px" id="kontaktInEvent">{{$value['vorname'] }} {{$value['nachname'] }}</option>
                             @endforeach
                         </select>
                     @endif
@@ -52,8 +52,8 @@
         </form>
             <form id="contact" action="/Events_planen" method="post">
                 <button name="submit" type="submit">Abbrechen</button>
-
             </form>
+</div>
 </div>
 </body>
 </html>

@@ -95,6 +95,38 @@ class EventController
         }
     }
 
+    public function Kontakt_suchen_fuer_auswahl(){
+        if (isset($_SESSION['login_ok']) && $_SESSION['login_ok'] == 1) {
+            $email=$_SESSION['email'];
+            $search_text = trim($_POST['search_text']);
+            $andereKontakte=null;
+            $eventData = ausgewaehtlesevent($_POST['eventId']);
+            $userList = teilnehmerDesEvents($_POST['eventId']);
+            if($search_text==""){
+                $andereKontakte= nichtteilnehmerDesEvents($_POST['eventId'],$_SESSION['email']);
+                $daten = ['eventData' => $eventData,
+                    'userList' => $userList,
+                    'andereKontakte' => $andereKontakte
+                ];
+                return view('Events.Teilnehmer_Hinzufuegen',$daten);
+            }
+            if($_POST['wahl']==1){//Vorname
+                $andereKontakte= Suche_NichtTeilnehmer($email,$_POST['eventId'],"vorname",$search_text);
+            }else{
+                if($_POST['wahl']==2){//Nachname
+                    $andereKontakte = Suche_NichtTeilnehmer($email,$_POST['eventId'],"nachname",$search_text);
+                }else{//Tags
+                    $andereKontakte = Suche_NichtTeilnehmer($email,$_POST['eventId'],"tags",$search_text);
+                }
+            }
+            $daten = ['eventData' => $eventData,
+                'userList' => $userList,
+                'andereKontakte' => $andereKontakte
+            ];
+        }
+        return view('Events.Teilnehmer_Hinzufuegen',$daten);
+    }
+
     public function Kontakt_auswaehlen(){
         if(isset($_SESSION['login_ok']) && $_SESSION['login_ok'] == 1){
             $eventID = $_POST['eventId'];
