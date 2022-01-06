@@ -18,6 +18,7 @@ return array(
     '/Teilnehmer_Hinzufuegen'                 => 'EventController@Teilnehmer_Hinzufuegen',
     '/Ausgewaehlten_Kontakt_Hinzufuegen' => 'EventController@Ausgewaehlten_Kontakt_Hinzufuegen',
     '/Kontakt_auswaehlen'                => 'EventController@Kontakt_auswaehlen',
+    '/Kontakt_suchen_fuer_auswahl' => 'EventController@Kontakt_suchen_fuer_auswahl',
     '/Teilnehmer_Entfernen'                 => 'EventController@Teilnehmer_Entfernen',
 
     '/beziehungenVerwalten'                =>      'BeziehungenController@beziehungenVerwalten',
