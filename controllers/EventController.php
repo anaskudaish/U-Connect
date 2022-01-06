@@ -103,7 +103,7 @@ class EventController
             $eventData = ausgewaehtlesevent($_POST['eventId']);
             $userList = teilnehmerDesEvents($_POST['eventId']);
             if($search_text==""){
-                $andereKontakte= nichtteilnehmerDesEvents($_POST['eventId'],$_SESSION['email']);
+                //$andereKontakte= nichtteilnehmerDesEvents($_POST['eventId'],$_SESSION['email']);
                 $daten = ['eventData' => $eventData,
                     'userList' => $userList,
                     'andereKontakte' => $andereKontakte

@@ -22,11 +22,11 @@
                     <form method="Post" action="/Kontakt_suchen_fuer_auswahl">
                         <span><b>Suche nach</b></span>
                         <input type="hidden" name="eventId" value="{{$eventData['id']}}">
-                        <input id="vorname" name="wahl" type="radio" value="1" checked>
+                        <input id="vorname" name="wahl" type="radio" value="1" checked <?php if(isset($_POST['wahl']) && $_POST['wahl'] == 1) echo "checked" ?>>
                         <label for="vorname">Vorname</label>
-                        <input id="nachname" name="wahl" type="radio" value="2">
+                        <input id="nachname" name="wahl" type="radio" value="2" <?php if(isset($_POST['wahl']) && $_POST['wahl'] == 2) echo "checked" ?>>
                         <label for="nachname">Nachname</label>
-                        <input id="tag" name="wahl" type="radio" value="3">
+                        <input id="tag" name="wahl" type="radio" value="3" <?php if(isset($_POST['wahl']) && $_POST['wahl'] == 3) echo "checked" ?>>
                         <label for="tag">Tag</label>
                         <input id="search_text" type="text" name="search_text" value="{{$search_text}}">
                         <input type="submit" value="Suchen">

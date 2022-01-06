@@ -25,10 +25,10 @@
 
         <fieldset>
             <input  type="text" name="vorname" required autofocus placeholder="Vorname">
-            <input  type="text" name="nachname" required autofocus placeholder="Nachname">
+            <input  type="text" name="nachname"  placeholder="Nachname">
         </fieldset>
         <fieldset>
-            <input  type="tel" name="telefonnummer" required placeholder="Telefonnummer">
+            <input  type="tel" name="telefonnummer" placeholder="Telefonnummer">
         </fieldset>
 
         <fieldset>

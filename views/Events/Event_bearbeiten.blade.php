@@ -38,7 +38,7 @@
                     @if(!empty($userList)) <? $i = 0; ?>
                         <select name="TeilnehmerID" size="10" width="100" style="width: 100px">
                             @foreach($userList as $value)
-                                <option style="border: 100px" id="kontaktInEvent">{{$value['vorname'] }} {{$value['nachname'] }}</option>
+                                <option style="border: 100px" id="kontaktInEvent" value="{{$value['id']}}">{{$value['vorname'] }} {{$value['nachname'] }}</option>
                             @endforeach
                         </select>
                     @endif
@@ -51,7 +51,7 @@
             <input type="hidden" name="eventId" value={{$eventData['id']}} >
         </form>
             <form id="contact" action="/Events_planen" method="post">
-                <button name="submit" type="submit">Abbrechen</button>
+                <!--<button name="submit" type="submit">Abbrechen</button> -->
             </form>
 </div>
 </div>

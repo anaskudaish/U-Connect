@@ -101,36 +101,40 @@ function nichtteilnehmerDesEvents($eventID,$email){
 function Suche_NichtTeilnehmer($email,$eventID,$searchtype,$searchText){
     $link  = connectdb();
 
-    $andereKontakte  =null;
+    $sortiereKontakte  =null;
     $alleNichtTeilnehmer = nichtteilnehmerDesEvents($eventID,$email);
     if($searchtype=="vorname"||$searchtype=="nachname"){
         foreach($alleNichtTeilnehmer as $kontakt){
             // $kontakt['id'] $kontakt['vorname'] $kontakt['nachname'];
             if($kontakt[$searchtype]==$searchText){
-                $andereKontakte[]=$kontakt;
+                $sortiereKontakte[]=$kontakt;
             }
-            if($andereKontakte==null){
-                $kontakt['id'] = -1;
-                $kontakt['vorname'] = "Keine Kontakte mit diesem Namen";
-                $kontakt['nachname'] = "";
-                $andereKontakte[] = $kontakt;
-            }
-       }
+        }
+        if(is_null($sortiereKontakte)){
+            $kontakt['id'] = -1;
+            $kontakt['vorname'] = "Keine Kontakte mit diesem Namen";
+            $kontakt['nachname'] = "";
+            $sortiereKontakte[] = $kontakt;
+        }
     }else{
-     $resultat = mysqli_query($link,"select id from tags_kontakte where tags ='$searchText'");
+        $resultat = mysqli_query($link,"select id from tags_kontakte where tags ='$searchText'");
         if(!is_bool($resultat)) {
             while ($data = mysqli_fetch_assoc($resultat)) {
-                $alleKontakte[] = $data['id'];//$data['id'] beinhaltet die ID der Kontakte mit dem Tag
+                $kontakt = getKontakt($data['id']);
+                if(in_array($data['id'],array_column($alleNichtTeilnehmer,'id'))){
+                    $sortiereKontakte[] = $kontakt;//$data['id'] beinhaltet die ID der Kontakte mit dem Tag
+                    //$kontakt = getKontakt($data['id']);
+                }
             }
-            if($alleKontakte==null){
+            if(is_null($sortiereKontakte)){
                 $kontakt['id'] = -1;
                 $kontakt['vorname'] = "Keine Kontakte mit diesem Tag";
                 $kontakt['nachname'] = "";
-                $andereKontakte[] = $kontakt;
+                $sortiereKontakte[] = $kontakt;
             }
         }
     }
-    return $andereKontakte;
+    return $sortiereKontakte;
 }
 
 function teilnehmerHinzufuegen($eventID,$KontaktID){

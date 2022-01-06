@@ -13,8 +13,19 @@
 </head>
 <body>
 <a href="/"><img src="../img/logo-swe.png" class="sweLogo" alt="sweLogo"></a>
+<nav>
+    <div class="navicon">
+        <div></div>
+    </div>
+    <div class="dropdown-content">
+        <a href="/" class="active"> <img src="../img/home.png" width="25" height="25"> </a>
+        <a href="/Events_planen">Events planen</a>
+        <a href="/Profil" >Profil</a>
+        <a href="/Neuer_Kontakt">Neuer Kontakt</a>
+        <a href="/abmeldung">Abmelden</a>
+    </div>
 
-
+</nav>
 <div class="container">
     <div class="main-body">
         <div class="row">

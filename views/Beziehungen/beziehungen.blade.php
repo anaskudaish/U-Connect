@@ -32,22 +32,22 @@
 
                         <div class="first">
                                 <label for="Beziehungen"><h5>Vorhandene Beziehungen</h5></label>
-                                <select id="Beziehungen" name="beziehungen_zu_id" size="4" onchange="document.getElementById('editR').text = document.getElementById('Beziehungen').options[document.getElementById('Beziehungen').selectedIndex].text.slice(0,-2);">
+                                <select id="Beziehungen" name="beziehungen_zu_id" size="8" onchange="document.getElementById('editR').text = document.getElementById('Beziehungen').options[document.getElementById('Beziehungen').selectedIndex].text.slice(0,-2);">
                                     @foreach($test_result2 as $key)
                                         <option value="{{$key['id_beziehung']}}" >{{$key['vorname']}} {{$key['nachname']}} {{$key['Beziehungs_wert']}} </option>
                                     @endforeach
                                     {{--<script>document.getElementById('Beziehungen').size = document.getElementById('Beziehungen').length;</script>--}}
                                 </select>
-                                <form id="auswahl" method="post" action="/beziehungenVerwalten" onsubmit="document.getElementById('auswahl')['beziehung_zu'].value = document.getElementById('Beziehungen').value;">
-                                <div class="row">
-                                    <div class="col-sm-9 text-secondary">
-                                        <input type="submit" name="submit" class="btn btn-primary px-4" value="Auswählen">
-                                        <input type="hidden" name="submitted" value="1" >
-                                        <input type="hidden" name="beziehung_zu" value="" >
-                                        <input type="hidden" name="id_kontakt" value="{{$kontakt['id']}}">
+                            {{--<form id="auswahl" method="post" action="/beziehungenVerwalten" onsubmit="document.getElementById('auswahl')['beziehung_zu'].value = document.getElementById('Beziehungen').value;">
+                           <div class="row">
+                               <div class="col-sm-9 text-secondary">
+                                   <input type="submit" name="submit" class="btn btn-primary px-4" value="Auswählen">
+                                   <input type="hidden" name="submitted" value="1" >
+                                   <input type="hidden" name="beziehung_zu" value="" >
+                                   <input type="hidden" name="id_kontakt" value="{{$kontakt['id']}}">
                                     </div>
                                 </div>
-                            </form>
+                            </form>--}}
                         </div>
 
                         {{--var_dump($kontakt_bearbeiten)--}}
@@ -115,20 +115,20 @@
                                     <input type="submit" name="submit" class="btn btn-primary px-4" value="Speichern">
                                 </form>
 
-                                <form method="Post" action="/kontakt">
+{{-- <form method="Post" action="/kontakt">
 
-                                    <input type="submit" value="Abbrechen" class="btn btn-primary px-4">
-                                    <input type="hidden" name="id_kontakt" value="{{$kontakt['id']}}">
-                                    <input type="hidden" name="submitted" value="1" >
+    <input type="submit" value="Abbrechen" class="btn btn-primary px-4">
+    <input type="hidden" name="id_kontakt" value="{{$kontakt['id']}}">
+    <input type="hidden" name="submitted" value="1" >
 
-                                </form>
+</form>--}}
 
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
 </div>
 
 </body>
