@@ -98,6 +98,41 @@ function nichtteilnehmerDesEvents($eventID,$email){
     return $resultat;
 }
 
+function Suche_NichtTeilnehmer($email,$eventID,$searchtype,$searchText){
+    $link  = connectdb();
+
+    $andereKontakte  =null;
+    $alleNichtTeilnehmer = nichtteilnehmerDesEvents($eventID,$email);
+    if($searchtype=="vorname"||$searchtype=="nachname"){
+        foreach($alleNichtTeilnehmer as $kontakt){
+            // $kontakt['id'] $kontakt['vorname'] $kontakt['nachname'];
+            if($kontakt[$searchtype]==$searchText){
+                $andereKontakte[]=$kontakt;
+            }
+            if($andereKontakte==null){
+                $kontakt['id'] = -1;
+                $kontakt['vorname'] = "Keine Kontakte mit diesem Namen";
+                $kontakt['nachname'] = "";
+                $andereKontakte[] = $kontakt;
+            }
+       }
+    }else{
+     $resultat = mysqli_query($link,"select id from tags_kontakte where tags ='$searchText'");
+        if(!is_bool($resultat)) {
+            while ($data = mysqli_fetch_assoc($resultat)) {
+                $alleKontakte[] = $data['id'];//$data['id'] beinhaltet die ID der Kontakte mit dem Tag
+            }
+            if($alleKontakte==null){
+                $kontakt['id'] = -1;
+                $kontakt['vorname'] = "Keine Kontakte mit diesem Tag";
+                $kontakt['nachname'] = "";
+                $andereKontakte[] = $kontakt;
+            }
+        }
+    }
+    return $andereKontakte;
+}
+
 function teilnehmerHinzufuegen($eventID,$KontaktID){
     $link = connectdb();
     $resultat = mysqli_query($link,"INSERT into event_kontakte (event_id, kontakte_id) VALUES ('{$eventID}','{$KontaktID}')");
@@ -115,8 +150,9 @@ function getKontakt($kontaktID){
     return $result;
 }
 
-function getBeziehungenImEvent($eventID,$KontaktID,$isEmpty){
-    if($isEmpty){
+function getBeziehungenImEvent($eventID,$KontaktID,$isEmpty)
+{
+    if ($isEmpty) {
         $KontaktBeziehung['Durchschnitt'] = '-';
         $KontaktBeziehung['besteWertung'] = "-";
         $KontaktBeziehung['besteName'] = 'Keine Teilnehmer im Event';
@@ -125,53 +161,66 @@ function getBeziehungenImEvent($eventID,$KontaktID,$isEmpty){
         return $KontaktBeziehung;
     }
     $link = connectdb();
-    $resultat = mysqli_query($link,"SELECT * FROM beziehungen_kontakte WHERE id_beziehung='$KontaktID'");
-    $alleBeziehungen = [];
-    $mittel = 0.0;
-    $beste = -6;
-    $schlechteste = 6;
-    $anzPers = 0;
-    $idBest = -1;
-    $idWorst = -1;
-    while($data = mysqli_fetch_assoc($resultat)) {
-        $alleBeziehungen[] = $data;
-        $currRel = $data['Beziehungs_wert'];
-        if($currRel>$beste){
-            $beste = $data['Beziehungs_wert'];
-            $idBest = $data['id'];
+    $resultat = mysqli_query($link,"SELECT kontakte_id FROM event_kontakte where event_id='$eventID'");
+    $alleKontakte = [];
+    if(!is_bool($resultat)) {
+        while ($data = mysqli_fetch_assoc($resultat)) {
+            $alleKontakte[] = $data['kontakte_id'];//$data['kontakte_id'] beinhaltet die ID der Kontakte im Event
         }
-        if($currRel<$schlechteste){
-            $schlechteste = $data['Beziehungs_wert'];
-            $idWorst = $data['id'];
+    }
+        $resultat = mysqli_query($link, "SELECT * FROM beziehungen_kontakte WHERE id_beziehung='$KontaktID'");
+        $alleBeziehungen = [];
+        $mittel = 0.0;
+        $beste = -6;
+        $schlechteste = 6;
+        $anzPers = 0;
+        $idBest = -1;
+        $idWorst = -1;
+        while ($data = mysqli_fetch_assoc($resultat)) {
+            if(in_array($data['id'], $alleKontakte)){
+                echo $data['id'];
+            $alleBeziehungen[] = $data;
+            $currRel = $data['Beziehungs_wert'];
+            if ($currRel > $beste) {
+                $beste = $data['Beziehungs_wert'];
+                $idBest = $data['id'];
+            }
+            if ($currRel < $schlechteste) {
+                $schlechteste = $data['Beziehungs_wert'];
+                $idWorst = $data['id'];
+            }
+            $mittel = $mittel + $currRel;
+            $anzPers++;
+            }
         }
-        $mittel = $mittel+$currRel;
-        $anzPers++;
-    }
-    $mittel = $mittel/$anzPers;
-    $KontaktBeziehung['Durchschnitt'] = $mittel;
+        if($anzPers> 0){
+            $mittel = $mittel / $anzPers;
+        }else{
+            $mittel = '-';
+            $KontaktBeziehung['besteWertung'] ="-";
+            $KontaktBeziehung['besteName'] = "Keine Beziehung für dieses Event";
+            $KontaktBeziehung['schlechtesteWertung'] = "-";
+            $KontaktBeziehung['schlechtesteName'] = "Keine Beziehung für dieses Event";
+        }
+        $KontaktBeziehung['Durchschnitt'] = $mittel;
 
-    if($idBest!=-1){
-    $KontaktBeziehung['besteWertung'] = $beste;
-    $resultat = mysqli_query($link,"SELECT * FROM kontakte WHERE id='$idBest'");
-    $result = mysqli_fetch_assoc($resultat);
-    $KontaktBeziehung['besteName'] = $result['vorname']." ".$result['nachname'];
-    }else{
-        $KontaktBeziehung['besteWertung'] = "-";
-        $KontaktBeziehung['besteName'] = "keine Beziehung gefunden";
-    }
-    if($idWorst!=-1){
-    $KontaktBeziehung['schlechtesteWertung'] = $schlechteste;
-    $resultat = mysqli_query($link,"SELECT * FROM kontakte WHERE id='$idWorst'");
-    $result = mysqli_fetch_assoc($resultat);
-    $KontaktBeziehung['schlechtesteName'] = $result['vorname']." ".$result['nachname'];
-    }else{
-        $KontaktBeziehung['schlechtesteWertung'] = "-";
-        $KontaktBeziehung['schlechtesteName'] = "keine Beziehung gefunden";
-    }
-    return $KontaktBeziehung;
-}
+        if ($idBest != -1) {
+            $KontaktBeziehung['besteWertung'] = $beste;
+            $resultat = mysqli_query($link, "SELECT * FROM kontakte WHERE id='$idBest'");
+            $result = mysqli_fetch_assoc($resultat);
+            $KontaktBeziehung['besteName'] = $result['vorname'] . " " . $result['nachname'];
+        }
+        if ($idWorst != -1) {
+                $KontaktBeziehung['schlechtesteWertung'] = $schlechteste;
+                $resultat = mysqli_query($link, "SELECT * FROM kontakte WHERE id='$idWorst'");
+                $result = mysqli_fetch_assoc($resultat);
+                $KontaktBeziehung['schlechtesteName'] = $result['vorname'] . " " . $result['nachname'];
+            }
+            return $KontaktBeziehung;
+        }
 
-    function deleteEvent($EventID){
+    function deleteEvent($EventID)
+    {
         $link = connectdb();
-        $resultat = mysqli_query($link,"DELETE FROM events WHERE id = '$EventID'");
+        $resultat = mysqli_query($link, "DELETE FROM events WHERE id = '$EventID'");
     }
