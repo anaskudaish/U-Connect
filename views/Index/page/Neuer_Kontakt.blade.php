@@ -79,11 +79,21 @@
             <label for="Bild"> Bild : </label>
             <input id="Bild" type="file" name="bild">
         </fieldset>
+
         <fieldset>
             <button name="submit" type="submit">Speichern</button>
         </fieldset>
         <input type="hidden" name="submitted" value="1" >
     </form>
+
+    <fieldset>
+        <form  method="post" action="\beziehungenVerwalten" >
+            <button name="submit" type="submit" value="Beziehungen ">Beziehungen verwalten</button>
+            <input type="hidden" name="id_kontakt" value="{{$kontakt['id']}}">
+            <input type="hidden" name="beziehungen" value="1" >
+        </form>
+    </fieldset>
+
     <form id="contact" action="/" method="post">
         <button name="submit" type="submit">Abbrechen</button>
 
