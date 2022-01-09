@@ -47,10 +47,19 @@
         </fieldset>
         <fieldset  class="tags">
             @if(isset($tags))<p>Vorhandene Tags</p>
-               @foreach($tags as $value)
+               @foreach(array_slice($tags,0,5) as $value)
                 <input type="checkbox" name="tags[]" id="{{$value}}" value="{{$value}}"> <label for="{{$value}}">{{$value}}</label>
                 @endforeach
             @endif
+
+                @if(isset($tags))
+                    <input type='text' oninput='onInput()' id='input'  list='dlist' placeholder="Vorhandene Tags durchsuchen" class="textDatalist" style="width: 300px; height: 20px;margin: 10px;"/>
+                    <datalist id='dlist'>
+                @foreach($tags as $value)
+                            <option value='{{$value}}'>{{$value}}</option>
+                @endforeach
+                    </datalist>
+                @endif
 
             <input  type="text" name="neu_tag"  autofocus placeholder="Neue Tags">
 
@@ -100,6 +109,21 @@
     </form>
 
 </div>
-
+<script>
+    function onInput() {
+        var val = document.getElementById("input").value;
+        var opts = document.getElementById('dlist').childNodes;
+        for (var i = 0; i < opts.length; i++) {
+            if (opts[i].value === val) {
+                if(document.getElementsByName('neu_tag')[0].value.slice(-1) == ',' || document.getElementsByName('neu_tag')[0].value.slice(-1) == '')
+                    document.getElementsByName('neu_tag')[0].value += opts[i].value;
+                else
+                    document.getElementsByName('neu_tag')[0].value += "," + opts[i].value;
+                document.getElementById("input").value = "";
+                break;
+            }
+        }
+    }
+</script>
 </body>
 </html>

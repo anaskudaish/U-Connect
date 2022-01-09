@@ -50,6 +50,8 @@ function anmeldung($email, $hashpasswort): int
                            if ($date4!= null) {//email  und temporäres Passwort richtig
                                $resultat= 2;
                            }
+                           else
+                               goto checkLogin;
                        }
                        else{// temporäres Passwort ist nicht mehr gültig
                            mysqli_query($link, "delete from temporaeres_passwort where id ='{$id}'");
@@ -58,6 +60,7 @@ function anmeldung($email, $hashpasswort): int
                        }
                    }
                    if ($passwort_zurueck ==0){//Es handelt sich um nicht temporäres Passwort
+                       checkLogin:
 
                        $result=  mysqli_query($link,"select id from nutzer where email ='{$email}' and passwort='{$hashpasswort}'");
                        $date5= mysqli_fetch_assoc($result);
@@ -68,6 +71,8 @@ function anmeldung($email, $hashpasswort): int
                        if ($date5 != null) {//email und Passwort richtig
                            $resultat = 1;
                        }
+                       if($passwort_zurueck != 0)
+                           mysqli_query($link, "update nutzer set passwort_zurueck=0 where id ='{$id}'");
                    }
              }
 
