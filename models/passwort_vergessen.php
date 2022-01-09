@@ -39,13 +39,9 @@ function neues_temporaerPasswort($email,$hashpasswort){
 
     if($passwort_zurueck==0){
         mysqli_query($link,"update  nutzer set passwort_zurueck=1 where id ='{$id}'");
-        mysqli_query($link,"insert into temporaeres_passwort (id,passwort, ablauf_zeit) VALUES ('$id','$hashpasswort','$ablauf_zeit') ");
 
     }
-    elseif ($passwort_zurueck==1){
-        mysqli_query($link,"update temporaeres_passwort set passwort ='{$hashpasswort}' , ablauf_zeit='{$ablauf_zeit}' where id='{$id}'");
-
-    }
+    mysqli_query($link,"replace into temporaeres_passwort (id,passwort, ablauf_zeit) VALUES ('$id','$hashpasswort','$ablauf_zeit') ");
     mysqli_free_result($result);
     mysqli_close($link);
 
