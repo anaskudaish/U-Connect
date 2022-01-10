@@ -90,9 +90,16 @@ echo '</pre>';
                             <form method="Post" action="/beziehungenVerwalten">
 
                                 <label for="search_text"><h5>Kontakt suchen</h5></label><br>
+                                <input id="vorname" name="wahl" type="radio" value="1" checked <?php if(isset($_POST['wahl']) && $_POST['wahl'] == 1) echo "checked" ?> >
+                                <label for="vorname">Vorname</label>
+                                <input id="nachname" name="wahl" type="radio" value="2" <?php if(isset($_POST['wahl']) && $_POST['wahl'] == 2) echo "checked" ?>>
+                                <label for="nachname">Nachname</label>
+                                <input id="tag" name="wahl" type="radio" value="3" <?php if(isset($_POST['wahl']) && $_POST['wahl'] == 3) echo "checked" ?>>
+                                <label for="tag">Tag</label>
                                 <input id="search_text" type="text" name="search_text" value="{{$search_text}}">   <!-- hidden value="<?php $_GET['search_text']; ?> -->
                                 <input type="submit" value="Suchen" class="btn btn-primary px-4">
                                 <input type="hidden" name="id_kontakt" value="{{$kontakt['id']}}">
+                                <input type="hidden" name="submitted" value="5" >
 
                             </form>
                             @endif

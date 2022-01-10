@@ -31,8 +31,8 @@ class BeziehungenController
             $kontakt_wo_beziehungen_bearebitet_werden = name_vom_kontakt($_POST['id_kontakt']);
             //$daten = [ 'names' => $names];
 
-            //if ($_POST['submitted'] == 1) {
-                $email = $_SESSION['email'];
+
+                /*$email = $_SESSION['email'];
                 $search_text = isset($_POST['search_text']) ? trim($_POST['search_text']) : "";
                 $show = null;
 
@@ -42,8 +42,49 @@ class BeziehungenController
 
                             $show[] = $value;
                         }
+                    }*/
+            if ($_POST['submitted'] == 5) {
+                $email=$_SESSION['email'];
+                $search_text = trim($_POST['search_text']);
+                $show=null;
+                if($_POST['wahl']==1){
+                    $vornamen= vorname_suchen($email,$search_text);
+                    foreach ($vornamen as $value) {
+                        if (stripos($value['vorname'], $search_text) !== false) {
+
+                            $show[] = $value;
+                        }
                     }
-            //}
+                }
+                elseif ($_POST['wahl']==2){
+                    $nachnamen= nachname_suchen($email,$search_text);
+                    foreach ($nachnamen as $value) {
+                        if (stripos($value['nachname'], $search_text) !== false) {
+
+                            $show[] = $value;
+                        }
+                    }
+                }
+                else{
+                    $tags= tags_suchen($email,$search_text);
+                    foreach ($tags as $value) {
+                        if (stripos($value['tags'], $search_text) !== false) {
+
+                            $show[] = $value;
+                        }
+                    }
+                }
+                if(!empty($show)){
+                    $kontakte=  kontakte_ergebnisse($show);
+                    $resultat= "Suchergebnisse";
+
+                }
+                else{
+                    $kontakte= kontakte($email);
+                    $resultat= "Ihre Suche ergab keine Treffer";
+                }
+            }
+
             if(!empty($show)){
                 $kontakte=  kontakte_ergebnisse($show);
                 $resultat= "Suchergebnisse";
