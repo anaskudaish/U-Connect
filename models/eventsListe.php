@@ -1,6 +1,4 @@
 <?php
-require_once('../models/kontaktenzeigen.php');
-
 function events($email){
 
     $link  = connectdb();
@@ -87,7 +85,7 @@ function nichtteilnehmerDesEvents($eventID,$email){
     foreach($Kontakte as $test){
         $ArrayKontaktID[] = $test[0];
     }
-    $alleKontakte = kontakte($email);
+    $alleKontakte = AlleKontakte($email);
     $resultat = [];
     foreach($alleKontakte as $Kontakt){
         if(in_array($Kontakt['id'],$ArrayKontaktID)){
@@ -109,7 +107,7 @@ function Suche_NichtTeilnehmer($email,$eventID,$searchtype,$searchText){
             if($kontakt[$searchtype]==$searchText){
                 $sortiereKontakte[]=$kontakt;
             }
-        }
+       }
         if(is_null($sortiereKontakte)){
             $kontakt['id'] = -1;
             $kontakt['vorname'] = "Keine Kontakte mit diesem Namen";
@@ -117,13 +115,13 @@ function Suche_NichtTeilnehmer($email,$eventID,$searchtype,$searchText){
             $sortiereKontakte[] = $kontakt;
         }
     }else{
-        $resultat = mysqli_query($link,"select id from tags_kontakte where tags ='$searchText'");
+     $resultat = mysqli_query($link,"select id from tags_kontakte where tags ='$searchText'");
         if(!is_bool($resultat)) {
             while ($data = mysqli_fetch_assoc($resultat)) {
                 $kontakt = getKontakt($data['id']);
                 if(in_array($data['id'],array_column($alleNichtTeilnehmer,'id'))){
-                    $sortiereKontakte[] = $kontakt;//$data['id'] beinhaltet die ID der Kontakte mit dem Tag
-                    //$kontakt = getKontakt($data['id']);
+                $sortiereKontakte[] = $kontakt;//$data['id'] beinhaltet die ID der Kontakte mit dem Tag
+                //$kontakt = getKontakt($data['id']);
                 }
             }
             if(is_null($sortiereKontakte)){
@@ -182,7 +180,7 @@ function getBeziehungenImEvent($eventID,$KontaktID,$isEmpty)
         $idWorst = -1;
         while ($data = mysqli_fetch_assoc($resultat)) {
             if(in_array($data['id'], $alleKontakte)){
-                echo $data['id'];
+                //echo $data['id'];
             $alleBeziehungen[] = $data;
             $currRel = $data['Beziehungs_wert'];
             if ($currRel > $beste) {
@@ -228,3 +226,67 @@ function getBeziehungenImEvent($eventID,$KontaktID,$isEmpty)
         $link = connectdb();
         $resultat = mysqli_query($link, "DELETE FROM events WHERE id = '$EventID'");
     }
+
+    function IstTeilnehmer($eventID,$kontaktID){
+        $link = connectdb();
+        $resultat = mysqli_query($link,"SELECT kontakte_id FROM event_kontakte where event_id='$eventID'");
+        while ($data = mysqli_fetch_assoc($resultat)) {
+            if($data['kontakte_id']==$kontaktID){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    function besteTeilnehmer($eventID){
+        $link = connectdb();
+        $resultat = mysqli_query($link, "SELECT * FROM beziehungen_kontakte WHERE Beziehungs_wert=5");
+        $alleKontakte = [];
+        //if(is_bool($resultat)) {
+            while ($data = mysqli_fetch_assoc($resultat)) {
+                if(istTeilnehmer($eventID,$data['id'])&&!istTeilnehmer($eventID,$data['id_beziehung']))
+                $alleKontakte[] = $data;//$data['id']==Person im Event, $data['id_beziehung'] 2. Person Ziel der Beziehung
+            }
+       //}
+        $besteBeziehungen = [];
+        foreach($alleKontakte as $Beziehung){
+            $KontaktBeziehung = getBeziehungenImEvent($eventID,$Beziehung['id_beziehung'],false);
+            $currKon = getKontakt($Beziehung['id_beziehung']);
+            if($KontaktBeziehung['Durchschnitt']==5&&!in_array($currKon,$besteBeziehungen)){
+            $besteBeziehungen[] = $currKon;
+            }
+        }
+        return $besteBeziehungen;
+    }
+
+    function getMatching($besteKontakte,$andereKontakte){
+    $filtered=[];
+    foreach($besteKontakte as $Kontakt){
+        if(in_array($Kontakt,$andereKontakte)){
+            $filtered[]=$Kontakt;
+        }
+    }
+        return $filtered;
+    }
+
+
+    function AlleKontakte($email){
+
+    $link  = connectdb();
+
+    $kontakte =null;
+
+    $resultat=  mysqli_query($link,"select id from nutzer where email='{$email}'");
+    $date = mysqli_fetch_assoc($resultat);
+    $nutzer_id=$date['id'];
+
+
+    $result=mysqli_query($link,"select kontakte.id,vorname,nachname from kontakte
+left join geburtsdatum_kontakte gk on kontakte.id = gk.id
+left join adresse_kontakte ak on kontakte.id = ak.id where nutzer_id= '{$nutzer_id}' ");
+    while($daten = mysqli_fetch_assoc($result)) {
+        $kontakte []= $daten;
+    }
+
+    return $kontakte;
+}
