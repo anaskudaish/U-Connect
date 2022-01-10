@@ -12,7 +12,17 @@
 <body>
 
 <a href="/"><img src="../img/logo-swe.png" class="sweLogo" alt="sweLogo"></a>
+<header >
+    <ul>
+        <li> <a href="/" class="active"> <img src="../img/home0.png" width="25" height="25"> </a></li>
+        <li> <a href="/Events_planen">Events planen</a></li>
+        <li><a href="/Profil" >Profil</a></li>
+        <li> <a href="/Neuer_Kontakt">Neuer Kontakt</a></li>
+        <li><a href="/abmeldung">Abmelden</a></li>
 
+
+    </ul>
+</header>
 <div class="container">
     <div class="main-body">
         <div class="row">
@@ -85,7 +95,7 @@
                     </div>
                     <form id="contact" action="/Event_bearbeiten" method="post">
                         <input type="hidden" name="eventId" value="{{$eventData['id']}}">
-                        <button class="btn btn-primary px-4" name="submit" type="submit">zurück zum Event</button>
+                        <button class="btn btn-primary px-4" name="submit" type="submit">Zurück zum Event</button>
                     </form>
             </div>
         </div>

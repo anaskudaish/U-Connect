@@ -1,7 +1,6 @@
 body {
     font-family: "Roboto", Helvetica, Arial, sans-serif;
     color: #00b5ad;
-
     background-size: cover;
     padding: 50px;
     margin: 0;
@@ -99,3 +98,32 @@ span{
     color: black;
 }
 
+
+header{
+    margin-top: -61px;
+    margin-left: -80px;
+
+}
+
+header li {
+
+    display: inline;
+    font-weight: bold;
+    padding: 1% 1% 0.2% 0.2%; /* li Elmente */
+}
+
+a:hover{
+    cursor: pointer;
+    color: white;
+    text-underline: none;
+}
+
+a:active{
+    color: initial;
+
+}
+/* Wählt jedes Element aus, das mit :link oder :visited übereinstimmen würde */
+:any-link {
+    text-decoration: none;
+    color: #00b5ad;
+}

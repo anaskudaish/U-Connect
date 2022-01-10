@@ -165,3 +165,31 @@ label {
 .tags{
     margin-top: -20px;
 }
+#header{
+    margin-top: -13px;
+    margin-left: 10px;
+
+}
+#header  li {
+
+    display: inline;
+    font-weight: 90;
+    font-size: 16px;
+    padding: 1% 1% 0.2% 0.2%; /* li Elmente */
+}
+
+#header a:hover{
+    cursor: pointer;
+    color: white;
+    text-underline: none;
+}
+
+#header a:active{
+    color: initial;
+}
+
+/* Wählt jedes Element aus, das mit :link oder :visited übereinstimmen würde */
+#header :any-link {
+    text-decoration: none;
+    color: #00b5ad;
+}

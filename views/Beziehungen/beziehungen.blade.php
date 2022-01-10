@@ -19,27 +19,21 @@ echo '<pre>';
 //var_dump($names2);
 echo '</pre>';
 ?>
-@if($_POST['beziehungen_verwalten'] == 1)
-<div>
-    <form method="post" action="/kontakt">
-        <input type="submit" name="zurück" class="btn btn-primary px-4" value="Zurück">
-        <input type="hidden" name="id_kontakt" value="{{$kontakt['id']}}">
-        <input type="hidden" name="submitted" value="1" >
-    </form>
-</div>
-@else
-<div class="col-sm-9 text-secondary">
-    <form  method="post" action="/kontakt_bearbeiten" >
-        <input type="submit" name="submit" class="btn btn-primary px-4" value="Zurück">
-        <input type="hidden" name="id_kontakt" value="{{$kontakt['id']}}">
-        <input type="hidden" name="bearbeiten" value="1" >
-    </form>
-</div>
-@endif
+
 <body>
 
 <a href="/"><img src="../img/logo-swe.png" class="sweLogo" alt="sweLogo"></a>
+<header>
+    <ul>
+        <li> <a href="/" class="active"> <img src="../img/home0.png" width="25" height="25"> </a></li>
+        <li> <a href="/Events_planen">Events planen</a></li>
+        <li><a href="/Profil" >Profil</a></li>
+        <li> <a href="/Neuer_Kontakt">Neuer Kontakt</a></li>
+        <li><a href="/abmeldung">Abmelden</a></li>
 
+
+    </ul>
+</header>
 <div class="container">
     <div class="main-body">
         <div class="row">
@@ -139,6 +133,23 @@ echo '</pre>';
                                     <input type="hidden" name="id_kontakt" value="{{$kontakt['id']}}">
                                     <input type="submit" name="submit" class="btn btn-primary px-4" value="Speichern">
                                 </form>
+                                @if($_POST['beziehungen_verwalten'] == 1)
+                                    <div>
+                                        <form method="post" action="/kontakt">
+                                            <input type="submit" name="zurück" class="btn btn-primary px-4" value="Zurück">
+                                            <input type="hidden" name="id_kontakt" value="{{$kontakt['id']}}">
+                                            <input type="hidden" name="submitted" value="1" >
+                                        </form>
+                                    </div>
+                                @else
+                                    <div class="col-sm-9 text-secondary">
+                                        <form  method="post" action="/kontakt_bearbeiten" >
+                                            <input type="submit" name="submit" class="btn btn-primary px-4" value="Zurück">
+                                            <input type="hidden" name="id_kontakt" value="{{$kontakt['id']}}">
+                                            <input type="hidden" name="bearbeiten" value="1" >
+                                        </form>
+                                    </div>
+                                @endif
 
 {{-- <form method="Post" action="/kontakt">
 

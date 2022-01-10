@@ -19,7 +19,7 @@ body{
 }
 .sweLogo {
 
-    margin-top:-100px;
+    margin-top:-80px;
     grid-column: 1 / 2;
     justify-self: right;
     float: right;
@@ -85,4 +85,32 @@ body{
 
 .third { grid-area: third;
     padding-top: 10px;
+}
+
+header{
+    margin-top: -50px;
+    margin-left: -25px;
+
+}
+header li {
+
+    display: inline;
+    font-weight: bold;
+    padding: 1% 1% 0.2% 0.2%; /* li Elmente */
+}
+
+a:hover{
+    cursor: pointer;
+    color: white;
+    text-underline: none;
+}
+
+a:active{
+    color: initial;
+}
+
+/* Wählt jedes Element aus, das mit :link oder :visited übereinstimmen würde */
+:any-link {
+    text-decoration: none;
+    color: #00b5ad;
 }

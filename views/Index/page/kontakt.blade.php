@@ -13,13 +13,18 @@
 </head>
 <body>
 <a href="/"><img src="../img/logo-swe.png" class="sweLogo" alt="sweLogo"></a>
-<div>
-    <form method="post" action="/">
-        <input type="submit" name="zurück" class="btn btn-primary px-4" value="Zurück">
-        <input type="hidden" name="id_kontakt" value="{{$kontakt['id']}}">
-        <input type="hidden" name="submitted" value="1" >
-    </form>
-</div>
+
+<header>
+    <ul>
+        <li> <a href="/" class="active"> <img src="../img/home0.png" width="25" height="25"> </a></li>
+        <li> <a href="/Events_planen">Events planen</a></li>
+        <li><a href="/Profil" >Profil</a></li>
+        <li> <a href="/Neuer_Kontakt">Neuer Kontakt</a></li>
+        <li><a href="/abmeldung">Abmelden</a></li>
+
+
+    </ul>
+</header>
 
     <div class="container">
         <div class="main-body">
@@ -230,6 +235,14 @@
                                         <input type="hidden" name="id_kontakt" value="{{$kontakt['id']}}">
                                         <input type="hidden" name="loeschen" value="1" >
                                     </form>
+                                    <br>
+                                    <div>
+                                        <form method="post" action="/">
+                                            <input type="submit" name="zurück" class="btn btn-primary px-4" value="Zurück">
+                                            <input type="hidden" name="id_kontakt" value="{{$kontakt['id']}}">
+                                            <input type="hidden" name="submitted" value="1" >
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
 

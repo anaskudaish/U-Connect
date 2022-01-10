@@ -9,6 +9,19 @@
 </head>
 <a href="/"><img src="../img/logo-swe.png" class="sweLogo" alt="sweLogo"></a>
 <body>
+
+<header id="header">
+    <ul>
+        <li> <a href="/" class="active"> <img src="../img/home0.png" width="25" height="25"> </a></li>
+        <li> <a href="/Events_planen">Events planen</a></li>
+        <li><a href="/Profil" >Profil</a></li>
+        <li> <a href="/Neuer_Kontakt">Neuer Kontakt</a></li>
+        <li><a href="/abmeldung">Abmelden</a></li>
+
+
+    </ul>
+</header>
+
 <div class="container">
     <div class="main-body">
         <form id="contact" action="/Event_bearbeiten" method="post">

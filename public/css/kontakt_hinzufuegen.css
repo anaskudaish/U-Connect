@@ -13,8 +13,7 @@
 
 body {
     font-family: "Roboto", Helvetica, Arial, sans-serif;
-    font-weight: 100;
-    font-size: 12px;
+
     line-height: 30px;
     color: #777;
     background-image: url("../img/E810h.png");
@@ -170,4 +169,37 @@ label {
 
 .tags{
     margin-top: -20px;
+}
+
+
+
+header{
+    margin-top: 4px;
+    margin-left: 8px;
+
+}
+
+
+header li {
+    display: inline;
+    font-weight: bold;
+    padding: 1% 1% 0.2% 0.2%; /* li Elmente */
+}
+li:first-child{
+
+    color: #00b5ad;
+}
+a:hover{
+    cursor: pointer;
+    color: white;
+    text-underline: none;
+}
+
+a:active{
+    color: initial;
+}
+/* Wählt jedes Element aus, das mit :link oder :visited übereinstimmen würde */
+:any-link {
+    text-decoration: none;
+    color: #00b5ad;
 }

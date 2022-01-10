@@ -8,8 +8,18 @@
 </head>
 <body>
 <a href="/"><img src="../img/logo-swe.png" class="sweLogo" alt="sweLogo"></a>
+<header>
+    <ul>
+        <li> <a href="/" class="active"> <img src="../img/home0.png" width="25" height="25"> </a></li>
+        <li> <a href="/Events_planen">Events planen</a></li>
+        <li><a href="/Profil" >Profil</a></li>
+        <li> <a href="/Neuer_Kontakt">Neuer Kontakt</a></li>
+        <li><a href="/abmeldung">Abmelden</a></li>
 
 
+    </ul>
+</header>
+<br>
 <h2 class=""> Account </h2>
 
 <p>Angemeldet als <span >{{$Email}}</span></p><br>

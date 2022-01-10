@@ -85,3 +85,33 @@ body{
 .navicon div:before { top: -7px; }
 
 .navicon div:after { top: 7px; }
+
+header{
+    margin-top: -20px;
+    margin-left: -20px;
+
+}
+
+header li {
+    display: inline;
+    font-weight: bold;
+    padding: 1% 1% 0.2% 0.2%; /* li Elmente */
+}
+li:first-child{
+
+    color: #00b5ad;
+}
+a:hover{
+    cursor: pointer;
+    color: white;
+    text-underline: none;
+}
+
+a:active{
+    color: initial;
+}
+/* Wählt jedes Element aus, das mit :link oder :visited übereinstimmen würde */
+:any-link {
+    text-decoration: none;
+    color: #00b5ad;
+}
