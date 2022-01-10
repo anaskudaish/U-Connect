@@ -13,8 +13,13 @@
 </head>
 <body>
 <a href="/"><img src="../img/logo-swe.png" class="sweLogo" alt="sweLogo"></a>
-
-
+<div>
+    <form method="post" action="/">
+        <input type="submit" name="zurück" class="btn btn-primary px-4" value="Zurück">
+        <input type="hidden" name="id_kontakt" value="{{$kontakt['id']}}">
+        <input type="hidden" name="submitted" value="1" >
+    </form>
+</div>
 
     <div class="container">
         <div class="main-body">
@@ -172,7 +177,7 @@
                             <div class="row mb-3">
                                 <div class="col-sm-9 text-secondary">
                                     <form  method="post" action="/kontakt_bearbeiten" >
-                                    <input   type="submit" name="submit" class="btn btn-primary px-4" value="Bearbeiten">
+                                    <input type="submit" name="submit" class="btn btn-primary px-4" value="Bearbeiten">
                                     <input type="hidden" name="id_kontakt" value="{{$kontakt['id']}}">
                                     <input type="hidden" name="bearbeiten" value="1" >
                                     </form>
@@ -187,6 +192,7 @@
                                         <input type="submit" name="submit" class="btn btn-primary px-4" value="Beziehungen">
                                         <input type="hidden" name="id_kontakt" value="{{$kontakt['id']}}">
                                         <input type="hidden" name="beziehungen" value="1" >
+                                            <input type="hidden" name="beziehungen_verwalten" value="1" >
                                         </form>
                                 </div>
                                 </div>

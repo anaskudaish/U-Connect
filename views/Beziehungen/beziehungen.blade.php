@@ -9,17 +9,35 @@
     <link rel="stylesheet" href="../css/beziehungen.css">
 
 </head>
-<body>
 <?php
-    $kontakt['id'] = $_POST['id_kontakt'];
+$kontakt['id'] = $_POST['id_kontakt'];
 
-    echo '<pre>';
-        //var_dump($test_result2);
-    echo '</pre>';
-    echo '<pre>';
-        //var_dump($names2);
-    echo '</pre>';
+echo '<pre>';
+//var_dump($test_result2);
+echo '</pre>';
+echo '<pre>';
+//var_dump($names2);
+echo '</pre>';
 ?>
+@if($_POST['beziehungen_verwalten'] == 1)
+<div>
+    <form method="post" action="/kontakt">
+        <input type="submit" name="zurück" class="btn btn-primary px-4" value="Zurück">
+        <input type="hidden" name="id_kontakt" value="{{$kontakt['id']}}">
+        <input type="hidden" name="submitted" value="1" >
+    </form>
+</div>
+@else
+<div class="col-sm-9 text-secondary">
+    <form  method="post" action="/kontakt_bearbeiten" >
+        <input type="submit" name="submit" class="btn btn-primary px-4" value="Zurück">
+        <input type="hidden" name="id_kontakt" value="{{$kontakt['id']}}">
+        <input type="hidden" name="bearbeiten" value="1" >
+    </form>
+</div>
+@endif
+<body>
+
 <a href="/"><img src="../img/logo-swe.png" class="sweLogo" alt="sweLogo"></a>
 
 <div class="container">
@@ -91,13 +109,13 @@
                                         @endforeach
                                     </select>
 
-                                    <div class="row">
+                                    {{--<div class="row">
                                         <div class="col-sm-9 text-secondary">
                                             <input type="submit" name="submit" class="btn btn-primary px-4" value="Auswählen">
                                             <input type="hidden" name="submitted" value="1" >
                                             <input type="hidden" name="id_kontakt" value="{{$kontakt['id']}}">
                                         </div>
-                                    </div>
+                                    </div> --}}
 
                                 </form>
 
