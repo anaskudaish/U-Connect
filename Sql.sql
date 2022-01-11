@@ -1,4 +1,4 @@
-CREATE SCHEMA adressbuch;
+CREATE SCHEMA adressbuch COLLATE 'utf8_unicode_ci';
 USE adressbuch;
 
 
