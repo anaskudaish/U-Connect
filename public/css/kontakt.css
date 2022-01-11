@@ -65,13 +65,9 @@ header li {
     font-weight: bold;
     padding: 1% 1% 0.2% 0.2%; /* li Elmente */
 }
-li:first-child{
-
-    color: #00b5ad;
-}
 a:hover{
     cursor: pointer;
-    color: white;
+    color: #00b5ad;;
     text-underline: none;
 }
 

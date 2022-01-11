@@ -178,18 +178,17 @@ label {
     padding: 1% 1% 0.2% 0.2%; /* li Elmente */
 }
 
-#header a:hover{
+a:hover{
     cursor: pointer;
-    color: white;
+    color: #00b5ad;;
     text-underline: none;
 }
 
-#header a:active{
+a:active{
     color: initial;
 }
-
 /* Wählt jedes Element aus, das mit :link oder :visited übereinstimmen würde */
-#header :any-link {
+:any-link {
     text-decoration: none;
     color: #00b5ad;
 }

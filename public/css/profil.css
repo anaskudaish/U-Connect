@@ -114,13 +114,12 @@ header li {
 
 a:hover{
     cursor: pointer;
-    color: white;
+    color: #00b5ad;;
     text-underline: none;
 }
 
 a:active{
     color: initial;
-
 }
 /* Wählt jedes Element aus, das mit :link oder :visited übereinstimmen würde */
 :any-link {

@@ -1,18 +1,18 @@
-
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
-    <title>Neuer Kontakt</title>
     <meta charset="UTF-8">
-
-
+    <title>Kontakt</title>
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet"  href="../css/kontakt_hinzufuegen.css">
     <link rel="stylesheet" href="../css/logo-swe.css">
+
 
 </head>
 <body>
 <a href="/"><img src="../img/logo-swe.png" class="sweLogo" alt="sweLogo"></a>
-<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
 <header>
     <ul>
         <li> <a href="/" class="active"> <img src="../img/home0.png" width="25" height="25"> </a></li>
@@ -24,102 +24,206 @@
 
     </ul>
 </header>
-
-<br>
 <div class="container">
+    <div class="main-body">
+        <div class="row">
 
-    <form id="contact" action="/kontakt_hinzufuegen" method="post" enctype="multipart/form-data">
-        <h3>Neuer Kontakt</h3>
-        <div class="form__input-error-message">@if(isset($resultatfehler)){{$resultatfehler}} @endif</div>
-        <div class="form__message form__message--success">@if(isset($resultatok)){{$resultatok}} @endif</div>
+            <div class="col-lg-8">
+                <div class="card">
+                    <div class="card-body">
+                        <form action="/kontakt_hinzufuegen" method="post" enctype="multipart/form-data">
+                            <h3>Neuer Kontakt</h3>
+                            <div class="form__input-error-message">@if(isset($resultatfehler)){{$resultatfehler}} @endif</div>
+                            <div class="form__message form__message--success">@if(isset($resultatok)){{$resultatok}} @endif</div>
+                            <br>
+                            <div class="row mb-3">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Vorname</h6>
+                                </div>
+
+                                <div class="col-sm-9 text-secondary">
+                                    <input type="text"  name="vorname" class="form-control"  required>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Nachname</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <input type="text" name="nachname" class="form-control"  required>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Telefonnummer</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <input type="text" name="telefonnummer" class="form-control"  required>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Instagram Link</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <input type="text" name="instagram" class="form-control">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Facebook Link</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <input type="text" name="facebook" class="form-control" >
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Twitter Link</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <input type="text"  name="twitter" class="form-control" >
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Straße</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <input type="text" name="strasse"  class="form-control" >
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">PLZ</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <input type="text" name="plz" class="form-control" >
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Stadt</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <input type="text" name="stadt" class="form-control" >
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Land</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <input type="text" name="land" class="form-control" >
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Tags</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    @if(isset($tags))<p>Vorhandene Tags</p>
+                                    @foreach(array_slice($tags,0,5) as $value)
+                                        <input type="checkbox" name="tags[]" id="{{$value}}" value="{{$value}}"> <label for="{{$value}}">{{$value}}</label>
+                                    @endforeach
+                                    @endif
+
+                                    @if(isset($tags))
+                                        <input type='text' oninput='onInput()' id='input'  list='dlist' placeholder="Vorhandene Tags durchsuchen" class="textDatalist" style="width: 300px; height: 20px;margin: 10px;"/>
+                                        <datalist id='dlist'>
+                                            @foreach($tags as $value)
+                                                <option value='{{$value}}'>{{$value}}</option>
+                                            @endforeach
+                                        </datalist>
+                                    @endif
+                                    <input  type="text" name="neu_tag"  autofocus placeholder="Neue Tags">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Textfeld</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <textarea  type="text" name="textfeld" class="form-control"></textarea>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Geburtsdatum</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <input type="date" name="geburtsdatum" class="form-control"  >
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Erinnerungsinterval</h6>
+                                </div>
+
+                                <div class="col-sm-9 text-secondary">
+                                    <select id="Interval" name="erinnerungsinterval">
+                                        <option value="1 Day">  Tag     </option>
+                                        <option value="3 Day">  3 Tage   </option>
+                                        <option value="1 week"> Woche   </option>
+                                        <option value="2 week"> 2 Wochen </option>
+                                        <option value="1 month"> Monat  </option>
+                                        <option value="3 month"> 3 Monate </option>
+                                        <option value="6 month"> 6 Monate </option>
+                                        <option value="9 month"> 9 Monate </option>
+                                        <option value="1 year" selected> Jahr</option>
+                                    </select>
+                                </div>
+                            </div>
 
 
-        <fieldset>
-            <input  type="text" name="vorname" required autofocus placeholder="Vorname">
-            <input  type="text" name="nachname"  placeholder="Nachname">
-        </fieldset>
-        <fieldset>
-            <input  type="tel" name="telefonnummer" placeholder="Telefonnummer">
-        </fieldset>
+                            <div class="row mb-3">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Bild :</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <input id="Bild" type="file" name="bild">
+                                </div>
+                            </div>
 
-        <fieldset>
-            <input type="url" name="instagram"  placeholder="Instagram Link" >
-            <input type="url" name="facebook"  placeholder="Facebook Link" >
-            <input type="url" name="twitter"  placeholder="Twitter Link" >
-        </fieldset>
-        <fieldset>
-            <input type="text" name="strasse"  placeholder="Straße" >
-            <input type="text" name="plz"  placeholder="PLZ" >
-            <input type="text" name="stadt"  placeholder="Stadt" >
-            <input type="text" name="land"  placeholder="Land" >
-        </fieldset>
-        <fieldset>
-            <textarea  name="textfeld" placeholder="Textfeld"></textarea>
-        </fieldset>
-        <fieldset  class="tags">
-            @if(isset($tags))<p>Vorhandene Tags</p>
-               @foreach(array_slice($tags,0,5) as $value)
-                <input type="checkbox" name="tags[]" id="{{$value}}" value="{{$value}}"> <label for="{{$value}}">{{$value}}</label>
-                @endforeach
-            @endif
+                            <div class="row">
 
-                @if(isset($tags))
-                    <input type='text' oninput='onInput()' id='input'  list='dlist' placeholder="Vorhandene Tags durchsuchen" class="textDatalist" style="width: 300px; height: 20px;margin: 10px;"/>
-                    <datalist id='dlist'>
-                @foreach($tags as $value)
-                            <option value='{{$value}}'>{{$value}}</option>
-                @endforeach
-                    </datalist>
-                @endif
+                                <div class="col-sm-9 text-secondary">
 
-            <input  type="text" name="neu_tag"  autofocus placeholder="Neue Tags">
+                                    <input type="submit" name="submit" class="btn btn-primary px-4" value="Speichern">
+                                    <input type="hidden" name="submitted" value="1" >
+                                    <input type="hidden" name="id_kontakt" value="{{$kontakt['id']}}">
+                                </div>
+                            </div>
+                        </form>
+                        <br>
+                        <div class="row">
+                            <div class="col-sm-9 text-secondary">
+                                <form method="post" action="\beziehungenhinzufuegen" >
+                                    <input  type="submit" name="submit" class="btn btn-primary px-4" value="Beziehungen hinzufügen">
+                                    <input type="hidden" name="id_kontakt" value="{{$kontakt['id']}}">
+                                    <input type="hidden" name="beziehungen_verwalten" value="2" >
+                                </form>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-sm-9 text-secondary">
+                                <form method="post" action="\" >
+                                    <input  type="submit" name="submit" class="btn btn-primary px-4" value="Abbrechen">
+                                    <input type="hidden" name="submitted" value="1" >
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-        </fieldset>
-        <fieldset>
-            <label for="Geburtsdatum"> Geburtsdatum : </label>
-            <input id="Geburtsdatum" type="date" name="geburtsdatum">
+            </div>
 
-        </fieldset>
-        <fieldset>
-
-            <label for="Interval"> Erinnerungsinterval : </label>
-            <select id="Interval" name="erinnerungsinterval">
-                <option value="1 Day">  Tag     </option>
-                <option value="3 Day">  3 Tage   </option>
-                <option value="1 week"> Woche   </option>
-                <option value="2 week"> 2 Wochen </option>
-                <option value="1 month"> Monat  </option>
-                <option value="3 month"> 3 Monate </option>
-                <option value="6 month"> 6 Monate </option>
-                <option value="9 month"> 9 Monate </option>
-                <option value="1 year" selected> Jahr</option>
-            </select>
-        </fieldset>
-        <fieldset>
-            <label for="Bild"> Bild : </label>
-            <input id="Bild" type="file" name="bild">
-        </fieldset>
-
-        <fieldset>
-            <button name="submit" type="submit">Speichern</button>
-        </fieldset>
-        <input type="hidden" name="submitted" value="1" >
-    </form>
-
-    <fieldset>
-        <form  method="post" action="\beziehungenVerwalten" >
-            <button name="submit" type="submit" value="Beziehungen ">Beziehungen verwalten</button>
-            <input type="hidden" name="id_kontakt" value="{{$kontakt['id']}}">
-            <input type="hidden" name="beziehungen" value="1" >
-        </form>
-    </fieldset>
-
-    <form id="contact" action="/" method="post">
-        <button name="submit" type="submit">Abbrechen</button>
-
-    </form>
-
+        </div>
+    </div>
 </div>
+
+
 <script>
     function onInput() {
         var val = document.getElementById("input").value;
@@ -136,5 +240,9 @@
         }
     }
 </script>
+
+
+
+
 </body>
 </html>

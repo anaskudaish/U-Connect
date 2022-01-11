@@ -22,6 +22,8 @@ return array(
     '/Teilnehmer_Entfernen'                 => 'EventController@Teilnehmer_Entfernen',
 
     '/beziehungenVerwalten'                =>      'BeziehungenController@beziehungenVerwalten',
+    '/beziehungenhinzufuegen'                =>      'BeziehungenController@beziehungen_hinzufuegen',
+
     '/kontakt_loeschen'                     =>     'IndexController@kontakt_loeschen',
 
     '/anmeldung'                             =>       'AnmeldungController@anmeldung',

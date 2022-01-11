@@ -94,7 +94,7 @@ li:first-child{
 }
 a:hover{
     cursor: pointer;
-    color: white;
+    color: #00b5ad;;
     text-underline: none;
 }
 
