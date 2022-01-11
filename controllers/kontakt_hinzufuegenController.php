@@ -34,6 +34,8 @@ class kontakt_hinzufuegenController
                 $textfeld            = $_POST['textfeld'];
 
                 $geburtsdatum        = $_POST['geburtsdatum'];
+
+                $customURL = $_POST['customURL'];
                 $bildname = null;
                    if (!$_FILES['bild']['error']){
 
@@ -70,7 +72,7 @@ class kontakt_hinzufuegenController
                 $resultatok =null;
                 $resultatfehelr=null;
                 $resultat= kontakt_hinzufuegen
-                ($email_nutzer,$vorname,$nachname,$bildname,$erinnerungsinterval,$telefonnummer,$instagram,$facebook,$twitter,$strasse,$plz,$stadt,$land,$textfeld,$geburtsdatum,$tags);
+                ($email_nutzer,$vorname,$nachname,$bildname,$erinnerungsinterval,$telefonnummer,$instagram,$facebook,$twitter,$strasse,$plz,$stadt,$land,$textfeld,$geburtsdatum,$tags,$customURL);
                 if($resultat==true){
                     $resultatok  ='Kontakt hinzugefügt';
                 }

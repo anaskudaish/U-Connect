@@ -31,7 +31,7 @@
             <div class="col-lg-8">
                 <div class="card">
                     <div class="card-body">
-                        <form action="/kontakt_hinzufuegen" method="post" enctype="multipart/form-data">
+                        <form action="/kontakt_hinzufuegen" method="post" onsubmit="sendURL()" enctype="multipart/form-data">
                             <h3>Neuer Kontakt</h3>
                             <div class="form__input-error-message">@if(isset($resultatfehler)){{$resultatfehler}} @endif</div>
                             <div class="form__message form__message--success">@if(isset($resultatok)){{$resultatok}} @endif</div>
@@ -83,6 +83,16 @@
                                 </div>
                                 <div class="col-sm-9 text-secondary">
                                     <input type="text"  name="twitter" class="form-control" >
+
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Eigene Links</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary" id="contactURL">
+                                    <input type="hidden" name="customURL" >
+                                    <button type="button" onclick="addURLInput();" class="">+</button>
                                 </div>
                             </div>
                             <div class="row mb-3">
@@ -191,7 +201,6 @@
 
                                     <input type="submit" name="submit" class="btn btn-primary px-4" value="Speichern">
                                     <input type="hidden" name="submitted" value="1" >
-                                    <input type="hidden" name="id_kontakt" value="{{$kontakt['id']}}">
                                 </div>
                             </div>
                         </form>
@@ -238,6 +247,30 @@
                 break;
             }
         }
+    }
+
+    var urlArray =[];
+
+    function addURLInput() {
+        var br = document.createElement("br");
+        var container = document.getElementById("contactURL");
+        var input = document.createElement("input");
+        input.type = "url";
+        input.placeholder = "Eigene URL";
+        input.className = "form-control";
+        urlArray.push(input);
+        container.appendChild(br);
+        container.appendChild(input);
+    }
+
+    function sendURL() {
+        var custom = document.getElementsByName('customURL');
+        var tmp = [];
+        for(var i =0;i < urlArray.length;i++) {
+            if(urlArray[i] != "")
+                tmp.push(urlArray[i].value.replaceAll(',',''));
+        }
+        custom[0].value = tmp.filter(Boolean).join(',');
     }
 </script>
 
