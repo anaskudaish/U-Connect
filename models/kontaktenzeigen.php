@@ -45,6 +45,14 @@ function kontaktdaten($kontakt_id)
     $kontakt ['facebook'] = $daten2['facebook'] ?? null;
     $kontakt ['twitter'] = $daten2['twitter'] ?? null;
 
+    $result5 = mysqli_query($link, "select * from urls_kontakte where id= '{$kontakt_id}' ");
+    $daten2 = mysqli_fetch_assoc($result2);
+    $kontakt ['instagram'] = $daten2['instagram'] ?? null;
+
+    $result8  =   mysqli_query($link,"select GROUP_CONCAT(url) as url from urls_kontakte where id= '{$kontakt_id}' ");
+    $daten8    =   mysqli_fetch_assoc($result8);
+    $kontakt ['url']= $daten8['url']?? null;
+
 
     $result3 = mysqli_query($link, "select telefonnummer from telefonnummer_kontakte where id= '{$kontakt_id}' ");
     $daten3 = mysqli_fetch_assoc($result3);

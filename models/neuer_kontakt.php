@@ -2,7 +2,7 @@
 
 
 function kontakt_hinzufuegen($email_nutzer,$vorname,$nachname,$bildname,$erinnerungsinterval,
-                             $telefonnummer,$instagram,$facebook,$twitter,$strasse,$plz,$stadt,$land,$textfeld,$geburtsdatum,$tags): bool {
+                             $telefonnummer,$instagram,$facebook,$twitter,$strasse,$plz,$stadt,$land,$textfeld,$geburtsdatum,$tags,$customURL): bool {
 
     $resultat=true;
 
@@ -55,6 +55,14 @@ function kontakt_hinzufuegen($email_nutzer,$vorname,$nachname,$bildname,$erinner
           $tmp = explode(",",$tags);
           foreach ($tmp as $t)
               mysqli_query($link, "insert into tags_kontakte (id,tags)
+         VALUES ('$lastid','$t')");
+
+      }
+
+      if($customURL){
+          $tmp = explode(",",$customURL);
+          foreach ($tmp as $t)
+              mysqli_query($link, "insert into urls_kontakte (id,url)
          VALUES ('$lastid','$t')");
 
       }

@@ -45,7 +45,7 @@
             <div class="col-lg-8">
                 <div class="card">
                     <div class="card-body">
-                        <form method="post" action="" method="post" enctype="multipart/form-data">
+                        <form method="post" action="" method="post" onsubmit="sendURL()" enctype="multipart/form-data">
                         <div class="row mb-3">
                             <div class="col-sm-3">
                                 <h6 class="mb-0">Vorname</h6>
@@ -95,6 +95,15 @@
                                 <input type="text"  name="twitter" class="form-control" value="{{$kontakt['twitter']}}">
                             </div>
                         </div>
+                            <div class="row mb-3">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Eigene Links</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary" id="contactURL">
+                                    <input type="hidden" name="customURL" >
+                                    <button type="button" onclick="addURLInput();" class="">+</button>
+                                </div>
+                            </div>
                         <div class="row mb-3">
                             <div class="col-sm-3">
                                 <h6 class="mb-0">Straße</h6>
@@ -219,7 +228,40 @@
     </div>
 </div>
 
+<script>
+    var urlArray =[];
 
+    function addURLInput(url="") {
+        var br = document.createElement("br");
+        var container = document.getElementById("contactURL");
+        var input = document.createElement("input");
+        input.type = "url";
+        input.placeholder = "Eigene URL";
+        input.className = "form-control";
+        if(url)
+            input.value = url;
+        urlArray.push(input);
+        container.appendChild(br);
+        container.appendChild(input);
+    }
+
+    function sendURL() {
+        var custom = document.getElementsByName('customURL');
+        var tmp = [];
+        for(var i =0;i < urlArray.length;i++) {
+            if(urlArray[i] != "")
+                tmp.push(urlArray[i].value.replaceAll(',',''));
+        }
+        custom[0].value = tmp.filter(Boolean).join(',');
+    }
+
+    @if(!empty($kontakt['url']))
+    @foreach(explode(",",$kontakt['url']) as $key)
+        addURLInput('{{$key}}');
+    @endforeach
+    @endif
+
+</script>
 
 
 
