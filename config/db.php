@@ -1,7 +1,7 @@
 <?php
 return [
     'host' => 'localhost',
-    'user' => 'root',
+    'user' => 'adressbuch',
     'password' => 'toor', // '<yourpassword>',
     'database' => 'adressbuch'
 ];

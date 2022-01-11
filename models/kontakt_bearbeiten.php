@@ -25,6 +25,7 @@ function kontakt_bearbeiten(): bool {
     $textfeld = mysqli_real_escape_string($link,$_POST['textfeld']);
     $geburtsdatum = mysqli_real_escape_string($link,$_POST['geburtsdatum']);
     $tags = mysqli_real_escape_string($link,$_POST['tags']);
+    $customURL = mysqli_real_escape_string($link,$_POST['customURL']);
 
 
     $result = mysqli_query($link, "select bildname from kontakte where id=$_POST[id_kontakt]");
@@ -76,6 +77,14 @@ function kontakt_bearbeiten(): bool {
             $tmp = explode(",",$tags);
             foreach ($tmp as $t)
                 mysqli_query($link, "insert into tags_kontakte VALUES ('$_POST[id_kontakt]','$t')");
+
+        }
+
+        if($customURL){
+            mysqli_query($link,"delete from urls_kontakte where id=$_POST[id_kontakt]");
+            $tmp = explode(",",$customURL);
+            foreach ($tmp as $t)
+                mysqli_query($link, "insert into urls_kontakte VALUES ('$_POST[id_kontakt]','$t')");
 
         }
 
