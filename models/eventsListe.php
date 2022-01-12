@@ -38,7 +38,7 @@ function createEvent($email,$eventname,$date,$time,$contacts)
                 $r2 += mysqli_query($link, "insert into event_kontakte VALUES ('$eventId','$t')");
         }
     }
-    return (bool)$r2;
+    return $eventId;
 }
 
     function ausgewaehtlesevent($eventID){
