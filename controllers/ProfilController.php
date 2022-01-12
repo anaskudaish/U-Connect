@@ -13,7 +13,6 @@ class ProfilController
 
             $email=$_SESSION['email'];
             $var =null;
-
             if ($_POST['submitted']) {
                 if(isset($_POST['email'])){
                 if($_POST['email']==''){
@@ -25,26 +24,8 @@ class ProfilController
                     return view('Index.page.profil', $var);
                 }
                 }
-                if(isset($_POST['passwort1'])){
-                    if($_POST['passwort1']==''){
-                        $mitteilung = "Neues Passwort wurde nicht eingegeben.";
-                        $var = [
-                            'Email' => $_SESSION['email'],
-                            'fehler_passwort'  => $mitteilung,
-                        ];
-                        return view('Index.page.profil', $var);
-                    }
-                }
-                if(isset($_POST['passwort2'])){
-                    if($_POST['passwort2']==''){
-                        $mitteilung = "Wiederholung des Passwort wurde nicht eingegeben.";
-                        $var = [
-                            'Email' => $_SESSION['email'],
-                            'fehler_passwort'  => $mitteilung,
-                        ];
-                        return view('Index.page.profil', $var);
-                    }
-                }
+                $mitteilung=null;
+                $result1=null; $result2=null; $result3=null; $result4=null; $result5= null;
                 $passwort = $_POST['passwort'];
                 $hashpasswort= hashpasswort($passwort);
                 $resultat =  passwort_ok($email, $hashpasswort);// Aktuelles Passwort ok
@@ -66,7 +47,7 @@ class ProfilController
                             $result1='Bitte eine andere E-Mail verwenden';
                         }
                         elseif ($resultat==1) {// E-Mail existiert nicht bereits
-                          $code=  code_senden($neue_email);
+                          $code=  code_senden($email);
                             if (!$code) {
                                 $result1= 'Leider ist ein fehler aufgetreten';
                             }
