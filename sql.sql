@@ -111,11 +111,3 @@ create table event_kontakte(
     event_id int not null references events(id) ON DELETE CASCADE,
     kontakte_id int not null references kontakte(id) ON DELETE CASCADE
 ); 
-
-create table urls_kontakte(
-                              id int(10) not null references kontakte(id)
-                                  ON DELETE CASCADE,
-                              url varchar(800) not null,
-                              primary key (id,url)
-
-);
