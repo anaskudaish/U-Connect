@@ -11,15 +11,15 @@
 </head>
 <?php
 $kontakt['id'] = $id_kontakt2;//$_POST['id_kontakt']
-echo'<br>';
+//echo'<br>';
 //var_dump($kontakt['id']);
-echo'<br>';
-echo '<pre>';
+//echo'<br>';
+//echo '<pre>';
 //var_dump($test_result2);
-echo '</pre>';
-echo '<pre>';
+//echo '</pre>';
+//echo '<pre>';
 //var_dump($names2);
-echo '</pre>';
+//echo '</pre>';
 ?>
 
 <body>
