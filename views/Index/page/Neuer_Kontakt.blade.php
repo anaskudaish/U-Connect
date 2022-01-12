@@ -142,7 +142,7 @@
                                         <input type='text' oninput='onInput()' id='input'  list='dlist' placeholder="Vorhandene Tags durchsuchen" class="textDatalist" style="width: 300px; height: 20px;margin: 10px;"/>
                                         <datalist id='dlist'>
                                             @foreach($tags as $value)
-                                                <option value='{{$value}}'>{{$value}}</option>
+                                                <option value='{{"\t".$value}}'>{{$value}}</option>
                                             @endforeach
                                         </datalist>
                                     @endif
@@ -233,9 +233,9 @@
         for (var i = 0; i < opts.length; i++) {
             if (opts[i].value === val) {
                 if(document.getElementsByName('neu_tag')[0].value.slice(-1) == ',' || document.getElementsByName('neu_tag')[0].value.slice(-1) == '')
-                    document.getElementsByName('neu_tag')[0].value += opts[i].value;
+                    document.getElementsByName('neu_tag')[0].value += opts[i].value.replaceAll('\t','');
                 else
-                    document.getElementsByName('neu_tag')[0].value += "," + opts[i].value;
+                    document.getElementsByName('neu_tag')[0].value += "," + opts[i].value.replaceAll('\t','');
                 document.getElementById("input").value = "";
                 break;
             }

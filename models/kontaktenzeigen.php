@@ -24,21 +24,6 @@ left join adresse_kontakte ak on kontakte.id = ak.id where nutzer_id= '{$nutzer_
     return $kontakte;
 }
 
-function find_kontakt_for_beziehungen($email_nutzer,$vorname,$nachname,$telefonnummer){
-    $link  = connectdb();
-
-    $resultat = mysqli_query($link,"select id from nutzer where email='{$email_nutzer}'");
-    $date = mysqli_fetch_assoc($resultat);
-    $nutzer_id=$date['id'];
-
-    $result = mysqli_query($link,"SELECT kontakte.id FROM kontakte Join telefonnummer_kontakte tk on kontakte.id = tk.id WHERE vorname = '{$vorname}' AND nachname = '{$nachname}' AND telefonnummer = '{$telefonnummer}' AND nutzer_id = '{$nutzer_id}'");
-    $result2 = mysqli_fetch_assoc($result);
-    $result3=$result2['id'];
-
-    mysqli_close($link);
-    return $result3;
-}
-
 function kontaktdaten($kontakt_id)
 {
     $link = connectdb();
@@ -60,14 +45,10 @@ function kontaktdaten($kontakt_id)
     $kontakt ['facebook'] = $daten2['facebook'] ?? null;
     $kontakt ['twitter'] = $daten2['twitter'] ?? null;
 
-    $result5 = mysqli_query($link, "select * from urls_kontakte where id= '{$kontakt_id}' ");
-    $daten2 = mysqli_fetch_assoc($result2);
-    $kontakt ['instagram'] = $daten2['instagram'] ?? null;
-
     $result8  =   mysqli_query($link,"select GROUP_CONCAT(url) as url from urls_kontakte where id= '{$kontakt_id}' ");
-    $daten8    =   mysqli_fetch_assoc($result8);
+    if(!is_bool($result8))
+        $daten8    =   mysqli_fetch_assoc($result8);
     $kontakt ['url']= $daten8['url']?? null;
-
 
     $result3 = mysqli_query($link, "select telefonnummer from telefonnummer_kontakte where id= '{$kontakt_id}' ");
     $daten3 = mysqli_fetch_assoc($result3);
@@ -87,14 +68,14 @@ function kontaktdaten($kontakt_id)
     $kontakt ['geburtsdatum'] = $daten5['geburtsdatum'] ?? null;
     if (!empty($kontakt ['geburtsdatum'])){
         $arr1 = explode('-', $kontakt['geburtsdatum']);
-    $jahr = $arr1[0];
-    $monat = $arr1[1];
-    $tag = $arr1[2];
+        $jahr = $arr1[0];
+        $monat = $arr1[1];
+        $tag = $arr1[2];
 
-    $alter = alter_kontakt($tag, $monat, $jahr);
-    $kontakt ['alter'] = $alter;
+        $alter = alter_kontakt($tag, $monat, $jahr);
+        $kontakt ['alter'] = $alter;
 
-}
+    }
 
     $result6  =   mysqli_query($link,"select GROUP_CONCAT(tags) as tags from tags_kontakte where id= '{$kontakt_id}' ");
     $daten6    =   mysqli_fetch_assoc($result6);
@@ -107,7 +88,7 @@ function kontaktdaten($kontakt_id)
 
 
 
-return $kontakt;
+    return $kontakt;
 
 }
 

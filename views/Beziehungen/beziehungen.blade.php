@@ -14,12 +14,12 @@ $kontakt['id'] = $id_kontakt2;//$_POST['id_kontakt']
 echo'<br>';
 //var_dump($kontakt['id']);
 echo'<br>';
-echo '<pre>';
+//echo '<pre>';
 //var_dump($test_result2);
-echo '</pre>';
-echo '<pre>';
+//echo '</pre>';
+//echo '<pre>';
 //var_dump($names2);
-echo '</pre>';
+//echo '</pre>';
 ?>
 
 <body>
@@ -46,7 +46,7 @@ echo '</pre>';
 
                         <div class="first">
                                 <label for="Beziehungen"><h5>Vorhandene Beziehungen</h5></label>
-                                <select id="Beziehungen" name="beziehungen_zu_id" size="8" onchange="document.getElementById('editR').text = document.getElementById('Beziehungen').options[document.getElementById('Beziehungen').selectedIndex].text.slice(0,-2);">
+                                <select id="Beziehungen" name="beziehungen_zu_id" size="8" onchange="document.getElementById('editR').text = document.getElementById('Beziehungen').options[document.getElementById('Beziehungen').selectedIndex].text.slice(0,-2);document.getElementsByName('update_entfernen')[0].value=document.getElementById('Beziehungen').options[document.getElementById('Beziehungen').selectedIndex].text.slice(-2).trim();document.getElementsByName('numerisch')[0].value=document.getElementById('Beziehungen').options[document.getElementById('Beziehungen').selectedIndex].text.slice(-2).trim();">
                                     @foreach($test_result2 as $key)
                                         <option value="{{$key['id_beziehung']}}" >{{$key['vorname']}} {{$key['nachname']}} {{$key['Beziehungs_wert']}} </option>
                                     @endforeach
