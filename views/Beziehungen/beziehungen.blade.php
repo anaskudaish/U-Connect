@@ -10,8 +10,10 @@
 
 </head>
 <?php
-$kontakt['id'] = $_POST['id_kontakt'];
-
+$kontakt['id'] = $id_kontakt2;//$_POST['id_kontakt']
+echo'<br>';
+//var_dump($kontakt['id']);
+echo'<br>';
 echo '<pre>';
 //var_dump($test_result2);
 echo '</pre>';

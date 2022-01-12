@@ -1,6 +1,7 @@
 <?php
 require_once ('../models/neuer_kontakt.php');
 require_once('../models/helfer.php');
+require_once ('../models/kontaktenzeigen.php');
 
 class kontakt_hinzufuegenController
 {
@@ -85,6 +86,14 @@ class kontakt_hinzufuegenController
                     'resultatok' => $resultatok,
                     'tags' => tags_export($email_nutzer)
                 ];
+
+                if ($_POST['submit'] == 'Beziehungen hinzufügen') {
+                    $tmp_kontakt_id = find_kontakt_for_beziehungen($email_nutzer,$_POST['vorname'],$_POST['nachname'],$_POST['telefonnummer']);
+                    $_SESSION['edit_beziehung_von'] = $tmp_kontakt_id;
+                    header("Location: /beziehungenVerwalten");
+                }
+
+
                 return view('Index.page.Neuer_Kontakt', $daten);
             }
             else{

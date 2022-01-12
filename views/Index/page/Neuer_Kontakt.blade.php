@@ -201,19 +201,12 @@
 
                                     <input type="submit" name="submit" class="btn btn-primary px-4" value="Speichern">
                                     <input type="hidden" name="submitted" value="1" >
+
+                                    <input type="submit" name="submit" class="btn btn-primary px-4" value="Beziehungen hinzufügen">
+                                    <input type="hidden" name="beziehungen_verwalten" value="2" >
                                 </div>
                             </div>
                         </form>
-                        <br>
-                        <div class="row">
-                            <div class="col-sm-9 text-secondary">
-                                <form method="post" action="\beziehungenhinzufuegen" >
-                                    <input  type="submit" name="submit" class="btn btn-primary px-4" value="Beziehungen hinzufügen">
-                                    <input type="hidden" name="id_kontakt" value="{{$kontakt['id']}}">
-                                    <input type="hidden" name="beziehungen_verwalten" value="2" >
-                                </form>
-                            </div>
-                        </div>
                         <br>
                         <div class="row">
                             <div class="col-sm-9 text-secondary">

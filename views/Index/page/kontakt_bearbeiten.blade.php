@@ -203,7 +203,7 @@
                         <div class="row">
                             <div class="col-sm-9 text-secondary">
                                 <form method="post" action="\beziehungenVerwalten" >
-                                    <input  type="submit" name="submit" class="btn btn-primary px-4" value="Beziehungen verwalten">
+                                    <input type="submit" name="submit" class="btn btn-primary px-4" value="Beziehungen verwalten">
                                     <input type="hidden" name="id_kontakt" value="{{$kontakt['id']}}">
                                     <input type="hidden" name="beziehungen_verwalten" value="2" >
                                 </form>

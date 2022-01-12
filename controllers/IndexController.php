@@ -90,7 +90,7 @@ class IndexController
 
     public function kontakt()// ausgewählte Kontakt anzeigen
     {
-
+        $_SESSION['edit_beziehung_von'] = 0;
         if (isset($_SESSION['login_ok']) && $_SESSION['login_ok'] == 1) {
 
             if ($_POST['submitted']) {
@@ -113,7 +113,7 @@ class IndexController
     }
     public function kontakt_bearbeiten()// ausgewählte Kontakt anzeigen bearbeiten
     {
-
+        $_SESSION['edit_beziehung_von'] = 0;
         if (isset($_SESSION['login_ok']) && $_SESSION['login_ok'] == 1) {
 
             if(isset($_POST['bearbeiten'])) {

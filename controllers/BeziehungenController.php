@@ -6,6 +6,14 @@ class BeziehungenController
 {
     function beziehungenVerwalten(){
         if (isset($_SESSION['login_ok']) && $_SESSION['login_ok'] == 1){
+
+            if(isset($_SESSION['edit_beziehung_von']) && $_SESSION['edit_beziehung_von'] !== 0){
+                $id_kontakt2 = $_SESSION['edit_beziehung_von'];
+                //$_POST['id_kontakt'] = $_SESSION['edit_beziehung_von'];
+
+            }else{
+                $id_kontakt2 = $_POST['id_kontakt'];
+            }
             $email=$_SESSION['email'];
             if(isset($_POST['beziehungen_zu_id'])){
                 $beziehung_zu = $_POST['beziehungen_zu_id'];
@@ -17,19 +25,19 @@ class BeziehungenController
                 $kontakt_hinzufügen = get_zu_bearbeitenden_name($zu_bearebiten);
             }
             if(isset($_POST['bewertung'])){
-                $ergebnis = beziehung_hinzufügen($_POST['id_kontakt'],$_POST['beziehungen_hinzufügen'],$_POST['bewertung']);
+                $ergebnis = beziehung_hinzufügen($id_kontakt2,$_POST['beziehungen_hinzufügen'],$_POST['bewertung']); //$_POST['id_kontakt']
             }
             if(isset($_POST['submit_entfernen'])){
-                $id = $_POST['id_kontakt'];
+                $id = $id_kontakt2;  //$_POST['id_kontakt']
                 $beziehung_zu2 = $_POST['beziehung_zu'];
                 beziehung_entfernen($id,$beziehung_zu2);
             }
             if(isset($_POST['submit_update'])){
-                $id = $_POST['id_kontakt'];
+                $id = $id_kontakt2;  //$_POST['id_kontakt']        $id = $_POST['id_kontakt'];
                 $beziehung_zu2 = $_POST['beziehung_zu'];
                 $ergebnis = beziehung_hinzufügen($id,$beziehung_zu2,$_POST['update_entfernen']);
             }
-            $kontakt_wo_beziehungen_bearebitet_werden = name_vom_kontakt($_POST['id_kontakt']);
+            $kontakt_wo_beziehungen_bearebitet_werden = name_vom_kontakt($id_kontakt2);//$_POST['id_kontakt']
             //$daten = [ 'names' => $names];
 
 
@@ -94,7 +102,7 @@ class BeziehungenController
                 $kontakte= kontakte($email);
                 $resultat= "Ihre Suche ergab keine Treffer";
             }
-            $names = kontakt_name($_POST['id_kontakt']);
+            $names = kontakt_name($id_kontakt2); //$_POST['id_kontakt']
             foreach ($names as $key){
                 $names2[] = get_name_zu_beziehung($key['id_beziehung']);
             }
@@ -122,7 +130,8 @@ class BeziehungenController
                 'kontakt_wo_beziehungen_bearebitet_werden' => $kontakt_wo_beziehungen_bearebitet_werden,
                 'names2' => $names2 ?? [],
                 'test_result2' => $test_result2,
-                'beziehung_zu' => $beziehung_zu ?? 0
+                'beziehung_zu' => $beziehung_zu ?? 0,
+                'id_kontakt2' => $id_kontakt2
             ];
 
             return view('Beziehungen.beziehungen', $daten);
