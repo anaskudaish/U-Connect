@@ -57,12 +57,16 @@
                                         <button type="submit" name="submit" class="btn btn-primary px-4">Auswählen</button>
                                         <input type="hidden" name="eventId" value="{{$eventData['id']}}">
                                         <input type="hidden" name="sus_kontakt" value="{{$kontakt['id']}}">
+                                        <input type="hidden" name="BeziehungsWertMax" value={{$BeziehungsWertMax}}>
                                     </div>
                                 </div>
                             </form>
                             </div>
                         <div id="float-child">
-                            <b>5/5:</b>
+                            <form method="post" action="/Teilnehmer_Hinzufuegen">
+                                <input type="text" name="BeziehungsWertMax" value={{$BeziehungsWertMax}}><b>/5:</b> <button type="submit" name="submit" class="btn btn-primary px-4">Auswählen</button>
+                                <input type="hidden" name="eventId" value={{$eventData['id']}} >
+                            </form>
                             <form method="post" action="/Kontakt_auswaehlen">
                                 <select id="nichtTeilnehmerListeKontakt" name="kontaktID" size="4" onchange="document.getElementById('outputName').text = document.getElementById('nichtTeilnehmerListeKontakt').options[document.getElementById('nichtTeilnehmerListeKontakt').selectedIndex].text;">
                                     @foreach($besteKontakte as $value)
@@ -75,9 +79,9 @@
                                     <div class="col-sm-9 text-secondary">
                                         <button type="submit" name="submit" class="btn btn-primary px-4">Auswählen</button>
                                         <input type="hidden" name="eventId" value="{{$eventData['id']}}">
-                                        <input type="hidden" name="sus_kontakt" value="{{$kontakt['id']}}">
                                     </div>
                                 </div>
+                                <input type="hidden" name="BeziehungsWertMax" value={{$BeziehungsWertMax}}>
                             </form></div>
                             @if( isset($ausgewaehtlerKontakt['vorname']) & isset($KontaktBeziehung['Durchschnitt']))
                             <h5>Ausgewählter Kontakt:{{$ausgewaehtlerKontakt['vorname']}} {{$ausgewaehtlerKontakt['nachname']}}</h5>
@@ -89,6 +93,7 @@
                                 <form method="post" action="/Ausgewaehlten_Kontakt_Hinzufuegen">
                                 <input type="hidden" name="kontaktID" value="{{$ausgewaehtlerKontakt['id']}}">
                                     <input type="hidden" name="eventId" value="{{$eventData['id']}}">
+                                    <input type="hidden" name="BeziehungsWertMax" value={{$BeziehungsWertMax}}>
                                     <button type="submit">Kontakt Hinzufügen</button>
                                 </form>
                             </div> @else Wählen Sie einen Kontakt aus @endif
