@@ -62,8 +62,13 @@ class EventController
         if($_POST['submit']=='add_Teilnehmer'){
             $eventData = ausgewaehtlesevent($eventID);
             $userList = teilnehmerDesEvents($eventID );
+            if(isset($_POST['BeziehungsWertMax'])) {
+                $BeziehungsWertMax = $_POST['BeziehungsWertMax'];
+            }else{
+                $BeziehungsWertMax = 5;
+            }
             $andereKontakte= nichtteilnehmerDesEvents($eventID ,$_SESSION['email']);
-            $besteKontakte = besteTeilnehmer($eventID );
+            $besteKontakte = besteTeilnehmer($eventID,$BeziehungsWertMax);
             $daten = ['eventData' => $eventData,
                 'userList' => $userList,
                 'andereKontakte' => $andereKontakte,
@@ -79,12 +84,19 @@ class EventController
         if (isset($_SESSION['login_ok']) && $_SESSION['login_ok'] == 1) {
             $eventData = ausgewaehtlesevent($_POST['eventId']);
             $userList = teilnehmerDesEvents($_POST['eventId']);
+            if(isset($_POST['BeziehungsWertMax'])) {
+                $BeziehungsWertMax = $_POST['BeziehungsWertMax'];
+                echo "fjhasfhasjdkfhsdjk";
+            }else{
+                $BeziehungsWertMax = 5;
+            }
             $andereKontakte= nichtteilnehmerDesEvents($_POST['eventId'],$_SESSION['email']);
-            $besteKontakte = besteTeilnehmer($_POST['eventId']);
+            $besteKontakte = besteTeilnehmer($_POST['eventId'],$BeziehungsWertMax);
             $daten = ['eventData' => $eventData,
                 'userList' => $userList,
                 'andereKontakte' => $andereKontakte,
-                'besteKontakte' => $besteKontakte
+                'besteKontakte' => $besteKontakte,
+                'BeziehungsWertMax' => $BeziehungsWertMax
             ];
             return view('Events.Teilnehmer_Hinzufuegen',$daten);
         }else{
@@ -94,7 +106,6 @@ class EventController
 
     public function Teilnehmer_Entfernen(){
       if (isset($_SESSION['login_ok']) && $_SESSION['login_ok'] == 1) {
-            // TO DO REMOVE SELECTED CONTACT
             $eventID = $_POST['eventID'];
             teilnehmerEntfernen($_POST['eventID'],$_POST['TeilnehmerID']);
           $eventData = ausgewaehtlesevent($eventID);
@@ -113,14 +124,20 @@ class EventController
             $email=$_SESSION['email'];
             $search_text = trim($_POST['search_text']);
             $andereKontakte=null;
+            if(isset($_POST['BeziehungsWertMax'])) {
+                $BeziehungsWertMax = $_POST['BeziehungsWertMax'];
+            }else{
+                $BeziehungsWertMax = 5;
+            }
             $eventData = ausgewaehtlesevent($_POST['eventId']);
             $userList = teilnehmerDesEvents($_POST['eventId']);
-            $besteKontakte = besteTeilnehmer($_POST['eventId']);
+            $besteKontakte = besteTeilnehmer($_POST['eventId'],$BeziehungsWertMax);
             if($search_text==""){
                 $andereKontakte= nichtteilnehmerDesEvents($_POST['eventId'],$_SESSION['email']);
                 $daten = ['eventData' => $eventData,
                     'userList' => $userList,
-                    'andereKontakte' => $andereKontakte
+                    'andereKontakte' => $andereKontakte,
+                    'BeziehungsWertMax' => $BeziehungsWertMax
                 ];
                 return view('Events.Teilnehmer_Hinzufuegen',$daten);
             }
@@ -137,7 +154,8 @@ class EventController
             $daten = ['eventData' => $eventData,
                 'userList' => $userList,
                 'andereKontakte' => $andereKontakte,
-                'besteKontakte' => $FilteredbesteKontakte
+                'besteKontakte' => $FilteredbesteKontakte,
+                'BeziehungsWertMax' => $BeziehungsWertMax
             ];
         }
         return view('Events.Teilnehmer_Hinzufuegen',$daten);
@@ -153,16 +171,22 @@ class EventController
             if($userList==[]){
                 $isEmpty=true;
             }
+            if(isset($_POST['BeziehungsWertMax'])) {
+                $BeziehungsWertMax = $_POST['BeziehungsWertMax'];
+            }else{
+                $BeziehungsWertMax = 5;
+            }
             $andereKontakte = nichtteilnehmerDesEvents($eventID,$_SESSION['email']);
             $ausgewaehtlerKontakt = getKontakt($KontaktID);
             $KontaktBeziehung = getBeziehungenImEvent($eventID,$KontaktID,$isEmpty);
-            $besteKontakte = besteTeilnehmer($eventID);
+            $besteKontakte = besteTeilnehmer($eventID,$BeziehungsWertMax);
             $daten = ['eventData' => $eventData,
                 'userList' => $userList,
                 'andereKontakte' => $andereKontakte,
                 'KontaktBeziehung' => $KontaktBeziehung,
                 'ausgewaehtlerKontakt' => $ausgewaehtlerKontakt,
-                'besteKontakte' => $besteKontakte
+                'besteKontakte' => $besteKontakte,
+                'BeziehungsWertMax' => $BeziehungsWertMax
             ];
             return view('Events.Teilnehmer_Hinzufuegen',$daten);
         }else{
@@ -176,14 +200,20 @@ class EventController
             if(!IstTeilnehmer($eventID,$_POST['kontaktID'])){
             teilnehmerHinzufuegen($eventID,$_POST['kontaktID']);
             }
+            if(isset($_POST['BeziehungsWertMax'])) {
+                $BeziehungsWertMax = $_POST['BeziehungsWertMax'];
+            }else{
+                $BeziehungsWertMax = 5;
+            }
             $eventData = ausgewaehtlesevent($eventID);
             $userList = teilnehmerDesEvents($eventID);
             $andereKontakte= nichtteilnehmerDesEvents($eventID,$_SESSION['email']);
-            $besteKontakte = besteTeilnehmer($eventID);
+            $besteKontakte = besteTeilnehmer($eventID,$BeziehungsWertMax);
             $daten = ['eventData' => $eventData,
                 'userList' => $userList,
                 'andereKontakte' => $andereKontakte,
-                'besteKontakte' => $besteKontakte
+                'besteKontakte' => $besteKontakte,
+                'BeziehungsWertMax' => $BeziehungsWertMax
             ];
             return view('Events.Teilnehmer_Hinzufuegen',$daten);
         }else{
