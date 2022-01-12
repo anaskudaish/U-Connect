@@ -40,7 +40,7 @@ class BeziehungenController
             $kontakt_wo_beziehungen_bearebitet_werden = name_vom_kontakt($id_kontakt2);//$_POST['id_kontakt']
             //$daten = [ 'names' => $names];
 
-
+		$search_text="";
                 /*$email = $_SESSION['email'];
                 $search_text = isset($_POST['search_text']) ? trim($_POST['search_text']) : "";
                 $show = null;
@@ -52,6 +52,7 @@ class BeziehungenController
                             $show[] = $value;
                         }
                     }*/
+	if(isset($_POST['submitted'])){
             if ($_POST['submitted'] == 5) {
                 $search_text = trim($_POST['search_text']);
                 $show=null;
@@ -82,6 +83,7 @@ class BeziehungenController
                         }
                     }
                 }
+	}
                 if(!empty($show)){
                     $kontakte=  kontakte_ergebnisse($show);
                     $resultat= "Suchergebnisse";
@@ -91,8 +93,8 @@ class BeziehungenController
                     $kontakte= kontakte($email);
                     $resultat= "Ihre Suche ergab keine Treffer";
                 }
-            }
 
+            }
             if(!empty($show)){
                 $kontakte=  kontakte_ergebnisse($show);
                 $resultat= "Suchergebnisse";
