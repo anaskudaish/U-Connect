@@ -25,9 +25,10 @@ function is_email_ok($email,$neue_email):int{
     $result2 = mysqli_stmt_get_result($stmt2);
     $daten2= mysqli_fetch_assoc($result2);
     mysqli_free_result($result2);
-
+    if(!is_null($daten2)){
     if($daten1['id']==$daten2['id']){
         $resultat=2;
+    }
     }
     else{// id != id D.H ist email eines anderen nutzer
         $stmt3=  mysqli_stmt_init($link);
@@ -43,8 +44,6 @@ function is_email_ok($email,$neue_email):int{
 
         }
     }
-
-
     mysqli_close($link);
     return $resultat;
 }
