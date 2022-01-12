@@ -15,7 +15,36 @@ class ProfilController
             $var =null;
 
             if ($_POST['submitted']) {
-
+                if(isset($_POST['email'])){
+                if($_POST['email']==''){
+                    $mitteilung = "Email wurde nicht eingegeben.";
+                    $var = [
+                        'Email' => $_SESSION['email'],
+                        'fehler_email'  => $mitteilung,
+                    ];
+                    return view('Index.page.profil', $var);
+                }
+                }
+                if(isset($_POST['passwort1'])){
+                    if($_POST['passwort1']==''){
+                        $mitteilung = "Neues Passwort wurde nicht eingegeben.";
+                        $var = [
+                            'Email' => $_SESSION['email'],
+                            'fehler_passwort'  => $mitteilung,
+                        ];
+                        return view('Index.page.profil', $var);
+                    }
+                }
+                if(isset($_POST['passwort2'])){
+                    if($_POST['passwort2']==''){
+                        $mitteilung = "Wiederholung des Passwort wurde nicht eingegeben.";
+                        $var = [
+                            'Email' => $_SESSION['email'],
+                            'fehler_passwort'  => $mitteilung,
+                        ];
+                        return view('Index.page.profil', $var);
+                    }
+                }
                 $passwort = $_POST['passwort'];
                 $hashpasswort= hashpasswort($passwort);
                 $resultat =  passwort_ok($email, $hashpasswort);// Aktuelles Passwort ok
@@ -51,6 +80,7 @@ class ProfilController
                             $result1='Die eingegebene E-Mail entspricht aktuelle E-Mail';
                         }
                     }
+                    if(isset($_POST['code'])){
                     if(!empty(trim($_POST['code']))){
 
                         $code=trim($_POST['code']);
@@ -69,6 +99,7 @@ class ProfilController
                             $result2='Code ist falsch';
 
                         }
+                    }
                     }
                     if (!empty($_POST['passwort1']) || !empty($_POST['passwort2'])) {
 
