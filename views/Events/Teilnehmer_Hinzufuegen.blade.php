@@ -30,6 +30,8 @@
                 <div class="card">
                     <h3>neuen Teilnehmer zu <b>{{$eventData['eventname']}}</b> hinzufuegen</h3>
                     <form method="Post" action="/Kontakt_suchen_fuer_auswahl">
+                        <input type="hidden" name="BeziehungsWertMax" value={{$BeziehungsWertMax}}>
+                        <input type="hidden" name="comparator" value={{$comparator}}>
                         <span><b>Suche nach</b></span>
                         <input type="hidden" name="eventId" value="{{$eventData['id']}}">
                         <input id="vorname" name="wahl" type="radio" value="1" checked>
@@ -58,16 +60,18 @@
                                         <input type="hidden" name="eventId" value="{{$eventData['id']}}">
                                         <input type="hidden" name="sus_kontakt" value="{{$kontakt['id']}}">
                                         <input type="hidden" name="BeziehungsWertMax" value={{$BeziehungsWertMax}}>
+                                        <input type="hidden" name="comparator" value={{$comparator="greater"}}>
                                     </div>
                                 </div>
                             </form>
                             </div>
                         <div id="float-child">
                             <form method="post" action="/Teilnehmer_Hinzufuegen">
-                                <input type="text" name="BeziehungsWertMax" value={{$BeziehungsWertMax}}><b>/5:</b> <button type="submit" name="submit" class="btn btn-primary px-4">Auswählen</button>
+                                <input type="text" name="BeziehungsWertMax" value={{$BeziehungsWertMax}}><b>/5:</b> <button type="submit" name="comparator" value="{{$comparator="greater"}}" class="btn btn-primary px-4">></button> <button type="submit" name="comparator" value="{{$comparator="lesser"}}" class="btn btn-primary px-4"><</button>
                                 <input type="hidden" name="eventId" value={{$eventData['id']}} >
                             </form>
                             <form method="post" action="/Kontakt_auswaehlen">
+                                <input type="hidden" name="comparator" value={{$comparator}}>
                                 <select id="nichtTeilnehmerListeKontakt" name="kontaktID" size="4" onchange="document.getElementById('outputName').text = document.getElementById('nichtTeilnehmerListeKontakt').options[document.getElementById('nichtTeilnehmerListeKontakt').selectedIndex].text;">
                                     @foreach($besteKontakte as $value)
                                         @if($value['id'] !== $kontakt['id'])
@@ -90,7 +94,16 @@
                                     mit:                {{$KontaktBeziehung['besteWertung']}} /5<br>
                                     schlechteste Beziehung zu: {{$KontaktBeziehung['schlechtesteName']}} <br>
                                     mit: {{$KontaktBeziehung['schlechtesteWertung']}} /5<br>
+                                <?php if(isset($KontaktBeziehung['listeWarnungPers'])){
+
+                                    echo "<b style='color:red;'>WARNUNG: Folgende Personen haben eine schlechte Beziehung zu ".$ausgewaehtlerKontakt['vorname']." ".$ausgewaehtlerKontakt['nachname']."</b>";
+                                    foreach($KontaktBeziehung['listeWarnungPers'] as $pers){
+                                    echo ("<li>".$pers['vorname']." ".$pers['nachname']." mit Beziehung: ".$pers['rel']."</li>");
+                                    }
+                                }
+                                ?>
                                 <form method="post" action="/Ausgewaehlten_Kontakt_Hinzufuegen">
+                                    <input type="hidden" name="comparator" value={{$comparator}}>
                                 <input type="hidden" name="kontaktID" value="{{$ausgewaehtlerKontakt['id']}}">
                                     <input type="hidden" name="eventId" value="{{$eventData['id']}}">
                                     <input type="hidden" name="BeziehungsWertMax" value={{$BeziehungsWertMax}}>
