@@ -57,9 +57,22 @@ class EventController
         $time = $_POST['time'];
         $email=$_SESSION['email'];
         $contacts = [];
-        createEvent($email,$eventname,$date,$time,$contacts);
-
-        header("Location: /Events_planen");
+        $eventID = createEvent($email,$eventname,$date,$time,$contacts);
+        if(isset($_POST['submit']))
+        if($_POST['submit']=='add_Teilnehmer'){
+            $eventData = ausgewaehtlesevent($eventID);
+            $userList = teilnehmerDesEvents($eventID );
+            $andereKontakte= nichtteilnehmerDesEvents($eventID ,$_SESSION['email']);
+            $besteKontakte = besteTeilnehmer($eventID );
+            $daten = ['eventData' => $eventData,
+                'userList' => $userList,
+                'andereKontakte' => $andereKontakte,
+                'besteKontakte' => $besteKontakte
+            ];
+            return view('Events.Teilnehmer_Hinzufuegen',$daten);
+        }else{
+            header("Location: /Events_planen");
+        }
     }
 
     public function Teilnehmer_Hinzufuegen(){
@@ -121,7 +134,6 @@ class EventController
                 }
             }
             $FilteredbesteKontakte = getMatching($besteKontakte,$andereKontakte);
-            var_dump($andereKontakte);
             $daten = ['eventData' => $eventData,
                 'userList' => $userList,
                 'andereKontakte' => $andereKontakte,
