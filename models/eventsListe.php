@@ -204,7 +204,7 @@ function getBeziehungenImEvent($eventID,$KontaktID,$isEmpty)
             $KontaktBeziehung['schlechtesteWertung'] = "-";
             $KontaktBeziehung['schlechtesteName'] = "Keine Beziehung für dieses Event";
         }
-        $KontaktBeziehung['Durchschnitt'] = $mittel;
+        $KontaktBeziehung['Durchschnitt'] = number_format((float)$mittel, 2, '.', '');
 
         if ($idBest != -1) {
             $KontaktBeziehung['besteWertung'] = $beste;
@@ -238,7 +238,11 @@ function getBeziehungenImEvent($eventID,$KontaktID,$isEmpty)
         return false;
     }
 
-    function besteTeilnehmer($eventID){
+    function besteTeilnehmer($eventID,$BeziehungsWertMax){
+    if($BeziehungsWertMax>5)
+        $BeziehungsWertMax = 5;
+    if($BeziehungsWertMax<-5)
+        $BeziehungsWertMax = -5;
         $link = connectdb();
         $resultat = mysqli_query($link, "SELECT * FROM beziehungen_kontakte WHERE Beziehungs_wert=5");
         $alleKontakte = [];
@@ -252,7 +256,7 @@ function getBeziehungenImEvent($eventID,$KontaktID,$isEmpty)
         foreach($alleKontakte as $Beziehung){
             $KontaktBeziehung = getBeziehungenImEvent($eventID,$Beziehung['id_beziehung'],false);
             $currKon = getKontakt($Beziehung['id_beziehung']);
-            if($KontaktBeziehung['Durchschnitt']==5&&!in_array($currKon,$besteBeziehungen)){
+            if($KontaktBeziehung['Durchschnitt']>=$BeziehungsWertMax&&!in_array($currKon,$besteBeziehungen)){
             $besteBeziehungen[] = $currKon;
             }
         }
