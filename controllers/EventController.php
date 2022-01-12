@@ -64,15 +64,19 @@ class EventController
             $userList = teilnehmerDesEvents($eventID );
             if(isset($_POST['BeziehungsWertMax'])) {
                 $BeziehungsWertMax = $_POST['BeziehungsWertMax'];
+                if(isset($_POST['comparator'])){
+                    $comparator = $_POST['comparator'];
+                }
             }else{
                 $BeziehungsWertMax = 5;
             }
             $andereKontakte= nichtteilnehmerDesEvents($eventID ,$_SESSION['email']);
-            $besteKontakte = besteTeilnehmer($eventID,$BeziehungsWertMax);
+            $besteKontakte = besteTeilnehmer($eventID,$BeziehungsWertMax,$comparator);
             $daten = ['eventData' => $eventData,
                 'userList' => $userList,
                 'andereKontakte' => $andereKontakte,
-                'besteKontakte' => $besteKontakte
+                'besteKontakte' => $besteKontakte,
+                'comparator' =>  $comparator
             ];
             return view('Events.Teilnehmer_Hinzufuegen',$daten);
         }else{
@@ -84,19 +88,24 @@ class EventController
         if (isset($_SESSION['login_ok']) && $_SESSION['login_ok'] == 1) {
             $eventData = ausgewaehtlesevent($_POST['eventId']);
             $userList = teilnehmerDesEvents($_POST['eventId']);
+            $comparator = "greater";
             if(isset($_POST['BeziehungsWertMax'])) {
                 $BeziehungsWertMax = $_POST['BeziehungsWertMax'];
-                echo "fjhasfhasjdkfhsdjk";
+                if(isset($_POST['comparator'])){
+                    $comparator = $_POST['comparator'];
+                }
             }else{
                 $BeziehungsWertMax = 5;
             }
+            echo $comparator;
             $andereKontakte= nichtteilnehmerDesEvents($_POST['eventId'],$_SESSION['email']);
-            $besteKontakte = besteTeilnehmer($_POST['eventId'],$BeziehungsWertMax);
+            $besteKontakte = besteTeilnehmer($_POST['eventId'],$BeziehungsWertMax,$comparator);
             $daten = ['eventData' => $eventData,
                 'userList' => $userList,
                 'andereKontakte' => $andereKontakte,
                 'besteKontakte' => $besteKontakte,
-                'BeziehungsWertMax' => $BeziehungsWertMax
+                'BeziehungsWertMax' => $BeziehungsWertMax,
+                'comparator' =>  $comparator
             ];
             return view('Events.Teilnehmer_Hinzufuegen',$daten);
         }else{
@@ -124,20 +133,25 @@ class EventController
             $email=$_SESSION['email'];
             $search_text = trim($_POST['search_text']);
             $andereKontakte=null;
+            $comparator = "greater";
             if(isset($_POST['BeziehungsWertMax'])) {
                 $BeziehungsWertMax = $_POST['BeziehungsWertMax'];
+                if(isset($_POST['comparator'])){
+                    $comparator = $_POST['comparator'];
+                }
             }else{
                 $BeziehungsWertMax = 5;
             }
             $eventData = ausgewaehtlesevent($_POST['eventId']);
             $userList = teilnehmerDesEvents($_POST['eventId']);
-            $besteKontakte = besteTeilnehmer($_POST['eventId'],$BeziehungsWertMax);
+            $besteKontakte = besteTeilnehmer($_POST['eventId'],$BeziehungsWertMax,$comparator);
             if($search_text==""){
                 $andereKontakte= nichtteilnehmerDesEvents($_POST['eventId'],$_SESSION['email']);
                 $daten = ['eventData' => $eventData,
                     'userList' => $userList,
                     'andereKontakte' => $andereKontakte,
-                    'BeziehungsWertMax' => $BeziehungsWertMax
+                    'BeziehungsWertMax' => $BeziehungsWertMax,
+                    'comparator' =>  $comparator
                 ];
                 return view('Events.Teilnehmer_Hinzufuegen',$daten);
             }
@@ -155,7 +169,8 @@ class EventController
                 'userList' => $userList,
                 'andereKontakte' => $andereKontakte,
                 'besteKontakte' => $FilteredbesteKontakte,
-                'BeziehungsWertMax' => $BeziehungsWertMax
+                'BeziehungsWertMax' => $BeziehungsWertMax,
+                'comparator' =>  $comparator
             ];
         }
         return view('Events.Teilnehmer_Hinzufuegen',$daten);
@@ -167,27 +182,33 @@ class EventController
             $KontaktID = $_POST['kontaktID'];
             $eventData = ausgewaehtlesevent($eventID);
             $userList = teilnehmerDesEvents($eventID);
+            $comparator = "greater";
             $isEmpty=false;
             if($userList==[]){
                 $isEmpty=true;
             }
             if(isset($_POST['BeziehungsWertMax'])) {
                 $BeziehungsWertMax = $_POST['BeziehungsWertMax'];
+                if(isset($_POST['comparator'])){
+                    $comparator = $_POST['comparator'];
+                }
             }else{
                 $BeziehungsWertMax = 5;
             }
             $andereKontakte = nichtteilnehmerDesEvents($eventID,$_SESSION['email']);
             $ausgewaehtlerKontakt = getKontakt($KontaktID);
             $KontaktBeziehung = getBeziehungenImEvent($eventID,$KontaktID,$isEmpty);
-            $besteKontakte = besteTeilnehmer($eventID,$BeziehungsWertMax);
+            $besteKontakte = besteTeilnehmer($eventID,$BeziehungsWertMax,$comparator);
             $daten = ['eventData' => $eventData,
                 'userList' => $userList,
                 'andereKontakte' => $andereKontakte,
                 'KontaktBeziehung' => $KontaktBeziehung,
                 'ausgewaehtlerKontakt' => $ausgewaehtlerKontakt,
                 'besteKontakte' => $besteKontakte,
-                'BeziehungsWertMax' => $BeziehungsWertMax
+                'BeziehungsWertMax' => $BeziehungsWertMax,
+                'comparator' =>  $comparator
             ];
+            //var_dump($KontaktBeziehung['listeWarnungPers']);
             return view('Events.Teilnehmer_Hinzufuegen',$daten);
         }else{
             header("Location: /");
@@ -197,23 +218,28 @@ class EventController
     public function Ausgewaehlten_Kontakt_Hinzufuegen(){
         if (isset($_SESSION['login_ok']) && $_SESSION['login_ok'] == 1) {
             $eventID = $_POST['eventId'];
+            $comparator = "greater";
             if(!IstTeilnehmer($eventID,$_POST['kontaktID'])){
             teilnehmerHinzufuegen($eventID,$_POST['kontaktID']);
             }
             if(isset($_POST['BeziehungsWertMax'])) {
                 $BeziehungsWertMax = $_POST['BeziehungsWertMax'];
+                if(isset($_POST['comparator'])){
+                    $comparator = $_POST['comparator'];
+                }
             }else{
                 $BeziehungsWertMax = 5;
             }
             $eventData = ausgewaehtlesevent($eventID);
             $userList = teilnehmerDesEvents($eventID);
             $andereKontakte= nichtteilnehmerDesEvents($eventID,$_SESSION['email']);
-            $besteKontakte = besteTeilnehmer($eventID,$BeziehungsWertMax);
+            $besteKontakte = besteTeilnehmer($eventID,$BeziehungsWertMax,$comparator);
             $daten = ['eventData' => $eventData,
                 'userList' => $userList,
                 'andereKontakte' => $andereKontakte,
                 'besteKontakte' => $besteKontakte,
-                'BeziehungsWertMax' => $BeziehungsWertMax
+                'BeziehungsWertMax' => $BeziehungsWertMax,
+                'comparator' =>  $comparator
             ];
             return view('Events.Teilnehmer_Hinzufuegen',$daten);
         }else{

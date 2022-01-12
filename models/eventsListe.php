@@ -154,6 +154,7 @@ function getKontakt($kontaktID){
 
 function getBeziehungenImEvent($eventID,$KontaktID,$isEmpty)
 {
+    $listeWarnungPers = [];
     if ($isEmpty) {
         $KontaktBeziehung['Durchschnitt'] = '-';
         $KontaktBeziehung['besteWertung'] = "-";
@@ -180,9 +181,13 @@ function getBeziehungenImEvent($eventID,$KontaktID,$isEmpty)
         $idWorst = -1;
         while ($data = mysqli_fetch_assoc($resultat)) {
             if(in_array($data['id'], $alleKontakte)){
-                //echo $data['id'];
             $alleBeziehungen[] = $data;
             $currRel = $data['Beziehungs_wert'];
+            if($currRel<0){
+                $pers = getKontakt($data['id']);
+                $pers['rel'] = $currRel;
+                $listeWarnungPers[]=$pers;
+            }
             if ($currRel > $beste) {
                 $beste = $data['Beziehungs_wert'];
                 $idBest = $data['id'];
@@ -218,6 +223,9 @@ function getBeziehungenImEvent($eventID,$KontaktID,$isEmpty)
                 $result = mysqli_fetch_assoc($resultat);
                 $KontaktBeziehung['schlechtesteName'] = $result['vorname'] . " " . $result['nachname'];
             }
+            if(($listeWarnungPers!=[])){
+            $KontaktBeziehung['listeWarnungPers'] = $listeWarnungPers;
+            }
             return $KontaktBeziehung;
         }
 
@@ -238,13 +246,13 @@ function getBeziehungenImEvent($eventID,$KontaktID,$isEmpty)
         return false;
     }
 
-    function besteTeilnehmer($eventID,$BeziehungsWertMax){
+    function besteTeilnehmer($eventID,$BeziehungsWertMax,$comparator){
     if($BeziehungsWertMax>5)
         $BeziehungsWertMax = 5;
     if($BeziehungsWertMax<-5)
         $BeziehungsWertMax = -5;
         $link = connectdb();
-        $resultat = mysqli_query($link, "SELECT * FROM beziehungen_kontakte WHERE Beziehungs_wert=5");
+            $resultat = mysqli_query($link, "SELECT * FROM beziehungen_kontakte");
         $alleKontakte = [];
         //if(is_bool($resultat)) {
             while ($data = mysqli_fetch_assoc($resultat)) {
@@ -253,13 +261,19 @@ function getBeziehungenImEvent($eventID,$KontaktID,$isEmpty)
             }
        //}
         $besteBeziehungen = [];
-        foreach($alleKontakte as $Beziehung){
-            $KontaktBeziehung = getBeziehungenImEvent($eventID,$Beziehung['id_beziehung'],false);
-            $currKon = getKontakt($Beziehung['id_beziehung']);
-            if($KontaktBeziehung['Durchschnitt']>=$BeziehungsWertMax&&!in_array($currKon,$besteBeziehungen)){
-            $besteBeziehungen[] = $currKon;
+            foreach($alleKontakte as $Beziehung){
+                $KontaktBeziehung = getBeziehungenImEvent($eventID,$Beziehung['id_beziehung'],false);
+                $currKon = getKontakt($Beziehung['id_beziehung']);
+                if($comparator=="lesser") {
+                    if ($KontaktBeziehung['Durchschnitt'] < $BeziehungsWertMax && !in_array($currKon, $besteBeziehungen)) {
+                        $besteBeziehungen[] = $currKon;
+                    }
+                }else{
+                    if($KontaktBeziehung['Durchschnitt']>=$BeziehungsWertMax&&!in_array($currKon,$besteBeziehungen)){
+                        $besteBeziehungen[] = $currKon;
+                    }
+                }
             }
-        }
         return $besteBeziehungen;
     }
 
