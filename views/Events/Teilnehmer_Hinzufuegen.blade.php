@@ -38,7 +38,7 @@
                         <label for="nachname">Nachname</label>
                         <input id="tag" name="wahl" type="radio" value="3">
                         <label for="tag">Tag</label>
-                        <input id="search_text" type="text" name="search_text" value="{{$search_text}}">
+                        <input id="search_text" type="text" name="search_text" value="{{$search_text=''}}">
                         <input type="submit" value="Suchen">
                         <input type="hidden" name="submitted" value="1" >
                     </form>
