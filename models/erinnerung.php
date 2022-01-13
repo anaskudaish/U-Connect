@@ -2,7 +2,7 @@
 
 use PHPMailer\PHPMailer\PHPMailer;
 
-set_time_limit(3600);//24*60*60
+
 
 $heute = date("Y-m-d");
 

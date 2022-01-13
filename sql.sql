@@ -86,7 +86,8 @@ create table tags_kontakte(
 create table geburtsdatum_kontakte(
                               id int(10) primary key not null references kontakte(id)
                                   ON DELETE CASCADE,
-                              geburtsdatum varchar(80) not null
+                              geburtsdatum varchar(80) not null,
+                              wanngesanet  varchar(80) not null,
 
 );
 

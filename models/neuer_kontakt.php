@@ -47,8 +47,11 @@ function kontakt_hinzufuegen($email_nutzer,$vorname,$nachname,$bildname,$erinner
          }
 
       if($geburtsdatum){
-          mysqli_query($link, "insert into geburtsdatum_kontakte (id,geburtsdatum)
-         VALUES ('$lastid','$geburtsdatum')");
+          $date = new DateTime();
+          $date->sub(new DateInterval('P1D'));
+          $wanngesanet=  $date->format("Y-m-d");
+          mysqli_query($link, "insert into geburtsdatum_kontakte (id,geburtsdatum,wanngesanet)
+         VALUES ('$lastid','$geburtsdatum','$wanngesanet')");
        }
 
       if($tags){

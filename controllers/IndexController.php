@@ -5,7 +5,8 @@ require_once('../models/kontaktenzeigen.php');
 require_once('../models/kontakt_bearbeiten.php');
 require_once('../models/kontakt_suchen.php');
 require_once('../models/loeschen.php');
-
+require_once('../models/erinnerung.php');
+require_once('../models/geburtstage_erinnerung.php');
 
 class IndexController
 {

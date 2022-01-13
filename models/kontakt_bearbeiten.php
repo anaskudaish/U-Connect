@@ -70,7 +70,10 @@ function kontakt_bearbeiten(): bool {
             mysqli_query($link,"replace into text_kontakte VALUES($_POST[id_kontakt],'$textfeld')");
 
         if(!empty($geburtsdatum))
-            mysqli_query($link,"replace into geburtsdatum_kontakte VALUES($_POST[id_kontakt],'$geburtsdatum')");
+            $date = new DateTime();
+        $date->sub(new DateInterval('P1D'));
+        $wanngesanet=  $date->format("Y-m-d");
+            mysqli_query($link,"replace into geburtsdatum_kontakte VALUES($_POST[id_kontakt],'$geburtsdatum','$wanngesanet')");
 
         if($tags){
             mysqli_query($link,"delete from tags_kontakte where id=$_POST[id_kontakt]");

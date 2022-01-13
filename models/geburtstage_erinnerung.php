@@ -2,10 +2,12 @@
 use PHPMailer\PHPMailer\PHPMailer;
 
 // Geburtstag Erinnerung
-set_time_limit(3600);//24*60*60
+
 $heute = date("m-d");
 $link  = connectdb();
 
+
+$heutegesandet = date("Y-m-d");
 $resultat=  mysqli_query($link,"select id,email from nutzer");
 
 while ($date = mysqli_fetch_assoc($resultat)) {
@@ -19,12 +21,12 @@ while ($date = mysqli_fetch_assoc($resultat)) {
         $vorname    = $daten1['vorname'];
         $nachname   = $daten1['nachname'];
 
-        $result2    =  mysqli_query($link,"select geburtsdatum from geburtsdatum_kontakte where id= '{$kontakt_id}'");
+        $result2    =  mysqli_query($link,"select id,geburtsdatum,wanngesanet from geburtsdatum_kontakte where id= '{$kontakt_id}'");
         $daten2     =  mysqli_fetch_assoc($result2);
         if($daten2 != null){ // Geburtsdatum von Kontakt ist gegeben
-
+            $id = $daten2['id'];
             $geburtsdatum = $daten2['geburtsdatum'];
-
+            $wanngesanet=$daten2['wanngesanet'];
 
             $arr1   =   explode('-', $geburtsdatum);
             $jahr   =   $arr1[0];
@@ -35,25 +37,32 @@ while ($date = mysqli_fetch_assoc($resultat)) {
             $arr2[]   =  $tag;
             $datum    =  implode('-',$arr2);
 
-            if($heute == $datum){// kontakt hat heute Geburtstag
 
-                $alter= alter($tag,$monat,$jahr);
-                $result3   =   mysqli_query($link,"select * from socialMedia_Kontakte where id= '{$kontakt_id}' ");
-                $daten3    =   mysqli_fetch_assoc($result3);
-
-                $instagram =   $daten3['instagram'];
-                $facebook  =   $daten3['facebook'];
-                $twitter   =   $daten3['twitter'];
+            if($wanngesanet != $heutegesandet) {
 
 
-
-                $result4   =   mysqli_query($link,"select telefonnummer from telefonnummer_kontakte where id= '{$kontakt_id}' ");
-                $daten4   =   mysqli_fetch_assoc($result4);
-                $telefonnummer   =   $daten4['telefonnummer'];
-
-                send_geburtstage_erinnerung($email,$vorname,$nachname,$telefonnummer,$alter,$instagram,$facebook,$twitter);
+                if ($heute == $datum) {// kontakt hat heute Geburtstag
+                    $wanngesanet= date("Y-m-d");
+                    mysqli_query($link, "update geburtsdatum_kontakte set wanngesanet='$wanngesanet' where id='$id' ");
 
 
+                    $alter = alter($tag, $monat, $jahr);
+                    $result3 = mysqli_query($link, "select * from socialMedia_Kontakte where id= '{$kontakt_id}' ");
+                    $daten3 = mysqli_fetch_assoc($result3);
+
+                    $instagram = $daten3['instagram'];
+                    $facebook = $daten3['facebook'];
+                    $twitter = $daten3['twitter'];
+
+
+                    $result4 = mysqli_query($link, "select telefonnummer from telefonnummer_kontakte where id= '{$kontakt_id}' ");
+                    $daten4 = mysqli_fetch_assoc($result4);
+                    $telefonnummer = $daten4['telefonnummer'];
+
+                    send_geburtstage_erinnerung($email, $vorname, $nachname, $telefonnummer, $alter, $instagram, $facebook, $twitter);
+
+
+                }
             }
         }
 
