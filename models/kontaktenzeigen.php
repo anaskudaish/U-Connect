@@ -24,6 +24,21 @@ left join adresse_kontakte ak on kontakte.id = ak.id where nutzer_id= '{$nutzer_
     return $kontakte;
 }
 
+function find_kontakt_for_beziehungen($email_nutzer,$vorname,$nachname,$telefonnummer){
+    $link  = connectdb();
+
+    $resultat = mysqli_query($link,"select id from nutzer where email='{$email_nutzer}'");
+    $date = mysqli_fetch_assoc($resultat);
+    $nutzer_id=$date['id'];
+
+    $result = mysqli_query($link,"SELECT kontakte.id FROM kontakte Join telefonnummer_kontakte tk on kontakte.id = tk.id WHERE vorname = '{$vorname}' AND nachname = '{$nachname}' AND telefonnummer = '{$telefonnummer}' AND nutzer_id = '{$nutzer_id}'");
+    $result2 = mysqli_fetch_assoc($result);
+    $result3=$result2['id'];
+
+    mysqli_close($link);
+    return $result3;
+}
+
 function kontaktdaten($kontakt_id)
 {
     $link = connectdb();
